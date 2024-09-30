@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import useBuzzStore from "@/services/buzz/buzz.service";
+import React from "react";
 
 export default function FluteBuzzView(props: any) {
   const buzzStore = useBuzzStore();
@@ -40,7 +41,7 @@ export default function FluteBuzzView(props: any) {
           <div className="container py-33 px-[10px] md:px-[36px] mx-auto">
             <div className="gap-10 grid md:grid-cols-3">
               {buzzStore?.buzz?.list.length ? (
-                buzzStore?.buzz?.list.map((item) => {
+                buzzStore?.buzz?.list.map((item: any) => {
                   return (
                     <a
                       href={item?.reference_link}
@@ -90,9 +91,8 @@ export default function FluteBuzzView(props: any) {
                       className="isolate inline-flex  rounded-md shadow-sm"
                     >
                       <button
-                        className={`bg-[#302C28] hover:bg-[#222222] text-[#82BBBE] text-xl sm:text-2xl font-bold py-2 px-12 rounded-xl ${
-                          current_page === total_pages ? "hidden" : ""
-                        }`}
+                        className={`bg-[#302C28] hover:bg-[#222222] text-[#82BBBE] text-xl sm:text-2xl font-bold py-2 px-12 rounded-xl ${current_page === total_pages ? "hidden" : ""
+                          }`}
                         onClick={handlePaginate}
                         disabled={current_page === total_pages}
                       >

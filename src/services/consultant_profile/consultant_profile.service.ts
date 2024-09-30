@@ -113,6 +113,19 @@ export type ConsultantProfile = {
         avgRating: string
         totalRatings: number
     }
+    reviews_list: {
+        avg_rating: string
+        rating_count: {
+            "1": number
+            "2": number
+            "3": number
+            "4": number
+            "5": number
+        }
+        total_user_count: number
+    }
+    sessions: number
+
     categories_name: Array<string>
     category_name: Array<string>
     session_count: number

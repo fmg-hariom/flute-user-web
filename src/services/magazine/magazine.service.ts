@@ -19,9 +19,10 @@ export type Magazine = {
     title_image_web: string
     title_image_mobile: string
     category_names: any
-    total_page:number,
+    total_page: number,
     author_image: string
     author_names: string
+    likes: any
 };
 
 
@@ -47,10 +48,10 @@ const useMagazineStore = create(
                 total: 0,
                 page: 1,
                 size: 10,
-                total_pages:0,
-                current_page:0,
-                per_page:0,
-                total_posts:0,
+                total_pages: 0,
+                current_page: 0,
+                per_page: 0,
+                total_posts: 0,
                 search: null as string | null,
                 paginate: true as boolean,
                 category: null as string | null,
@@ -66,7 +67,7 @@ const useMagazineStore = create(
                         magazine: { page, size, category, search, sort }
                     } = get();
 
-                    const request = await PokerApi.get<{ records: Magazine[] }>(api.contentManagementProfileBaseUrl(category == "all" || !category ? '/blogs' : `/blogs/category/${category}`), {
+                    const request = await PokerApi.get<{ records: Magazine[], total_posts: any, total_pages: any, pagination: any }>(api.contentManagementProfileBaseUrl(category == "all" || !category ? '/blogs' : `/blogs/category/${category}`), {
                         query: {
                             page: page, size, search,
 
@@ -82,13 +83,15 @@ const useMagazineStore = create(
                         return;
                     }
                     // console.log("==>",request?.pagination?.per_page)
-                    set(prev => ({ ...prev, magazine: { 
-                        ...prev.magazine, list: request.data?.records,
-                        total_posts:request?.data?.total_posts,
-                        total_pages:request?.data?.total_pages,
-                        current_page:request?.pagination?.current_page,
-                        per_page:request?.pagination?.per_page,
-                     } }))
+                    set(prev => ({
+                        ...prev, magazine: {
+                            ...prev.magazine, list: request.data?.records,
+                            total_posts: request?.data?.total_posts,
+                            total_pages: request?.data?.total_pages,
+                            current_page: request?.data?.pagination?.current_page,
+                            per_page: request?.data?.pagination?.per_page,
+                        }
+                    }))
                 },
                 home_list: async () => {
                     set(prev => ({ ...prev, magazine: { ...prev.magazine, home_list: [] } }))

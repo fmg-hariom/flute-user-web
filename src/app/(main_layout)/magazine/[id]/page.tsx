@@ -30,7 +30,7 @@ export default function Blogs(props: any) {
     <div className="py-4 sm:py-8 px-0 bg-black text-white">
       <main>
         {store.magazine?.detail ? (
-          <div className="container mx-auto px-8 max-w-[1850px]">
+          <div className="container mx-auto px-2 max-w-[1850px]">
             <div className="pt-10">
               <span className="inline-block align-middle bg-slate-200 rounded-sm p-1 px-2 text-sm  text-dark">
                 {store.magazine.detail?.date}
@@ -83,17 +83,17 @@ export default function Blogs(props: any) {
                     alt=""
                   />
                   {/* </div> */}
-                  <div className="ml-6">
-                    <span className="text-[#D9D9D9] font-bold text-[15px] md:text-[16px]">
+                  <div className="ml-6 ">
+                    <span className="text-[#D9D9D9] font-bold text-[15px] md:text-[16px] flex flex-row-reverse md:flex-row">
                       Written by
                     </span>
-                    <h3 className="text-[#D9D9D9] font-bold text-[20px] md:text-[28px]">
+                    <h3 className="text-[#D9D9D9] font-bold text-[20px] md:text-[28px] flex flex-row-reverse md:flex-row">
                       {store.magazine.detail?.author_names || "Flute"}
                     </h3>
 
                     <div className="flex gap-2">
                       {store.magazine.detail.category_names?.map(
-                        (category, index) => (
+                        (category: any, index: any) => (
                           <div className="categories" key={index}>
                             {category}
                           </div>
@@ -111,7 +111,7 @@ export default function Blogs(props: any) {
                         viewBox="0 0 24 24"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
-                        
+
                       >
                         <g opacity="0.5">
                           <path
