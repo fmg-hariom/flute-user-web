@@ -383,25 +383,6 @@ input[type="radio"].custom-radio:disabled {
   padding: 0 80px;
 }
 
-@media only screen and (max-width: 600px){
-	/*Big smartphones [426px -> 600px]*/
-}
-@media only screen and (max-width: 700px){
-	/*Small smartphones [325px -> 425px]*/
-  .container.mx-auto.px-8 p {
-    padding: 0 !important;
-    font-size: 16px;
-    line-height: unset !important;
-  }
-  .container.mx-auto.px-8 strong {
-    font-size: 18px !important;
-    line-height: unset !important;
-  }
-  
-  
-}
-
-
 .container.mx-auto.px-8 strong {
   font-size: 30px;
   line-height: 54px;
