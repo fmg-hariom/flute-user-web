@@ -9,7 +9,8 @@ const nextConfig = {
                 hostname: "blogs.pokerdate.net"
             }
         ]
-    }
+    },
+    reactStrictMode: false,
 };
 
 export default nextConfig;
