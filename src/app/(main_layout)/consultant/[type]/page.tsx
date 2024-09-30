@@ -10,6 +10,7 @@ import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTr
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import DownloadAppDialog from "@/components/common/dialogs/DownloadAppDialog";
+import React from "react";
 
 const montserratAlternates = Montserrat_Alternates({
   weight: "400", // Specify the font weights you need

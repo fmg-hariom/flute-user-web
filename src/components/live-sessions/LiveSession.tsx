@@ -10,12 +10,13 @@ import {
 import { useRouter } from 'next/navigation'
 import useConsultantProfileStore from '@/services/consultant_profile/consultant_profile.service'
 import DownloadAppDialog from '../common/dialogs/DownloadAppDialog'
+import useLiveConsultantProfileStore from '@/services/consultant_profile/live_consultant.service'
 
 type Props = {}
 
 const LiveSession = (props: Props) => {
     const router = useRouter();
-    const consultantProfileStore = useConsultantProfileStore();
+    const liveConsultantProfileStore = useLiveConsultantProfileStore()
 
     const slides: any = [
         {
@@ -58,11 +59,11 @@ const LiveSession = (props: Props) => {
                     className="w-full"
                 >
                     <CarouselContent>
-                        {consultantProfileStore?.consultant_profile?.list?.length ? consultantProfileStore?.consultant_profile?.list?.map((slide, index: number) => (
+                        {liveConsultantProfileStore?.live_consultant_profile?.list?.length ? liveConsultantProfileStore?.live_consultant_profile?.list?.map((slide, index: number) => (
                             <CarouselItem key={index} className="md:basis-1/3 xlg:basis-1/6">
                                 <DownloadAppDialog trigger={
                                     <div className="p-1 flex justify-center">
-                                        <div className="relative flex h-[314px] w-[209px] flex-col text-center h-40 items-center justify-center rounded-3xl duration-300 ease-in-out bg-cover" style={{ backgroundImage: index == 0 ? ` linear-gradient( to bottom,rgba(0, 0, 0, 0) 0%,rgba(0, 0, 0, 0.8) 100%),url('${slide?.profile_photo?.url}')` : `url('${slide?.profile_photo?.url}') ` }}>
+                                        <div className="relative flex h-[314px] w-[209px] flex-col text-center h-40 items-center justify-center rounded-3xl duration-300 ease-in-out bg-cover" style={{ backgroundImage: index == 0 ? ` linear-gradient( to bottom,rgba(0, 0, 0, 0) 0%,rgba(0, 0, 0, 0.8) 100%),url('${slide?.profile_image}')` : `url('${slide?.profile_image}') ` }}>
                                             <span className="absolute w-4 h-4 rounded-full right-6 top-3">
                                                 <svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <circle cx="15.5986" cy="15" r="15" fill="black" fill-opacity="0.5" />
@@ -72,7 +73,7 @@ const LiveSession = (props: Props) => {
 
                                             </span>
                                             <span className="absolute left-0 bottom-0 p-3 flex flex-col items-start">
-                                                <p className='text-[16px] text-[#ffffff]'>{slide?.first_name} {slide?.last_name}</p>
+                                                <p className='text-[16px] text-[#ffffff]'>{slide?.first_name}</p>
                                                 <p className='text-[13px] text-[#FFA643] line-clamp-1'>{slide.categories_name}</p>
                                             </span>
                                         </div>
