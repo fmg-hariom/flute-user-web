@@ -1,5 +1,6 @@
 import { Secular_One } from "next/font/google"
 import type { Config } from "tailwindcss"
+ 
 
 const config = {
   darkMode: ["class"],
@@ -15,7 +16,7 @@ const config = {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1850px",
       },
     },
     extend: {
@@ -75,7 +76,12 @@ const config = {
       },
       fontFamily: {
         sans: ['Poppins'],
-        Secular_One: ['Secular One', 'sans-serif']
+        Secular_One: ['Secular One', 'sans-serif'],
+          // Custom font families added from @font-face declarations
+        charter: ['charterregular', 'sans-serif'],       // Regular font
+        charterBold: ['charterbold', 'sans-serif'],       // Bold font
+        charterItalic: ['charteritalic', 'sans-serif'],   // Italic font
+        charterBoldItalic: ['charterbold_italic', 'sans-serif'], // Bold Italic font
       },
       maxWidth: {
         '1/2': '50%',

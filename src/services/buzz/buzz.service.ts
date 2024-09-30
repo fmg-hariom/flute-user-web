@@ -1,7 +1,6 @@
 import { create } from 'zustand'
 import { combine } from 'zustand/middleware'
-import toast from 'react-hot-toast'
-import Api from '@/api/Api';
+ 
 import PokerApi from '@/api/PokerApi';
 import api from '@/configs/api';
 
@@ -18,7 +17,8 @@ export type Buzz = {
     title_image_web: string
     title_image_mobile: string
     category_names: any
-
+total_pages:0,
+                current_page:0,
     author_image: string
     author_names: string
 };
@@ -45,12 +45,14 @@ const useBuzzStore = create(
                 category_list: [] as MagazineCategory[],
                 total: 0,
                 page: 1,
-                size: 10,
+                size: 6,
+                total_pages:0,
+                current_page:0,
                 search: null as string | null,
                 paginate: true as boolean,
                 category: null as string | null,
                 sort: 'asc' as 'asc' | 'desc'
-                // timeOut: null as any
+               
             }
         },
         (set, get) => ({
@@ -63,7 +65,7 @@ const useBuzzStore = create(
 
                     const request = await PokerApi.get<{ records: Buzz[] }>(api.buzzBaseUrl('/buzz'), {
                         query: {
-                            paged: page, size, search,
+                            page: page, size, search,
                         }
                     })
 
@@ -71,7 +73,9 @@ const useBuzzStore = create(
                         return;
                     }
 
-                    set(prev => ({ ...prev, buzz: { ...prev.buzz, list: request.data?.records } }))
+                    set(prev => ({ ...prev, buzz: { ...prev.buzz, list: request.data?.records , 
+                        total_pages:request?.data?.total_pages,
+                        current_page:request?.pagination?.current_page,} }))
                 },
                 home_list: async () => {
                     set(prev => ({ ...prev, buzz: { ...prev.buzz, home_list: [] } }))

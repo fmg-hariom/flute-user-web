@@ -1,47 +1,11 @@
-"use client";
-import React from "react";
-import {
-  Carousel,
-  CarouselApi,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import useBuzzStore from "@/services/buzz/buzz.service";
-import { useRouter } from "next/navigation";
+import React from 'react'
 
-type Props = {};
-
-const FluteBuzz = (props: Props) => {
-  const router = useRouter();
-  const buzzStore = useBuzzStore();
-
-  console.log("buzz store", buzzStore);
-
-  const [api, setApi] = React.useState<CarouselApi>();
-  const [current, setCurrent] = React.useState(0);
-
-  React.useEffect(() => {
-    if (!api) {
-      return;
-    }
-
-    setCurrent(api.selectedScrollSnap() + 1);
-
-    api.on("select", (e) => {
-      setCurrent(api.selectedScrollSnap());
-    });
-  }, [api]);
-
-
-  
-
+const FluteTestimonial = () => {
   return (
     <div className="w-screen flex flex-col justify-center h-[680px] bg-[#82BBBE] py-8 sm:py-9 px-2 sm:px-16 text-black">
       <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-bold text-[#302C28] ">
         Flute Buzz
-      </h2> 
+      </h2>
       <div className=" w-48 sm:w-56 md:w-72 rounded container h-[4px] my-3 bg-[#302C28]"></div>
       <div className="my-6 mx-2 md:mx-12">
         <Carousel
@@ -59,11 +23,7 @@ const FluteBuzz = (props: Props) => {
                   className="md:basis-1/2 lg:basis-1/3 xl:basis-1/3"
                 >
                   <div className="p-1 flex justify-center">
-                    <a
-                      href={slide?.reference_link}
-                      target="_blank"
-                   
-                    >
+                    <a href={slide?.reference_link} target="_blank">
                       <div className="max-w-[470px] rounded-[30px] overflow-hidden">
                         <div className="h-60">
                           <img
@@ -116,15 +76,15 @@ const FluteBuzz = (props: Props) => {
       <div className="my-6 flex justify-center">
         <button
           className="bg-[#302C28] hover:[#222222] text-[#82BBBE] text-xl sm:text-2xl font-bold py-2 px-12 rounded-xl"
-          onClick={() => {
-            router.push("/buzz/list");
-          }}
+        //   onClick={() => {
+        //     router.push("/buzz/list");
+        //   }}
         >
           Show More
         </button>
       </div>
     </div>
   );
-};
+}
 
-export default FluteBuzz;
+export default FluteTestimonial

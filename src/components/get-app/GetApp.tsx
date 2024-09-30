@@ -25,10 +25,10 @@ const GetApp = (props: Props) => {
                         <input type="radio" name="radio" id="radio" className="h-4 w-4 form-radio accent-[#FF2C20]" />
                         <label htmlFor="email" className='p-2 text-lg'>Email</label>
                     </div>
-                    <div>
+                    {/* <div>
                         <input type="radio" name="radio" id="radio" className="h-4 w-4 form-radio accent-[#FF2C20]" />
                         <label htmlFor="phone" className='p-2 text-lg'>Phone</label>
-                    </div>
+                    </div> */}
                 </div>
                 <div className='flex flex-wrap sm:flex-nowrap gap-4 p-2 '>
                     <div >

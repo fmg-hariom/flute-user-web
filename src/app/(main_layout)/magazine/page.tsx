@@ -16,9 +16,11 @@ export default function FluteMagazine() {
         <div className="relative isolate overflow-hidden bg-light-yellow py-22 ">
           <div className="mx-auto px-6 lg:px-8">
             <div className="mx-auto  lg:mx-0 text-center">
-              <h2 className=" heading-2 !text-[26px] md:!text-[40px]    text-dark ">Flute Magazine</h2>
+              <h2 className=" heading-2 !text-[26px] md:!text-[40px]    text-dark ">
+                Flute Magazine
+              </h2>
               <span className="x-arrow"></span>
-              <p className="mt-14 text-lg header-p  !text-[14px] md:!text-[16px]	 text-dark">
+              <p className="mt-14 text-lg header-p  !text-[14px] md:!text-[16px]">
                 Harmonizing Life: Honest Talks, Real Stories, and Expert Advice
                 for Your Journey
               </p>
@@ -187,8 +189,6 @@ export default function FluteMagazine() {
                   Pet Psychic
                 </button>
               </div>
-
-
             </div>
 
             <div className="text-center">
