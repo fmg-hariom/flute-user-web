@@ -39,11 +39,12 @@ const LiveSession = (props: Props) => {
                                     <div className="p-1 flex justify-center">
                                         <div className="relative flex h-[314px] w-[209px] flex-col text-center h-40 items-center justify-center rounded-3xl duration-300 ease-in-out bg-cover" style={{ backgroundImage: index == 0 ? ` linear-gradient( to bottom,rgba(0, 0, 0, 0) 0%,rgba(0, 0, 0, 0.8) 100%),url('${slide?.profile_image}')` : `url('${slide?.profile_image}') ` }}>
                                             <span className="absolute w-4 h-4 rounded-full right-6 top-3">
-                                                <svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                {/* <svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <circle cx="15.5986" cy="15" r="15" fill="black" fill-opacity="0.5" />
                                                     <circle cx="16.6869" cy="14.0882" r="10.2353" stroke="#33C004" stroke-width="1.70588" />
                                                     <circle cx="16.6872" cy="14.0871" r="4.7521" fill="#33C004" />
-                                                </svg>
+                                                </svg> */}
+                                                <div className="pulse-loader"></div>
 
                                             </span>
                                             <span className="absolute left-0 bottom-0 p-3 flex flex-col items-start">

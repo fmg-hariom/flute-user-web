@@ -437,3 +437,21 @@ input[type="radio"].custom-radio:disabled {
   text-transform: capitalize;
   letter-spacing: 1px;
 }
+
+.pulse-loader{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: #33C004;
+    animation: 1.5s pulse-loader infinite ease-in-out;
+  }
+  
+  @keyframes pulse-loader {
+    0% {
+      box-shadow: 0 0 0 0 #33C004;
+    }
+  
+    100% {
+      box-shadow: 0 0 0 14px #33C00400;
+    }
+  }
