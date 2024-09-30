@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { combine } from 'zustand/middleware'
- 
+
 import PokerApi from '@/api/PokerApi';
 import api from '@/configs/api';
 
@@ -17,8 +17,8 @@ export type Buzz = {
     title_image_web: string
     title_image_mobile: string
     category_names: any
-total_pages:0,
-                current_page:0,
+    total_pages: 0,
+    current_page: 0,
     author_image: string
     author_names: string
 };
@@ -46,13 +46,13 @@ const useBuzzStore = create(
                 total: 0,
                 page: 1,
                 size: 6,
-                total_pages:0,
-                current_page:0,
+                total_pages: 0,
+                current_page: 0,
                 search: null as string | null,
                 paginate: true as boolean,
                 category: null as string | null,
                 sort: 'asc' as 'asc' | 'desc'
-               
+
             }
         },
         (set, get) => ({
@@ -63,7 +63,7 @@ const useBuzzStore = create(
                         buzz: { page, size, category, search }
                     } = get();
 
-                    const request = await PokerApi.get<{ records: Buzz[] }>(api.buzzBaseUrl('/buzz'), {
+                    const request = await PokerApi.get<{ records: Buzz[], total_pages: number, pagination: any }>(api.buzzBaseUrl('/buzz'), {
                         query: {
                             page: page, size, search,
                         }
@@ -73,9 +73,13 @@ const useBuzzStore = create(
                         return;
                     }
 
-                    set(prev => ({ ...prev, buzz: { ...prev.buzz, list: request.data?.records , 
-                        total_pages:request?.data?.total_pages,
-                        current_page:request?.pagination?.current_page,} }))
+                    set(prev => ({
+                        ...prev, buzz: {
+                            ...prev.buzz, list: request.data?.records,
+                            total_pages: request?.data?.total_pages,
+                            current_page: request?.data?.pagination?.current_page,
+                        }
+                    }))
                 },
                 home_list: async () => {
                     set(prev => ({ ...prev, buzz: { ...prev.buzz, home_list: [] } }))
