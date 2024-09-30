@@ -18,33 +18,7 @@ const LiveSession = (props: Props) => {
     const router = useRouter();
     const liveConsultantProfileStore = useLiveConsultantProfileStore()
 
-    const slides: any = [
-        {
-            image: '/images/live/unsplash_0mN84vxigL0.png',
-            name: "Sophie Turner",
-            role: "Tarrot Reading"
-        },
-        {
-            image: '/images/live/unsplash_AxqT51VT8mw.png',
-            name: "Maise Williams",
-            role: "Astrologer"
-        },
-        {
-            image: '/images/live/unsplash_ra9IMT4b7IM.png',
-            name: "Hiral Soni",
-            role: "Dating Advice"
-        },
-        {
-            image: '/images/live/unsplash_CE_1ZBQ__Ns.png',
-            name: "Utkarsha Das",
-            role: "Life Coaching"
-        },
-        {
-            image: '/images/live/unsplash_mEZ3PoFGs_k.png',
-            name: "Samiksha Jain",
-            role: "Breakup Support"
-        },
-    ]
+
 
     return (
         <div className="w-screen flex flex-col justify-center h-[680px] bg-[#C9E2E5] py-8 sm:py-9 px-2 sm:px-16 text-black">
@@ -74,7 +48,7 @@ const LiveSession = (props: Props) => {
                                             </span>
                                             <span className="absolute left-0 bottom-0 p-3 flex flex-col items-start">
                                                 <p className='text-[16px] text-[#ffffff]'>{slide?.first_name}</p>
-                                                <p className='text-[13px] text-[#FFA643] line-clamp-1'>{slide.categories_name}</p>
+                                                <p className='text-[13px] text-[#FFA643] line-clamp-1 justify-start'>{`${slide.categories_name}`.substring(0, 25)}</p>
                                             </span>
                                         </div>
                                     </div>

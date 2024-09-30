@@ -57,7 +57,7 @@ const useLiveConsultantProfileStore = create(
                 list: [] as ConsultantProfile[],
                 detail: null as ConsultantProfile | null,
                 total: 0,
-                page: 0,
+                page: 1,
                 size: 10,
                 search: null as string | null,
                 paginate: false as boolean,
