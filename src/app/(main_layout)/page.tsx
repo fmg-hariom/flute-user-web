@@ -88,7 +88,7 @@ export default function Home() {
     consultantProfileStore.get.paginate({});
     buzzStore.get.paginate({});
     store.get.banners();
-    liveConsultantProfileStore.get.paginate({})
+    liveConsultantProfileStore.get.paginate({ paginate: true })
   }, []);
 
   console.log("store.dashboard.list: ", store.dashboard.list);

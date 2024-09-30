@@ -10,7 +10,7 @@ export default function LiveSession() {
     const consultantProfileStore = useLiveConsultantProfileStore();
 
     useEffect(() => {
-        consultantProfileStore.get.paginate({})
+        consultantProfileStore.get.paginate({ paginate: false })
     }, [])
 
     return (
@@ -87,7 +87,7 @@ export default function LiveSession() {
                         className="text-white mt-10 !text-[18px] md:!text-[36px] show-more-btn bg-semi-dark bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-10 py-5  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
 
                         onClick={() => {
-                            consultantProfileStore.get.paginate({ page: consultantProfileStore.live_consultant_profile.page + 1 })
+                            consultantProfileStore.get.paginate({ page: consultantProfileStore.live_consultant_profile.page + 1, paginate: true })
                         }}
                     >
                         Show More
