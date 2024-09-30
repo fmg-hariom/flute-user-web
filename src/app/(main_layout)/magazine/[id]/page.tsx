@@ -30,7 +30,7 @@ export default function Blogs(props: any) {
     <div className="py-4 sm:py-8 px-0 bg-black text-white">
       <main>
         {store.magazine?.detail ? (
-          <div className="container mx-auto px-8 max-w-[1850px]">
+          <div className="container mx-auto px-4 sm:px-12 max-w-[1850px]">
             <div className="pt-10">
               <span className="inline-block align-middle bg-slate-200 rounded-sm p-1 px-2 text-sm  text-dark">
                 {store.magazine.detail?.date}
@@ -38,7 +38,7 @@ export default function Blogs(props: any) {
             </div>
             <div>
               <h2
-                className={`text-2xl md:text-5xl  text-[#D9D9D9] mt-7 mb-2 leading-tight ${Montserrats.className} font-extrabold`}
+                className={`text-3xl md:text-5xl  text-[#D9D9D9] mt-7 mb-2 leading-tight ${Montserrats.className} font-extrabold`}
               >
                 {store.magazine.detail?.title}
               </h2>
@@ -63,7 +63,7 @@ export default function Blogs(props: any) {
                 alt=""
               />
             </div>
-            <div className="mt-5 bg-[#242424] p-[20px]  rounded-lg shadow-insets font-charter">
+            <div className="mt-5 bg-[#242424] py-[20px] px-2 sm:px-[80px] rounded-lg shadow-insets font-charter   ">
               <div
                 dangerouslySetInnerHTML={{
                   __html: `${store.magazine.detail?.content}`,
@@ -83,11 +83,11 @@ export default function Blogs(props: any) {
                     alt=""
                   />
                   {/* </div> */}
-                  <div className="ml-6">
-                    <span className="text-[#D9D9D9] font-bold text-[15px] md:text-[16px]">
+                  <div className="ml-6 ">
+                    <span className="text-[#D9D9D9] font-bold text-[15px] md:text-[16px] flex justify-end lg:justify-normal">
                       Written by
                     </span>
-                    <h3 className="text-[#D9D9D9] font-bold text-[20px] md:text-[28px]">
+                    <h3 className="text-[#D9D9D9] font-bold text-[20px] md:text-[28px] flex justify-end lg:justify-normal">
                       {store.magazine.detail?.author_names || "Flute"}
                     </h3>
 
@@ -111,7 +111,6 @@ export default function Blogs(props: any) {
                         viewBox="0 0 24 24"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
-
                       >
                         <g opacity="0.5">
                           <path

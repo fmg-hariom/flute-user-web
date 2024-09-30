@@ -375,12 +375,12 @@ input[type="radio"].custom-radio:disabled {
     font-style: normal;
 } */
 
-.container.mx-auto.px-8 p {
+.container.mx-auto.px-4 p {
   line-height: 50px;
   font-size: 28px;
   letter-spacing: 1px;
   color: #d9d9d9;
-  padding: 0 80px;
+  /* padding: 0 80px; */
 }
 
 .container.mx-auto.px-8 strong {
@@ -389,8 +389,35 @@ input[type="radio"].custom-radio:disabled {
   letter-spacing: 1px;
   color: #d9d9d9;
 }
+
 .magazine-sub-title p {
   padding: 0 !important;
+}
+
+/* .text {
+  .container.px-8 p {
+    font-size: 100px !important;
+    line-height: 10px;
+    letter-spacing: 0.5px;
+    padding: 0 !important;
+  }
+} */
+
+@media only screen and (max-width: 600px) {
+  .container.mx-auto.px-4 p {
+    font-size: 20px !important;
+    line-height: 25px;
+    letter-spacing: 0.5px;
+    padding: 0 !important;
+    padding-left: 10px !important;
+  }
+
+  .container.mx-auto strong {
+    font-size: 22px !important;
+    line-height: 30px;
+    letter-spacing: 0.5px;
+    padding: 0 !important;
+  }
 }
 
 .categories {
