@@ -30,7 +30,7 @@ export default function Blogs(props: any) {
     <div className="py-4 sm:py-8 px-0 bg-black text-white">
       <main>
         {store.magazine?.detail ? (
-          <div className="container mx-auto px-4 sm:px-12 max-w-[1850px]">
+          <div className="container mx-auto px-2 sm:px-12 max-w-[1850px]">
             <div className="pt-10">
               <span className="inline-block align-middle bg-slate-200 rounded-sm p-1 px-2 text-sm  text-dark">
                 {store.magazine.detail?.date}
@@ -53,17 +53,17 @@ export default function Blogs(props: any) {
               {/* h-60 sm:h-96 */}
               <img
                 src={`${store.magazine.detail?.title_image_web}`}
-                className="size-full rounded-xl hidden md:block object-cover items-center"
+                className="size-full rounded-xl hidden md:block object-cover items-center "
                 alt=""
               />
 
               <img
                 src={`${store.magazine.detail?.title_image_mobile}`}
-                className="size-full rounded-xl block md:hidden object-cover"
+                className="size-full rounded-xl block md:hidden object-cover "
                 alt=""
               />
             </div>
-            <div className="mt-5 bg-[#242424] py-[20px] px-2 sm:px-[80px] rounded-lg shadow-insets font-charter   ">
+            <div className="bg-[#242424] py-[20px] px-2 sm:px-[80px] rounded-lg shadow-insets font-charter mt-2 ">
               <div
                 dangerouslySetInnerHTML={{
                   __html: `${store.magazine.detail?.content}`,

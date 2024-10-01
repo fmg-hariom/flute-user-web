@@ -78,10 +78,10 @@ const config = {
         sans: ['Poppins'],
         Secular_One: ['Secular One', 'sans-serif'],
           // Custom font families added from @font-face declarations
-        charter: ['charterregular', 'sans-serif'],       // Regular font
-        charterBold: ['charterbold', 'sans-serif'],       // Bold font
-        charterItalic: ['charteritalic', 'sans-serif'],   // Italic font
-        charterBoldItalic: ['charterbold_italic', 'sans-serif'], // Bold Italic font
+        charter: ['charterregular'],       // Regular font
+        charterBold: ['charterbold'],       // Bold font
+        charterItalic: ['charteritalic'],   // Italic font
+        charterBoldItalic: ['charterbold_italic'], // Bold Italic font
       },
       maxWidth: {
         '1/2': '50%',
