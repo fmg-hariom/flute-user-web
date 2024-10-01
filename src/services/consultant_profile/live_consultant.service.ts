@@ -55,6 +55,7 @@ const useLiveConsultantProfileStore = create(
             live_consultant_profile: {
                 id: null as any,
                 list: [] as ConsultantProfile[],
+                home_list: [] as ConsultantProfile[],
                 detail: null as ConsultantProfile | null,
                 total: 0,
                 page: 1,
@@ -112,6 +113,22 @@ const useLiveConsultantProfileStore = create(
                         // item.is_live = item.service_status.some(f => [ServiceType.LIVE, ServiceType.LIVE_AUDIO, ServiceType.LIVE_CHAT, ServiceType.LIVE_VIDEO].includes(f.type) && f.status == ServiceStatus.STREAMING)
                     }
                     set(prev => ({ ...prev, live_consultant_profile: { ...prev.live_consultant_profile, list: paginate ? [...prev.live_consultant_profile.list, ...request.data?.records] : request.data?.records } }))
+                },
+
+                home_list: async () => {
+
+
+
+                    const request = await Api.get<{ records: ConsultantProfile[] }>(api.consultantProfileBaseUrl("/live-consultant"), {
+                        query: {
+                            page: 1, size: 10,
+                        }
+                    })
+
+                    if (!request.status) {
+                        return;
+                    }
+                    set(prev => ({ ...prev, live_consultant_profile: { ...prev.live_consultant_profile, home_list: request.data?.records } }))
                 },
 
                 detail: async (id: string | number) => {

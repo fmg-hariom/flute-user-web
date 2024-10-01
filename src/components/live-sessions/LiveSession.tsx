@@ -33,7 +33,7 @@ const LiveSession = (props: Props) => {
                     className="w-full"
                 >
                     <CarouselContent>
-                        {liveConsultantProfileStore?.live_consultant_profile?.list?.length ? liveConsultantProfileStore?.live_consultant_profile?.list?.map((slide, index: number) => (
+                        {liveConsultantProfileStore?.live_consultant_profile?.home_list?.length ? liveConsultantProfileStore?.live_consultant_profile?.home_list?.map((slide, index: number) => (
                             <CarouselItem key={index} className="md:basis-1/3 xlg:basis-1/6">
                                 <DownloadAppDialog trigger={
                                     <div className="p-1 flex justify-center">
@@ -44,7 +44,8 @@ const LiveSession = (props: Props) => {
                                                     <circle cx="16.6869" cy="14.0882" r="10.2353" stroke="#33C004" stroke-width="1.70588" />
                                                     <circle cx="16.6872" cy="14.0871" r="4.7521" fill="#33C004" />
                                                 </svg> */}
-                                                <div className="pulse-loader"></div>
+                                                {/* <div className="pulse-loader"></div> */}
+                                                <img src='/gifs/live-green-gif-marker.gif' className='w-[50px]' />
 
                                             </span>
                                             <span className="absolute left-0 bottom-0 p-3 flex flex-col items-start">
