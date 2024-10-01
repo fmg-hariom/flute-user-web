@@ -10,8 +10,15 @@ import {
 } from "@/components/ui/carousel";
 import { useRouter } from "next/navigation";
 import useMagazineStore from "@/services/magazine/magazine.service";
+import { Montserrat } from "next/font/google";
 
 type Props = {};
+
+const Montserrats = Montserrat({
+  weight: "600", // Specify the font weights you need
+  subsets: ["latin"], // Include any subsets you need
+  display: "swap", // Controls how the font is displayed while loading
+});
 
 const FluteMag = (props: Props) => {
   const router = useRouter();
@@ -69,11 +76,13 @@ const FluteMag = (props: Props) => {
                         }}
                       />
                     </div>
-                    <div className="p-6 py-3 bg-[#111111] h-[95px] flex flex-col items-start justify-between">
-                      <h2 className="text-[16px] text-[#959393] mb-2 line-clamp-1">
+                    <div className="p-6 py-3 bg-[#111111] h-[140px] flex flex-col items-start justify-between">
+                      <h2
+                        className={`text-[20px] text-[#959393] font-bold mb-2 line-clamp-2  ${Montserrats.className} `}
+                      >
                         {slide?.title}
                       </h2>
-                      <p className="text-[#959393] text-[13px] line-clamp-2">
+                      <p className="text-[#959393] text-[16px] line-clamp-2">
                         {slide?.sub_title}
                       </p>
                     </div>
