@@ -27,6 +27,7 @@ import { SkillSlide } from "@/components/slides/SkillSlide";
 import useBuzzStore from "@/services/buzz/buzz.service";
 import React from "react";
 import useLiveConsultantProfileStore from "@/services/consultant_profile/live_consultant.service";
+import FluteTestimonial from "@/components/testimonial/FluteTestimonial";
 
 // import HomeIcon from '/images/icons/home.svg'
 const HomeIcon = "/images/icons/home.svg";
@@ -78,8 +79,7 @@ export default function Home() {
   const magazineStore = useMagazineStore();
   const consultantProfileStore = useConsultantProfileStore();
   const buzzStore = useBuzzStore();
-  const liveConsultantProfileStore = useLiveConsultantProfileStore()
-
+  const liveConsultantProfileStore = useLiveConsultantProfileStore();
 
   useEffect(() => {
     store.get.paginate({});
@@ -88,7 +88,7 @@ export default function Home() {
     consultantProfileStore.get.paginate({});
     buzzStore.get.paginate({});
     store.get.banners();
-    liveConsultantProfileStore.get.paginate({})
+    liveConsultantProfileStore.get.paginate({});
   }, []);
 
   console.log("store.dashboard.list: ", store.dashboard.list);
@@ -148,8 +148,9 @@ export default function Home() {
                 >
                   <img src={item.imagePath} className="w-6" />
                   <p
-                    className={`text-sm font-normal text-[#A0A0A0] ${index == 0 ? "text-[#FFA643]" : ""
-                      }`}
+                    className={`text-sm font-normal text-[#A0A0A0] ${
+                      index == 0 ? "text-[#FFA643]" : ""
+                    }`}
                   >
                     {item.title}
                   </p>
@@ -157,29 +158,29 @@ export default function Home() {
               );
             })}
           </div>
-          <div className="relative mb-8">
+          <div className="relative mb-8 rounded-lg">
             <Banner />
-            {/* <Image src="/images/banners/banner.png" alt="Banner Image" layout="responsive" width={1920} height={1080} className="rounded-lg" /> */}
           </div>
 
           <div className="flex overflow-x-scroll mb-5 sm:mb-0">
             {skillStore.skill.list?.length ? (
               <SkillSlide slides={[...(skillStore.skill.list || [])]} />
             ) : (
+              // <div>pp</div>
               <>
                 {Array.from({ length: 10 }).map(() => {
                   return (
                     <Card
                       className={`animate-pulse mr-4 border-[2.359px] md:min-h-60 border-[#232323] bg-[#202020]/75 text-black text-center py-5 flex flex-col justify-center items-center rounded-[20px] min-w-32 md:min-w-40 overflow-x-scroll cursor-pointer`}
                     >
-                      <div className="h-28 py-2"></div>
+                      <div className="h-28 py-2"> </div>
                     </Card>
                   );
                 })}
               </>
             )}
           </div>
-          <div className="relative mb-8">
+          <div className="relative mb-8 sm:hidden">
             <MobileBanner />
           </div>
         </main>
@@ -205,18 +206,21 @@ export default function Home() {
             }
 
             return (
-              <div className="py-4 sm:py-8 px-2 sm:px-16 h-[300px] sm:h-[400px] w-full sm:w-[100%] bg-black text-white">
-                <Slides
-                  content_type={item.content_type}
-                  title={`${item.title}`}
-                  slides={slides}
-                  radiant1={`${item.categories?.[0]?.category_card_bg_color?.[0]?.color ||
-                    "#DDC3A2"
+              <>
+                <div className="py-4 sm:py-8 px-2 sm:px-16 h-[300px] sm:h-[400px] w-full sm:w-[100%] bg-black text-white">
+                  <Slides
+                    content_type={item.content_type}
+                    title={`${item.title}`}
+                    slides={slides}
+                    radiant1={`${
+                      item.categories?.[0]?.category_card_bg_color?.[0]
+                        ?.color || "#DDC3A2"
                     }`}
-                  radiant2={"#DFB881"}
-                  viewAllId={item.category_ids?.[0]}
-                />
-              </div>
+                    radiant2={"#DFB881"}
+                    viewAllId={item.category_ids?.[0]}
+                  />
+                </div>
+              </>
             );
           }
         })
@@ -234,6 +238,7 @@ export default function Home() {
       </div>
       <FluteMag />
       <FluteBuzz />
+      <FluteTestimonial />
       <GetApp />
     </>
   );

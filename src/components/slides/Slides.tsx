@@ -99,15 +99,6 @@ export const Slides = ({
                 </div>
               ) : content_type == 2 ? (
                 <>
-                  {/* <Image src={slide?.image} width={300} height={300} style={{ width: "100%", maxWidth: "384px" }} alt=''>
-                    </Image> */}
-                  {/* <Image
-                    src={slide?.image}
-                    width={250} 
-                    height={230} 
-                    className="w-[320px] h-[230px] sm:w-full sm:max-w-[384px] object-contain"
-                    alt=""
-                  /> */}
                   <Image
                     src={slide?.image}
                     width={320}
@@ -115,7 +106,6 @@ export const Slides = ({
                     className="w-[320px] h-[230px] sm:w-full sm:max-w-[384px] object-contain"
                     alt=""
                     quality={90}
-                    // layout="responsive"
                   />
                 </>
               ) : (

@@ -17,7 +17,7 @@ export default function FluteMagazine() {
           <div className="mx-auto px-6 lg:px-8">
             <div className="mx-auto  lg:mx-0 text-center">
               <h2 className=" heading-2 !text-[26px] md:!text-[40px]    text-dark ">
-                Flute Magazine
+                Flute Magazine 
               </h2>
               <span className="x-arrow"></span>
               <p className="mt-14 text-lg header-p  !text-[14px] md:!text-[16px]">
