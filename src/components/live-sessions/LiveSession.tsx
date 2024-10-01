@@ -18,33 +18,7 @@ const LiveSession = (props: Props) => {
     const router = useRouter();
     const liveConsultantProfileStore = useLiveConsultantProfileStore()
 
-    const slides: any = [
-        {
-            image: '/images/live/unsplash_0mN84vxigL0.png',
-            name: "Sophie Turner",
-            role: "Tarrot Reading"
-        },
-        {
-            image: '/images/live/unsplash_AxqT51VT8mw.png',
-            name: "Maise Williams",
-            role: "Astrologer"
-        },
-        {
-            image: '/images/live/unsplash_ra9IMT4b7IM.png',
-            name: "Hiral Soni",
-            role: "Dating Advice"
-        },
-        {
-            image: '/images/live/unsplash_CE_1ZBQ__Ns.png',
-            name: "Utkarsha Das",
-            role: "Life Coaching"
-        },
-        {
-            image: '/images/live/unsplash_mEZ3PoFGs_k.png',
-            name: "Samiksha Jain",
-            role: "Breakup Support"
-        },
-    ]
+
 
     return (
         <div className="w-screen flex flex-col justify-center h-[680px] bg-[#C9E2E5] py-8 sm:py-9 px-2 sm:px-16 text-black">
@@ -65,16 +39,17 @@ const LiveSession = (props: Props) => {
                                     <div className="p-1 flex justify-center">
                                         <div className="relative flex h-[314px] w-[209px] flex-col text-center h-40 items-center justify-center rounded-3xl duration-300 ease-in-out bg-cover" style={{ backgroundImage: index == 0 ? ` linear-gradient( to bottom,rgba(0, 0, 0, 0) 0%,rgba(0, 0, 0, 0.8) 100%),url('${slide?.profile_image}')` : `url('${slide?.profile_image}') ` }}>
                                             <span className="absolute w-4 h-4 rounded-full right-6 top-3">
-                                                <svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                {/* <svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <circle cx="15.5986" cy="15" r="15" fill="black" fill-opacity="0.5" />
                                                     <circle cx="16.6869" cy="14.0882" r="10.2353" stroke="#33C004" stroke-width="1.70588" />
                                                     <circle cx="16.6872" cy="14.0871" r="4.7521" fill="#33C004" />
-                                                </svg>
+                                                </svg> */}
+                                                <div className="pulse-loader"></div>
 
                                             </span>
                                             <span className="absolute left-0 bottom-0 p-3 flex flex-col items-start">
                                                 <p className='text-[16px] text-[#ffffff]'>{slide?.first_name}</p>
-                                                <p className='text-[13px] text-[#FFA643] line-clamp-1'>{slide.categories_name}</p>
+                                                <p className='text-[13px] text-[#FFA643] line-clamp-1 justify-start'>{`${slide.categories_name}`.substring(0, 25)}</p>
                                             </span>
                                         </div>
                                     </div>

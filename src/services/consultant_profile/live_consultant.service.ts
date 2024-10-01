@@ -57,10 +57,10 @@ const useLiveConsultantProfileStore = create(
                 list: [] as ConsultantProfile[],
                 detail: null as ConsultantProfile | null,
                 total: 0,
-                page: 0,
+                page: 1,
                 size: 10,
                 search: null as string | null,
-                paginate: true as boolean,
+                paginate: false as boolean,
                 skill_id: null as string | null,
                 consultant_type: null as string | null,
                 category_id: null as string | null,
@@ -111,7 +111,7 @@ const useLiveConsultantProfileStore = create(
                         // item.profile_photo = item.
                         // item.is_live = item.service_status.some(f => [ServiceType.LIVE, ServiceType.LIVE_AUDIO, ServiceType.LIVE_CHAT, ServiceType.LIVE_VIDEO].includes(f.type) && f.status == ServiceStatus.STREAMING)
                     }
-                    set(prev => ({ ...prev, live_consultant_profile: { ...prev.live_consultant_profile, list: [...prev.live_consultant_profile.list, ...request.data?.records] } }))
+                    set(prev => ({ ...prev, live_consultant_profile: { ...prev.live_consultant_profile, list: paginate ? [...prev.live_consultant_profile.list, ...request.data?.records] : request.data?.records } }))
                 },
 
                 detail: async (id: string | number) => {
@@ -161,7 +161,7 @@ const useLiveConsultantProfileStore = create(
                                 page: page || prev.live_consultant_profile.page,
                                 size: size || prev.live_consultant_profile.size,
                                 search: search || prev.live_consultant_profile.search,
-                                paginate: paginate ?? true,
+                                paginate: paginate ?? false,
                                 skill_id: skill_id || "",
                                 consultant_type: consultant_type || "",
                                 category_id: category_id || "",
