@@ -29,7 +29,9 @@ export const Slides = ({
   const router = useRouter();
 
   const plugin: any = React.useRef(
-    Autoplay({ delay: 1000, stopOnInteraction: true })
+    content_type === 2
+      ? Autoplay({ delay: 1000, stopOnInteraction: true })
+      : null
   );
 
   return (
@@ -54,9 +56,9 @@ export const Slides = ({
         <></>
       )}
       <Carousel
-        plugins={[plugin.current]}
-        onMouseEnter={plugin.current.stop}
-        onMouseLeave={plugin.current.play}
+        plugins={content_type === 2 ? [plugin.current] : []}
+        onMouseEnter={content_type === 2 ? plugin.current?.stop : undefined}
+        onMouseLeave={content_type === 2 ? plugin.current?.play : undefined}
         opts={{
           align: "center",
         }}

@@ -21,10 +21,13 @@ const MainHeader = (props: Props) => {
                     */
                 }
                 <Link href={"/"} >
-                    <Logo width={98} height={99} />
+                    <Logo width={98} height={99}  />
+                    
                 </Link>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center ">
+      {/* <div className="hidden sm:flex items-center"> */}
+
                 <DownloadAppDialog trigger={
                     <Button className="mr-3   md:flex bg-[#FFA843] text-black rounded-[32.2px]">
                         <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg" className='sm:mr-4' >

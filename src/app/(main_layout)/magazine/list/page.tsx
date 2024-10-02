@@ -3,7 +3,7 @@
 import MainHeader from "@/components/headers/MainHeader";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
-import { Montserrat_Alternates } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import { useRouter } from "next/navigation";
 import { ChangeEventHandler, useEffect, useState } from "react";
 import useMagazineStore from "@/services/magazine/magazine.service";
@@ -24,8 +24,8 @@ import {
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-const montserratAlternates = Montserrat_Alternates({
-  weight: "400", // Specify the font weights you need
+const Montserrats = Montserrat({
+  weight: "600", // Specify the font weights you need
   subsets: ["latin"], // Include any subsets you need
   display: "swap", // Controls how the font is displayed while loading
 });
@@ -231,7 +231,8 @@ export default function FluteMagazineView(props: any) {
                           className="border-white w-full py-2.5 mb-3 px-5  rounded-md bg-transparent border-solid border"
                           onClick={() => {
                             router.push(
-                              `/magazine/list?category_id=${item.slug}`
+                              // `/magazine/list?category_id=${item.slug}`
+                              `/magazine/list?category_id=${item.id}`
                             );
                             setShowCategories(false);
                           }}
@@ -269,14 +270,20 @@ export default function FluteMagazineView(props: any) {
                           alt=""
                         />
                         <div className="p-5">
-                          <a href="#">
-                            <h5 className="mb-6 line-clamp-1">
-                              {item.id} {item.title}
-                            </h5>
-                          </a>
-                          <p className="mb-4 line-clamp-2 h-6">
+                          <h2
+                            className={`text-[20px] text-[#959393] font-bold mb-2 line-clamp-2   ${Montserrats.className} `}
+                          >
+                            {" "}
+                            {item.id} {item.title}
+                          </h2>
+
+                          {/* <h2 className=" text-[16px] mb-6  line-clamp-2  h-6 text-[#959393] ">
                             {item.sub_title}
-                          </p>
+                          </h2> */}
+                          <h2 className="text-[16px] mb-6 text-[#959393] line-clamp-2 ">
+                            {item.sub_title}
+                          </h2>
+
                           <div className="flex justify-between ">
                             <div>
                               <span className="inline-block align-middle me-2">
@@ -384,7 +391,7 @@ export default function FluteMagazineView(props: any) {
                                 : " text-white ring-1 ring-inset ring-gray-300 bg-none"
                             }`}
                           >
-                            {item}
+                            {item }
                           </a>
                         );
                       })}

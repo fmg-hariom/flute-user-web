@@ -1208,9 +1208,6 @@ export default function ViewAll() {
                   </div>
                 </div>
               </div>
-
-
-
             </div>
             <div className="text-center">
               <button

@@ -1,12 +1,21 @@
-"use client"
+"use client";
 import MainHeader from "@/components/headers/MainHeader";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { Montserrat_Alternates } from "next/font/google";
-import useConsultantProfileStore, { Feature } from "@/services/consultant_profile/consultant_profile.service";
+import useConsultantProfileStore, {
+  Feature,
+} from "@/services/consultant_profile/consultant_profile.service";
 import { ChangeEventHandler, useEffect } from "react";
 import Link from "next/link";
-import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import DownloadAppDialog from "@/components/common/dialogs/DownloadAppDialog";
@@ -19,35 +28,28 @@ const montserratAlternates = Montserrat_Alternates({
 });
 
 export default function ViewAll(props: any) {
-
   // Store
   const store = useConsultantProfileStore();
 
   useEffect(() => {
-    store.get.paginate({ ...props?.searchParams })
-  }, [props?.searchParams])
+    store.get.paginate({ ...props?.searchParams });
+  }, [props?.searchParams]);
 
   const handleSearch: ChangeEventHandler<HTMLInputElement> = (e) => {
-
     store.get.paginate({
       ...props?.searchParams,
       search: e.target.value,
-    })
-
-  }
+    });
+  };
 
   return (
     <div className="py-4 sm:py-8 px-0 bg-black text-white">
-
       <main>
         <div className="relative isolate overflow-hidden bg-light-blue py-22 ">
           <div className="mx-auto px-6 lg:px-8">
             <div className="mx-auto  lg:mx-0 text-center">
               <h2 className=" heading-2 !text-[26px] md:!text-[40px]  text-dark ">
-                {
-                  props?.searchParams?.title ||
-                  "Astrologers"
-                }
+                {props?.searchParams?.title || "Astrologers"}
               </h2>
               <span className="x-arrow"></span>
               <p className="mt-14 text-lg !text-[14px] md:!text-[16px] header-p text-dark">
@@ -66,7 +68,7 @@ export default function ViewAll(props: any) {
                     <input
                       name="username"
                       type="text"
-                      placeholder="Search by name, country, language or gender"
+                      placeholder="Search by name, country, language or gender "
                       autoComplete="off"
                       className="block flex-1 outline-none border-0 bg-transparent py-1.5 pl-1 text-white placeholder:text-gray-400 "
                       onChange={handleSearch}
@@ -107,56 +109,61 @@ export default function ViewAll(props: any) {
                           </DialogHeader>
                           <hr className="bg-[#5B5B5B]" />
                           <div className="flex items-center">
-                            <RadioGroup value={store.consultant_profile.sort}  >
-                              {
-                                [
-                                  {
-                                    label: "Popularity",
-                                    value: ""
-                                  },
-                                  {
-                                    label: "Price : Low to High",
-                                    value: ""
-                                  },
-                                  {
-                                    label: "Price : High to Low",
-                                    value: ""
-                                  },
-                                  {
-                                    label: "Rating : Low to High",
-                                    value: ""
-                                  },
-                                  {
-                                    label: "Rating : High to Low",
-                                    value: ""
-                                  },
-                                  {
-                                    label: "Exp : Low to High",
-                                    value: ""
-                                  },
-                                  {
-                                    label: "Exp : High to Low",
-                                    value: ""
-                                  }
-                                ].map((item) => {
-                                  return (
-                                    <DialogClose asChild>
-                                      <div className="flex items-center space-x-2">
-                                        <RadioGroupItem value={item.value} id="r1" onClick={e => store.get.sort("desc")} />
-                                        <Label htmlFor="r1" className="text-white text-lg font-normal" >{item.label}</Label>
-                                      </div>
-                                    </DialogClose>
-                                  )
-                                })
-                              }
+                            <RadioGroup value={store.consultant_profile.sort}>
+                              {[
+                                {
+                                  label: "Popularity",
+                                  value: "",
+                                },
+                                {
+                                  label: "Price : Low to High",
+                                  value: "",
+                                },
+                                {
+                                  label: "Price : High to Low",
+                                  value: "",
+                                },
+                                {
+                                  label: "Rating : Low to High",
+                                  value: "",
+                                },
+                                {
+                                  label: "Rating : High to Low",
+                                  value: "",
+                                },
+                                {
+                                  label: "Exp : Low to High",
+                                  value: "",
+                                },
+                                {
+                                  label: "Exp : High to Low",
+                                  value: "",
+                                },
+                              ].map((item) => {
+                                return (
+                                  <DialogClose asChild>
+                                    <div className="flex items-center space-x-2">
+                                      <RadioGroupItem
+                                        value={item.value}
+                                        id="r1"
+                                        onClick={(e) => store.get.sort("desc")}
+                                      />
+                                      <Label
+                                        htmlFor="r1"
+                                        className="text-white text-lg font-normal"
+                                      >
+                                        {item.label}
+                                      </Label>
+                                    </div>
+                                  </DialogClose>
+                                );
+                              })}
                             </RadioGroup>
-
                           </div>
                         </DialogContent>
                       </Dialog>
                     </div>
                     <div className="sm:me-3 w-full mb-3 sm:mb-0 sm:w-fit">
-
                       <Dialog>
                         <DialogTrigger asChild>
                           <button
@@ -173,108 +180,106 @@ export default function ViewAll(props: any) {
                           </DialogHeader>
                           <hr className="bg-[#5B5B5B]" />
                           <div className="">
-
-                            <div className="mb-2" >
-                              <h4 className="text-[#CBCBCB] mb-2" >Who would you like to talk to?</h4>
-                              <div className="flex items-center" >
-                                {
-                                  [
-                                    {
-                                      value: "1",
-                                      label: "Male"
-                                    }, {
-                                      value: "1",
-                                      label: "Female"
-                                    }, {
-                                      value: "1",
-                                      label: "Other"
-                                    },
-                                  ].map((item => {
-                                    return (
-                                      <button
-                                        type="button"
-                                        className="rounded-full w-full sm:w-[99px] h-[45px] border px-2  border-[#FFA643] bg-transparent text-[#FFA643] mr-2 mb-2"
-                                      >
-                                        {item.label}
-                                      </button>
-                                    )
-                                  }))
-                                }
-
+                            <div className="mb-2">
+                              <h4 className="text-[#CBCBCB] mb-2">
+                                Who would you like to talk to?
+                              </h4>
+                              <div className="flex items-center">
+                                {[
+                                  {
+                                    value: "1",
+                                    label: "Male",
+                                  },
+                                  {
+                                    value: "1",
+                                    label: "Female",
+                                  },
+                                  {
+                                    value: "1",
+                                    label: "Other",
+                                  },
+                                ].map((item) => {
+                                  return (
+                                    <button
+                                      type="button"
+                                      className="rounded-full w-full sm:w-[99px] h-[45px] border px-2  border-[#FFA643] bg-transparent text-[#FFA643] mr-2 mb-2"
+                                    >
+                                      {item.label}
+                                    </button>
+                                  );
+                                })}
                               </div>
                             </div>
 
-                            <div className="mb-2" >
-                              <h4 className="text-[#CBCBCB] mb-2" >Who would you like to talk to?</h4>
-                              <div className="flex items-center flex-wrap flex-grow" >
-                                {
-                                  [
-                                    {
-                                      value: "1",
-                                      label: "21-30 yrs"
-                                    }, {
-                                      value: "1",
-                                      label: "31-40 yrs"
-                                    }, {
-                                      value: "1",
-                                      label: ">40 yrs"
-                                    }, {
-                                      value: "1",
-                                      label: "Any"
-                                    },
-                                  ].map((item => {
-                                    return (
-                                      <button
-                                        type="button"
-                                        className="rounded-full w-full sm:w-[99px] max-w-[99px] h-[45px] border px-2  border-[#FFA643] bg-transparent text-[#FFA643] mr-2 mb-2"
-                                      >
-                                        {item.label}
-                                      </button>
-                                    )
-                                  }))
-                                }
-
+                            <div className="mb-2">
+                              <h4 className="text-[#CBCBCB] mb-2">
+                                Who would you like to talk to?
+                              </h4>
+                              <div className="flex items-center flex-wrap flex-grow">
+                                {[
+                                  {
+                                    value: "1",
+                                    label: "21-30 yrs",
+                                  },
+                                  {
+                                    value: "1",
+                                    label: "31-40 yrs",
+                                  },
+                                  {
+                                    value: "1",
+                                    label: ">40 yrs",
+                                  },
+                                  {
+                                    value: "1",
+                                    label: "Any",
+                                  },
+                                ].map((item) => {
+                                  return (
+                                    <button
+                                      type="button"
+                                      className="rounded-full w-full sm:w-[99px] max-w-[99px] h-[45px] border px-2  border-[#FFA643] bg-transparent text-[#FFA643] mr-2 mb-2"
+                                    >
+                                      {item.label}
+                                    </button>
+                                  );
+                                })}
                               </div>
                             </div>
 
-                            <div className="mb-2" >
-                              <h4 className="text-[#CBCBCB] mb-2" >Country?</h4>
-                              <div className="flex items-center" >
-                                {
-                                  [
-                                    {
-                                      value: "1",
-                                      label: "India"
-                                    }, {
-                                      value: "1",
-                                      label: "Outside India"
-                                    }
-                                  ].map((item => {
-                                    return (
-                                      <button
-                                        type="button"
-                                        className="rounded-full w-full  h-[45px] border px-2  border-[#FFA643] bg-transparent text-[#FFA643] mr-2 mb-2"
-                                      >
-                                        {item.label}
-                                      </button>
-                                    )
-                                  }))
-                                }
-
+                            <div className="mb-2">
+                              <h4 className="text-[#CBCBCB] mb-2">Country?</h4>
+                              <div className="flex items-center">
+                                {[
+                                  {
+                                    value: "1",
+                                    label: "India",
+                                  },
+                                  {
+                                    value: "1",
+                                    label: "Outside India",
+                                  },
+                                ].map((item) => {
+                                  return (
+                                    <button
+                                      type="button"
+                                      className="rounded-full w-full  h-[45px] border px-2  border-[#FFA643] bg-transparent text-[#FFA643] mr-2 mb-2"
+                                    >
+                                      {item.label}
+                                    </button>
+                                  );
+                                })}
                               </div>
                             </div>
 
-                            <div className="flex items-center justify-between w-full" >
-                              <button className="w-full sm:w-[99px] max-w-[99px] h-[45px] border-none px-2  bg-transparent text-[#CBCBCB] mr-2 mb-2" >
+                            <div className="flex items-center justify-between w-full">
+                              <button className="w-full sm:w-[99px] max-w-[99px] h-[45px] border-none px-2  bg-transparent text-[#CBCBCB] mr-2 mb-2">
                                 Reset
                               </button>
 
-                              <button className=" h-[45px] border-none px-8  bg-[#FFA643] text-black rounded-[8.97px] mr-2 mb-2" >
+                              <button className=" h-[45px] border-none px-8  bg-[#FFA643] text-black rounded-[8.97px] mr-2 mb-2">
                                 Apply Filters
                               </button>
                             </div>
-
-
                           </div>
                         </DialogContent>
                       </Dialog>
@@ -320,19 +325,26 @@ export default function ViewAll(props: any) {
               </div>
             </form>
             <div className="columns-1 mt-12 gap-4 lg:columns-2">
-              {
-                store.consultant_profile.list.length ? store.consultant_profile.list.map(item => {
+              {store.consultant_profile.list.length ? (
+                store.consultant_profile.list.map((item) => {
                   return (
-                    <Link href={`/consultant/${props?.params?.type}/${item.id}`} onClick={(e: any) => {
-                      if (e.target.tagName.includes('svg') || e.target.tagName.includes('path')) {
-                        e.preventDefault();
-                      }
-                    }} >
+                    <Link
+                      href={`/consultant/${props?.params?.type}/${item.id}`}
+                      onClick={(e: any) => {
+                        if (
+                          e.target.tagName.includes("svg") ||
+                          e.target.tagName.includes("path")
+                        ) {
+                          e.preventDefault();
+                        }
+                      }}
+                    >
                       <div className="flex mb-4 modal-cards p-1 lg:p-2 rounded-md">
                         <div className="flex-none w-32 md:w-40 h-[15rem]">
                           <img
                             src={
-                              item.profile_photo?.url || "/images/avatars/modal-img.png"
+                              item.profile_photo?.url ||
+                              "/images/avatars/modal-img.png"
                             }
                             className=" rounded-md h-full  object-center object-cover"
                             width={"100%"}
@@ -347,16 +359,15 @@ export default function ViewAll(props: any) {
                                   {item.first_name + " " + item.last_name}
                                 </h2>
                               </div>
-                              {
-                                item.is_live ?
-
-                                  <div className="bg-black badges rounded-full px-4 py-1">
-                                    <span className="circle-dot text-[14px] xl:text-[16px]">
-                                      Live
-                                    </span>
-                                  </div>
-                                  : <></>
-                              }
+                              {item.is_live ? (
+                                <div className="bg-black badges rounded-full px-4 py-1">
+                                  <span className="circle-dot text-[14px] xl:text-[16px]">
+                                    Live
+                                  </span>
+                                </div>
+                              ) : (
+                                <></>
+                              )}
                             </div>
                             <div className="mb-3">
                               <span className="inline-block align-middle text-[14px] xl:text-[16px]">
@@ -375,7 +386,7 @@ export default function ViewAll(props: any) {
                                     stroke-linejoin="round"
                                   />
                                 </svg>
-                                {item?.rating_review?.totalRatings}
+                                {item?.rating_review?.avgRating}
                               </span>
                               <span className="inline-block align-middle mx-5">
                                 <svg
@@ -398,135 +409,152 @@ export default function ViewAll(props: any) {
                             </div>
 
                             <p className="card-text text-[14px] xl:text-[16px]">
-                              {item.languages.join(", ")}, <br /> {item.categories_name.join(", ")}
+                              {item.languages.join(", ")}, <br />{" "}
+                              {item.categories_name.join(", ")}
                             </p>
                             <div className="flex justify-between mt-3	items-center">
                               <div>
                                 <span className="inline-block green-color align-middle me-3 text-xs md:text-lg">
-                                  @ ₹ {item.chat_price ? item.chat_price?.current_price : ""}
+                                  @ ₹{" "}
+                                  {item.chat_price
+                                    ? item.chat_price?.discount_price
+                                    : ""}
                                 </span>
                                 <span className="inline-block align-middle text-xs md:text-lg">
-                                  <del>₹ {
-                                    item.chat_price ? item.chat_price?.discount_price : ""}/min</del>
+                                  <del>
+                                    ₹{" "}
+                                    {item.chat_price
+                                      ? item.chat_price?.current_price
+                                      : ""}
+                                    /min
+                                  </del>
                                 </span>
                               </div>
-                              <div className="z-10" >
-                                <DownloadAppDialog trigger={<span className="xl:ps-3 inline-block align-middle">
-                                  <svg
-                                    width="51"
-                                    height="50"
-                                    viewBox="0 0 51 50"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="w-[30px] h-[30px]  xl:w-[50px] xl:h-[50]"
-                                  >
-                                    <g clip-path="url(#clip0_2_6285)">
-                                      <path
-                                        d="M18.2993 21.8745H32.8827"
-                                        stroke="#33C004"
-                                        stroke-width="2.81439"
-                                        stroke-miterlimit="10"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                      />
-                                      <path
-                                        d="M15.1745 38.3958H23.5078L32.7787 44.5625C34.1537 45.4792 36.0078 44.5 36.0078 42.8333V38.3958C42.2578 38.3958 46.4245 34.2292 46.4245 27.9792V15.4792C46.4245 9.22917 42.2578 5.0625 36.0078 5.0625H15.1745C8.92448 5.0625 4.75781 9.22917 4.75781 15.4792V27.9792C4.75781 34.2292 8.92448 38.3958 15.1745 38.3958Z"
-                                        stroke="#33C004"
-                                        stroke-width="2.81439"
-                                        stroke-miterlimit="10"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                      />
-                                    </g>
-                                    <defs>
-                                      <clipPath id="clip0_2_6285">
-                                        <rect
-                                          width="50"
-                                          height="50"
-                                          fill="white"
-                                          transform="translate(0.591309)"
-                                        />
-                                      </clipPath>
-                                    </defs>
-                                  </svg>
-                                </span>} />
-
-                                <DownloadAppDialog trigger={
-                                  <span className="px-2 xl:px-3 inline-block align-middle">
-                                    <svg
-                                      viewBox="0 0 51 50"
-                                      fill="none"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      className="w-[30px] h-[30px]  xl:w-[50px] xl:h-[50]"
-                                    >
-                                      <path
-                                        d="M46.6503 38.1873C46.6503 38.9373 46.4836 39.7082 46.1295 40.4582C45.7753 41.2082 45.317 41.9165 44.7128 42.5832C43.692 43.7082 42.567 44.5207 41.2961 45.0415C40.0461 45.5623 38.692 45.8332 37.2336 45.8332C35.1086 45.8332 32.8378 45.3332 30.442 44.3123C28.0461 43.2915 25.6503 41.9165 23.2753 40.1873C20.8795 38.4373 18.6086 36.4998 16.442 34.354C14.2961 32.1873 12.3586 29.9165 10.6295 27.5415C8.92114 25.1665 7.54614 22.7915 6.54614 20.4373C5.54614 18.0623 5.04614 15.7915 5.04614 13.6248C5.04614 12.2082 5.29614 10.854 5.79614 9.604C6.29614 8.33317 7.08781 7.1665 8.19198 6.12484C9.52531 4.81234 10.9836 4.1665 12.5253 4.1665C13.1086 4.1665 13.692 4.2915 14.2128 4.5415C14.7545 4.7915 15.2336 5.1665 15.6086 5.70817L20.442 12.5207C20.817 13.0415 21.0878 13.5207 21.2753 13.979C21.4628 14.4165 21.567 14.854 21.567 15.2498C21.567 15.7498 21.4211 16.2498 21.1295 16.729C20.8586 17.2082 20.4628 17.7082 19.9628 18.2082L18.3795 19.854C18.1503 20.0832 18.0461 20.354 18.0461 20.6873C18.0461 20.854 18.067 20.9998 18.1086 21.1665C18.1711 21.3332 18.2336 21.4582 18.2753 21.5832C18.6503 22.2707 19.2961 23.1665 20.2128 24.2498C21.1503 25.3332 22.1503 26.4373 23.2336 27.5415C24.3586 28.6457 25.442 29.6665 26.5461 30.604C27.6295 31.5207 28.5253 32.1457 29.2336 32.5207C29.3378 32.5623 29.4628 32.6248 29.6086 32.6873C29.7753 32.7498 29.942 32.7707 30.1295 32.7707C30.4836 32.7707 30.7545 32.6457 30.9836 32.4165L32.567 30.854C33.0878 30.3332 33.5878 29.9373 34.067 29.6873C34.5461 29.3957 35.0253 29.2498 35.5461 29.2498C35.942 29.2498 36.3586 29.3332 36.817 29.5207C37.2753 29.7082 37.7545 29.979 38.2753 30.3332L45.1711 35.229C45.7128 35.604 46.0878 36.0415 46.317 36.5623C46.5253 37.0832 46.6503 37.604 46.6503 38.1873Z"
-                                        stroke="#8F63EC"
-                                        stroke-width="2.81439"
-                                        stroke-miterlimit="10"
-                                      />
-                                      <path
-                                        d="M39.4213 18.7497C39.4213 17.4997 38.4421 15.583 36.9838 14.0205C35.6505 12.583 33.8796 11.458 32.1296 11.458"
-                                        stroke="#8F63EC"
-                                        stroke-width="2.81439"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                      />
-                                      <path
-                                        d="M46.713 18.7498C46.713 10.6873 40.1921 4.1665 32.1296 4.1665"
-                                        stroke="#8F63EC"
-                                        stroke-width="2.81439"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                      />
-                                    </svg>
-                                  </span>
-                                } />
-                                <DownloadAppDialog trigger={
-                                  <span className="px-2 xl:px-3 inline-block align-middle">
-                                    <span className=" inline-block align-middle">
+                              <div className="z-10">
+                                <DownloadAppDialog
+                                  trigger={
+                                    <span className="xl:ps-3 inline-block align-middle">
                                       <svg
-                                        className="w-[30px] h-[30px]  xl:w-[50px] xl:h-[50]"
+                                        width="51"
+                                        height="50"
                                         viewBox="0 0 51 50"
                                         fill="none"
                                         xmlns="http://www.w3.org/2000/svg"
+                                        className="w-[30px] h-[30px]  xl:w-[50px] xl:h-[50]"
+                                      >
+                                        <g clip-path="url(#clip0_2_6285)">
+                                          <path
+                                            d="M18.2993 21.8745H32.8827"
+                                            stroke="#33C004"
+                                            stroke-width="2.81439"
+                                            stroke-miterlimit="10"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                          />
+                                          <path
+                                            d="M15.1745 38.3958H23.5078L32.7787 44.5625C34.1537 45.4792 36.0078 44.5 36.0078 42.8333V38.3958C42.2578 38.3958 46.4245 34.2292 46.4245 27.9792V15.4792C46.4245 9.22917 42.2578 5.0625 36.0078 5.0625H15.1745C8.92448 5.0625 4.75781 9.22917 4.75781 15.4792V27.9792C4.75781 34.2292 8.92448 38.3958 15.1745 38.3958Z"
+                                            stroke="#33C004"
+                                            stroke-width="2.81439"
+                                            stroke-miterlimit="10"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                          />
+                                        </g>
+                                        <defs>
+                                          <clipPath id="clip0_2_6285">
+                                            <rect
+                                              width="50"
+                                              height="50"
+                                              fill="white"
+                                              transform="translate(0.591309)"
+                                            />
+                                          </clipPath>
+                                        </defs>
+                                      </svg>
+                                    </span>
+                                  }
+                                />
+
+                                <DownloadAppDialog
+                                  trigger={
+                                    <span className="px-2 xl:px-3 inline-block align-middle">
+                                      <svg
+                                        viewBox="0 0 51 50"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="w-[30px] h-[30px]  xl:w-[50px] xl:h-[50]"
                                       >
                                         <path
-                                          d="M26.271 42.5418H13.1043C6.521 42.5418 4.3335 38.1668 4.3335 33.771V16.2293C4.3335 9.646 6.521 7.4585 13.1043 7.4585H26.271C32.8543 7.4585 35.0418 9.646 35.0418 16.2293V33.771C35.0418 40.3543 32.8335 42.5418 26.271 42.5418Z"
-                                          stroke="#11B9E9"
+                                          d="M46.6503 38.1873C46.6503 38.9373 46.4836 39.7082 46.1295 40.4582C45.7753 41.2082 45.317 41.9165 44.7128 42.5832C43.692 43.7082 42.567 44.5207 41.2961 45.0415C40.0461 45.5623 38.692 45.8332 37.2336 45.8332C35.1086 45.8332 32.8378 45.3332 30.442 44.3123C28.0461 43.2915 25.6503 41.9165 23.2753 40.1873C20.8795 38.4373 18.6086 36.4998 16.442 34.354C14.2961 32.1873 12.3586 29.9165 10.6295 27.5415C8.92114 25.1665 7.54614 22.7915 6.54614 20.4373C5.54614 18.0623 5.04614 15.7915 5.04614 13.6248C5.04614 12.2082 5.29614 10.854 5.79614 9.604C6.29614 8.33317 7.08781 7.1665 8.19198 6.12484C9.52531 4.81234 10.9836 4.1665 12.5253 4.1665C13.1086 4.1665 13.692 4.2915 14.2128 4.5415C14.7545 4.7915 15.2336 5.1665 15.6086 5.70817L20.442 12.5207C20.817 13.0415 21.0878 13.5207 21.2753 13.979C21.4628 14.4165 21.567 14.854 21.567 15.2498C21.567 15.7498 21.4211 16.2498 21.1295 16.729C20.8586 17.2082 20.4628 17.7082 19.9628 18.2082L18.3795 19.854C18.1503 20.0832 18.0461 20.354 18.0461 20.6873C18.0461 20.854 18.067 20.9998 18.1086 21.1665C18.1711 21.3332 18.2336 21.4582 18.2753 21.5832C18.6503 22.2707 19.2961 23.1665 20.2128 24.2498C21.1503 25.3332 22.1503 26.4373 23.2336 27.5415C24.3586 28.6457 25.442 29.6665 26.5461 30.604C27.6295 31.5207 28.5253 32.1457 29.2336 32.5207C29.3378 32.5623 29.4628 32.6248 29.6086 32.6873C29.7753 32.7498 29.942 32.7707 30.1295 32.7707C30.4836 32.7707 30.7545 32.6457 30.9836 32.4165L32.567 30.854C33.0878 30.3332 33.5878 29.9373 34.067 29.6873C34.5461 29.3957 35.0253 29.2498 35.5461 29.2498C35.942 29.2498 36.3586 29.3332 36.817 29.5207C37.2753 29.7082 37.7545 29.979 38.2753 30.3332L45.1711 35.229C45.7128 35.604 46.0878 36.0415 46.317 36.5623C46.5253 37.0832 46.6503 37.604 46.6503 38.1873Z"
+                                          stroke="#8F63EC"
+                                          stroke-width="2.81439"
+                                          stroke-miterlimit="10"
+                                        />
+                                        <path
+                                          d="M39.4213 18.7497C39.4213 17.4997 38.4421 15.583 36.9838 14.0205C35.6505 12.583 33.8796 11.458 32.1296 11.458"
+                                          stroke="#8F63EC"
                                           stroke-width="2.81439"
                                           stroke-linecap="round"
                                           stroke-linejoin="round"
                                         />
                                         <path
-                                          d="M40.8334 35.6253L35.0417 31.5628V18.4169L40.8334 14.3544C43.6667 12.3753 46.0001 13.5836 46.0001 17.0628V32.9378C46.0001 36.4169 43.6667 37.6253 40.8334 35.6253Z"
-                                          stroke="#11B9E9"
-                                          stroke-width="2.81439"
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round"
-                                        />
-                                        <path
-                                          d="M24.1255 22.9165C25.8514 22.9165 27.2505 21.5174 27.2505 19.7915C27.2505 18.0656 25.8514 16.6665 24.1255 16.6665C22.3996 16.6665 21.0005 18.0656 21.0005 19.7915C21.0005 21.5174 22.3996 22.9165 24.1255 22.9165Z"
-                                          stroke="#11B9E9"
+                                          d="M46.713 18.7498C46.713 10.6873 40.1921 4.1665 32.1296 4.1665"
+                                          stroke="#8F63EC"
                                           stroke-width="2.81439"
                                           stroke-linecap="round"
                                           stroke-linejoin="round"
                                         />
                                       </svg>
                                     </span>
-                                  </span>
-                                } />
-
+                                  }
+                                />
+                                <DownloadAppDialog
+                                  trigger={
+                                    <span className="px-2 xl:px-3 inline-block align-middle">
+                                      <span className=" inline-block align-middle">
+                                        <svg
+                                          className="w-[30px] h-[30px]  xl:w-[50px] xl:h-[50]"
+                                          viewBox="0 0 51 50"
+                                          fill="none"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                          <path
+                                            d="M26.271 42.5418H13.1043C6.521 42.5418 4.3335 38.1668 4.3335 33.771V16.2293C4.3335 9.646 6.521 7.4585 13.1043 7.4585H26.271C32.8543 7.4585 35.0418 9.646 35.0418 16.2293V33.771C35.0418 40.3543 32.8335 42.5418 26.271 42.5418Z"
+                                            stroke="#11B9E9"
+                                            stroke-width="2.81439"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                          />
+                                          <path
+                                            d="M40.8334 35.6253L35.0417 31.5628V18.4169L40.8334 14.3544C43.6667 12.3753 46.0001 13.5836 46.0001 17.0628V32.9378C46.0001 36.4169 43.6667 37.6253 40.8334 35.6253Z"
+                                            stroke="#11B9E9"
+                                            stroke-width="2.81439"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                          />
+                                          <path
+                                            d="M24.1255 22.9165C25.8514 22.9165 27.2505 21.5174 27.2505 19.7915C27.2505 18.0656 25.8514 16.6665 24.1255 16.6665C22.3996 16.6665 21.0005 18.0656 21.0005 19.7915C21.0005 21.5174 22.3996 22.9165 24.1255 22.9165Z"
+                                            stroke="#11B9E9"
+                                            stroke-width="2.81439"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                          />
+                                        </svg>
+                                      </span>
+                                    </span>
+                                  }
+                                />
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </Link>
-                  )
-                }) : <>
-                </>
-              }
+                  );
+                })
+              ) : (
+                <></>
+              )}
             </div>
             <div className="text-center">
               <button

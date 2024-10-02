@@ -82,6 +82,9 @@ const config = {
         charterBold: ['charterbold'],       // Bold font
         charterItalic: ['charteritalic'],   // Italic font
         charterBoldItalic: ['charterbold_italic'], // Bold Italic font
+          myriadRegular: ['Myriad Pro Regular'],
+       
+
       },
       maxWidth: {
         '1/2': '50%',

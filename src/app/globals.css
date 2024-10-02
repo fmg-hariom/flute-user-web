@@ -290,6 +290,7 @@
   font-weight: 500;
 }
 
+/* fonts/MYRIADPRO-REGULAR.woff */
 #pagination-first-page,
 #pagination-previous-page,
 #pagination-next-page,
@@ -337,50 +338,14 @@ input[type="radio"].custom-radio:disabled {
 
 /* here add the font family for charter */
 
-/* globals.css */
-
-/* @font-face {
-    font-family: 'charterbold_italic';
-    src: url('path/to/font/charter_bold_italic-webfont.eot');
-    src: url('path/to/font/charter_bold_italic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('path/to/font/charter_bold_italic-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'charterbold';
-    src: url('path/to/font/charter_bold-webfont.eot');
-    src: url('path/to/font/charter_bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('path/to/font/charter_bold-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'charteritalic';
-    src: url('path/to/font/charter_italic-webfont.eot');
-    src: url('path/to/font/charter_italic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('path/to/font/charter_italic-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'charterregular';
-    src: url('path/to/font/charter_regular-webfont.eot');
-    src: url('path/to/font/charter_regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('path/to/font/charter_regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-} */
-
 .container.mx-auto.px-2 p,
 .container.mx-auto.px-2 li {
   line-height: 50px;
   font-size: 30px;
   letter-spacing: 1px;
   color: #d9d9d9;
+  font-family: Georgia;
+
   /* padding: 0 80px; */
 }
 
@@ -397,10 +362,6 @@ input[type="radio"].custom-radio:disabled {
   padding: 0 !important;
 }
 
-/* .magazine-sub-title p span {
-    font-size: 22px !important;
-} */
-
 @media only screen and (max-width: 600px) {
   .container.mx-auto.px-2 p,
   .container.mx-auto.px-2 li {
@@ -408,6 +369,7 @@ input[type="radio"].custom-radio:disabled {
     line-height: 35px;
     letter-spacing: 0.5px;
     padding: 0 !important;
+    font-family: Georgia;
     padding-left: 5px !important;
     /* list-style-type: none; */
     color: #a1a1a1;

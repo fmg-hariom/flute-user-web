@@ -63,7 +63,7 @@ export default function Blogs(props: any) {
                 alt=""
               />
             </div>
-            <div className="bg-[#242424] py-[20px] px-2 sm:px-[80px] rounded-lg shadow-insets font-charter mt-2 ">
+            <div className="bg-[#242424] py-[20px] px-2 sm:px-[80px] rounded-lg shadow-insets mt-2 ">
               <div
                 dangerouslySetInnerHTML={{
                   __html: `${store.magazine.detail?.content}`,
@@ -83,11 +83,11 @@ export default function Blogs(props: any) {
                     alt=""
                   />
                   {/* </div> */}
-                  <div className="ml-6 ">
-                    <span className="text-[#D9D9D9] font-bold text-[15px] md:text-[16px] flex justify-end lg:justify-normal">
+                  <div className="ml-5 h-full">
+                    <span className="text-[#D9D9D9] font-bold text-[15px] md:text-[16px] flex justify-start lg:justify-normal">
                       Written by
                     </span>
-                    <h3 className="text-[#D9D9D9] font-bold text-[20px] md:text-[28px] flex justify-end lg:justify-normal">
+                    <h3 className="text-[#D9D9D9] font-bold text-[20px] md:text-[28px]   lg:justify-normal">
                       {store.magazine.detail?.author_names || "Flute"}
                     </h3>
 
