@@ -274,7 +274,7 @@ export default function FluteMagazineView(props: any) {
                             className={`text-[20px] text-[#959393] font-bold mb-2 line-clamp-2   ${Montserrats.className} `}
                           >
                             {" "}
-                            {item.id} {item.title}
+                            {item.title}
                           </h2>
 
                           {/* <h2 className=" text-[16px] mb-6  line-clamp-2  h-6 text-[#959393] ">
@@ -391,7 +391,7 @@ export default function FluteMagazineView(props: any) {
                                 : " text-white ring-1 ring-inset ring-gray-300 bg-none"
                             }`}
                           >
-                            {item }
+                            {item}
                           </a>
                         );
                       })}
