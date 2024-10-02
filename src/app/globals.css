@@ -373,7 +373,7 @@ input[type="radio"].custom-radio:disabled {
 @media only screen and (max-width: 600px) {
   .container.mx-auto.px-2 p,
   .container.mx-auto.px-2 li {
-    font-size: 20px !important;
+    font-size: 22px !important;
     line-height: 35px;
     letter-spacing: 0.5px;
     padding: 0 !important;
