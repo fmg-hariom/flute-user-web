@@ -16,7 +16,7 @@ const MobileBanner = (props: Props) => {
   const store = useDashboardStore();
 
   const plugin: any = React.useRef(
-    Autoplay({ delay: 100000, stopOnInteraction: true })
+    Autoplay({ delay: 2000, stopOnInteraction: true })
   );
 
   const [api, setApi] = React.useState<CarouselApi>();
@@ -49,13 +49,13 @@ const MobileBanner = (props: Props) => {
         onChange={(e) => {
           console.log(e);
         }}
-        className="w-full px-4 sm:px-0"
+        className="w-full  custom-style  sm:px-0"
       >
         <CarouselContent className="">
           {store.dashboard.banners?.length ? (
             store.dashboard.banners.map((slide, index: number) => (
               <CarouselItem key={index} className="">
-                <div className="w-[320px]  ">
+                <div className="pl-[10px] sm:pl-[0px] w-[98%]  ">
                   <Image
                     src={slide?.mobile_media}
                     alt="Banner Image"

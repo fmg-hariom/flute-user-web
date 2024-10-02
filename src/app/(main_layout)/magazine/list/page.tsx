@@ -269,7 +269,7 @@ export default function FluteMagazineView(props: any) {
                           src={`${item.featured_image_mobile}`}
                           alt=""
                         />
-                        <div className="p-5">
+                        <div className="p-2">
                           <h2
                             className={`text-[20px] text-[#959393] font-bold mb-2 line-clamp-2   ${Montserrats.className} `}
                           >

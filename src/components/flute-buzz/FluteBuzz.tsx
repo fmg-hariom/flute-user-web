@@ -34,14 +34,11 @@ const FluteBuzz = (props: Props) => {
     });
   }, [api]);
 
-
-  
-
   return (
     <div className="w-screen flex flex-col justify-center h-[680px] bg-[#82BBBE] py-8 sm:py-9 px-2 sm:px-16 text-black">
       <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-bold text-[#302C28] ">
         Flute Buzz
-      </h2> 
+      </h2>
       <div className=" w-48 sm:w-56 md:w-72 rounded container h-[4px] my-3 bg-[#302C28]"></div>
       <div className="my-6 mx-2 md:mx-12">
         <Carousel
@@ -59,13 +56,9 @@ const FluteBuzz = (props: Props) => {
                   className="md:basis-1/2 lg:basis-1/3 xl:basis-1/3"
                 >
                   <div className="p-1 flex justify-center">
-                    <a
-                      href={slide?.reference_link}
-                      target="_blank"
-                   
-                    >
-                      <div className="max-w-[470px] rounded-[30px] overflow-hidden">
-                        <div className="h-60">
+                    <a href={slide?.reference_link} target="_blank">
+                      <div className="rounded-[30px] overflow-hidden w-[320px] lg:w-[500px]">
+                        <div className="h-60 w-full flex items-center justify-center bg-gray-200 relative overflow-hidden">
                           <img
                             className="object-cover h-full w-full"
                             src={slide?.image}

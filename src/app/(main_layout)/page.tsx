@@ -88,7 +88,7 @@ export default function Home() {
     consultantProfileStore.get.paginate({});
     buzzStore.get.paginate({});
     store.get.banners();
-    liveConsultantProfileStore.get.home_list()
+    liveConsultantProfileStore.get.home_list();
   }, []);
 
   console.log("store.dashboard.list: ", store.dashboard.list);
@@ -148,8 +148,9 @@ export default function Home() {
                 >
                   <img src={item.imagePath} className="w-6" />
                   <p
-                    className={`text-sm font-normal text-[#A0A0A0] ${index == 0 ? "text-[#FFA643]" : ""
-                      }`}
+                    className={`text-sm font-normal text-[#A0A0A0] ${
+                      index == 0 ? "text-[#FFA643]" : ""
+                    }`}
                   >
                     {item.title}
                   </p>
@@ -165,7 +166,6 @@ export default function Home() {
             {skillStore.skill.list?.length ? (
               <SkillSlide slides={[...(skillStore.skill.list || [])]} />
             ) : (
-              // <div>pp</div>
               <>
                 {Array.from({ length: 10 }).map(() => {
                   return (
@@ -186,8 +186,6 @@ export default function Home() {
       </div>
       {/** Live Sessions */}
       <LiveSession />
-
-
 
       {store.dashboard.list.length ? (
         store.dashboard.list.map((item) => {
@@ -213,9 +211,10 @@ export default function Home() {
                     content_type={item.content_type}
                     title={`${item.title}`}
                     slides={slides}
-                    radiant1={`${item.categories?.[0]?.category_card_bg_color?.[0]
+                    radiant1={`${
+                      item.categories?.[0]?.category_card_bg_color?.[0]
                         ?.color || "#DDC3A2"
-                      }`}
+                    }`}
                     radiant2={"#DFB881"}
                     viewAllId={item.category_ids?.[0]}
                   />

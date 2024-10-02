@@ -71,8 +71,8 @@ export default function Blogs(props: any) {
               />
 
               <div className="border my-6"></div>
-              <div className="flex justify-between items-center flex-col md:flex-row ">
-                <div className="flex items-center w-full justify-between md:justify-normal  md:w-auto mb-4 md:mb-0">
+              <div className="flex justify-start lg:justify-between items-center flex-col md:flex-row ">
+                <div className="flex items-center w-full lg:justify-between md:justify-normal  md:w-auto mb-4 md:mb-0">
                   {/* <div className="text-[12px]"> */}
                   <img
                     src={
@@ -84,7 +84,7 @@ export default function Blogs(props: any) {
                   />
                   {/* </div> */}
                   <div className="ml-5 h-full">
-                    <span className="text-[#D9D9D9] font-bold text-[15px] md:text-[16px] flex justify-start lg:justify-normal">
+                    <span className="text-[#D9D9D9] font-bold text-[15px] md:text-[16px] flex justify-start lg:justify-normal y">
                       Written by
                     </span>
                     <h3 className="text-[#D9D9D9] font-bold text-[20px] md:text-[28px]   lg:justify-normal">
