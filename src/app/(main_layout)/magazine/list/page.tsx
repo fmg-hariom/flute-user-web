@@ -79,7 +79,7 @@ export default function FluteMagazineView(props: any) {
   };
 
   return (
-    <div className="py-4 sm:py-8  bg-black text-white">
+    <div className="py-4 sm:py-4  bg-black text-white">
       <main>
         <div className="relative isolate overflow-hidden bg-light-yellow py-22 ">
           <div className="mx-auto px-6 lg:px-8">
@@ -88,9 +88,9 @@ export default function FluteMagazineView(props: any) {
                 Flute Magazine
               </h2>
               <span className="x-arrow"></span>
-              <p className="mt-14 text-lg header-p  !text-[14px] md:!text-[16px]	 text-dark">
+              <p className="mt-14 text-lg header-p font-[600] text-[28px] font-workSans text-[#302c28]">
                 {/* <p
-                className={`mt-14 text-lg header-p !text-[14px] md:!text-[16px]  text-dark ${montserratAlternates.className}`}
+                className={`mt-14 text-lg header-p !text-[14px] md:!text-[16px]  text-dark ${Montserrats.className}`}
               > */}
                 Harmonizing Life: Honest Talks, Real Stories, and Expert Advice
                 for Your Journey

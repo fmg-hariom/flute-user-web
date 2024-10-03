@@ -102,8 +102,7 @@ const config = {
          'kay-pho-du': ['"Kay Pho Du"', 'serif'],
           sohne: ['sohne', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
         serif: ['source-serif-pro', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
-
-       
+         workSans:["Work Sans, sans-serif"]
 
       },
       maxWidth: {

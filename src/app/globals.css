@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Kay+Pho+Du:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -104,17 +105,18 @@
   letter-spacing: 0.0024em;
 }
 .x-arrow {
-  width: 182px;
+  width: 260px;
   height: 0px;
   display: inline-block;
   border: 3px solid #302c28;
   border-radius: 12px;
 }
 .header-p {
-  font-size: 25px;
-  font-weight: 400;
+  font-size: 28px;
+  font-weight: 600;
   line-height: 32.5px;
   letter-spacing: 0.24197041988372803px;
+  
 }
 .mt-14 {
   margin-top: 14px;
@@ -235,6 +237,7 @@
 }
 .shadow-insets {
   box-shadow: 0px 10px 0px 0px #abc130 inset;
+  padding-top: 42px;
 }
 
 .loader {
@@ -402,7 +405,6 @@ input[type="radio"].custom-radio:disabled {
     box-shadow: 0 0 0 14px #33c00400;
   }
 }
-
 
 #importantCategory {
   color: #a1a1a1;

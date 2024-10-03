@@ -1,23 +1,6 @@
 "use client";
-import MainHeader from "@/components/headers/MainHeader";
-import { Card } from "@/components/ui/card";
-import Image from "next/image";
-import { Montserrat_Alternates } from "next/font/google";
-import { Montserrat } from "next/font/google";
 import { useEffect } from "react";
 import useMagazineStore from "@/services/magazine/magazine.service";
-
-// const montserratAlternates = Montserrat_Alternates({
-//   weight: "400", // Specify the font weights you need
-//   subsets: ["latin"], // Include any subsets you need
-//   display: "swap", // Controls how the font is displayed while loading
-// });
-
-const Montserrats = Montserrat({
-  weight: "600", // Specify the font weights you need
-  subsets: ["latin"], // Include any subsets you need
-  display: "swap", // Controls how the font is displayed while loading
-});
 
 export default function Blogs(props: any) {
   const store = useMagazineStore();
@@ -27,11 +10,11 @@ export default function Blogs(props: any) {
   }, [props?.params?.id]);
 
   return (
-    <div className="py-4 sm:py-8 px-0 bg-black text-white">
+    <div className="px-0 bg-black text-white">
       <main>
         {store.magazine?.detail ? (
           <div className="container mx-auto px-2 sm:px-12 max-w-[1850px]">
-            <div className="pt-10">
+            <div className="pt-6">
               <span className="inline-block align-middle bg-slate-200 rounded-sm p-1 px-2 text-sm  text-dark">
                 {store.magazine.detail?.date}
               </span>
@@ -68,7 +51,7 @@ export default function Blogs(props: any) {
                 }}
               />
 
-              <div className="border my-6"></div>
+              <div className="border my-6 border-[#8f8e8e]"></div>
               <div className="flex justify-start lg:justify-between items-center flex-col md:flex-row ">
                 <div className="flex items-center w-full lg:justify-between md:justify-normal  md:w-auto mb-4 md:mb-0">
                   {/* <div className="text-[12px]"> */}
@@ -77,19 +60,19 @@ export default function Blogs(props: any) {
                       store.magazine.detail?.author_image ||
                       "https://placehold.co/200x200"
                     }
-                    className="rounded-[100%] w-[50px] h-[50px] md:w-[110px] md:h-[110px] border-4 border-white border-solid md:mr-2"
+                    className="rounded-[100%] w-[50px] h-[50px] md:w-[110px] md:h-[110px]  border-[#8f8e8e] border-[3px] md:mr-2"
                     alt=""
                   />
                   {/* </div> */}
                   <div className="ml-5 h-full">
-                    <span className="text-[#A1A1A1] font-bold text-[15px] md:text-[16px] flex justify-start lg:justify-normal font-sohne  y">
+                    <span className="text-[#A1A1A1] font-bold text-[15px] md:text-[16px] flex justify-start lg:justify-normal font-sohne ">
                       Written by
                     </span>
-                    <h3 className="text-[#A1A1A1] font-bold text-[20px] md:text-[28px]   lg:justify-normal">
+                    <h3 className="text-[#A1A1A1] font-bold text-[20px] md:text-[28px] lg:justify-normal">
                       {store.magazine.detail?.author_names || "Flute"}
                     </h3>
 
-                    <div className="flex gap-2 text-[#A1A1A1] ">
+                    <div className="flex gap-2 mt-2  text-[#A1A1A1] ">
                       {store.magazine.detail.category_names?.map(
                         (category: any, index: any) => (
                           <div
@@ -104,7 +87,7 @@ export default function Blogs(props: any) {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center w-full justify-between md:w-auto ">
+                <div className="flex items-center w-full justify-between md:w-auto  ">
                   <div>
                     <span className="inline-block align-middle me-1">
                       <svg
