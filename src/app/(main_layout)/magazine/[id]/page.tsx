@@ -61,7 +61,7 @@ export default function Blogs(props: any) {
                 alt=""
               />
             </div>
-            <div className=" blog-details py-[20px] px-2 sm:px-[80px] rounded-lg shadow-insets leading-[28px] text-[18px] sm:leading-[32px] mt-2 text-[#A1A1A1]  sm:text-[20px] font-[400] font-serif">
+            <div className=" blog-details py-[20px] px-2 md:px-[22px] lg:px-[80px] rounded-lg shadow-insets leading-[28px] text-[18px] sm:leading-[32px] mt-2 text-[#A1A1A1]  sm:text-[20px] font-[400] font-serif">
               <div
                 dangerouslySetInnerHTML={{
                   __html: `${store.magazine.detail?.content}`,
