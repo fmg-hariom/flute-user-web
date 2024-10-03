@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kay+Pho+Du:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -336,31 +337,6 @@ input[type="radio"].custom-radio:disabled {
   /* font-size: 12px !important; */
 }
 
-/* here add the font family for charter */
-
-.container.mx-auto.px-2 p,
-.container.mx-auto.px-2 li {
-  line-height: 50px;
-  font-size: 30px;
-  letter-spacing: 1px;
-  color: #d9d9d9;
-  font-family: Georgia;
-
-  /* padding: 0 80px; */
-}
-
-.container.mx-auto strong {
-  font-size: 32px;
-  line-height: 54px;
-  letter-spacing: 1px;
-  color: #d9d9d9;
-  margin-top: 34px;
-  display: inline-block;
-}
-
-.magazine-sub-title p {
-  padding: 0 !important;
-}
 @media only screen and (max-width: 676px) {
   .custom-style .min-w-0.shrink-0.grow-0.pl-4 {
     width: 100%;
@@ -370,34 +346,27 @@ input[type="radio"].custom-radio:disabled {
   }
 }
 
+/* here add the font family for charter */
+
+.blog-details ul {
+  padding-left: 35px;
+  list-style: auto;
+}
+
+.blog-details strong {
+  font-size: 24px;
+}
 @media only screen and (max-width: 600px) {
-  .container.mx-auto.px-2 p,
-  .container.mx-auto.px-2 li {
-    font-size: 22px !important;
-    line-height: 35px;
-    letter-spacing: 0.5px;
-    padding: 0 !important;
-    font-family: Georgia;
-    padding-left: 5px !important;
-    /* list-style-type: none; */
-    color: #a1a1a1;
+  .blog-details ul {
+    padding-left: 15px;
+    list-style: auto;
   }
-
-  .container.mx-auto.px-2 li {
-    /* list-style-type: none; */
-    margin-left: 15px !important;
-  }
-
-  .container.mx-auto strong {
-    font-size: 22px !important;
-    line-height: 30px;
-    letter-spacing: 0.5px;
-    padding: 0 !important;
-    margin-top: 4px;
-    color: #cccccce3;
+  .blog-details strong {
+    font-size: 22px;
   }
 }
 
+/* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */
 .categories {
   color: #ffffff;
   background-color: #e5e7e333;
@@ -432,4 +401,9 @@ input[type="radio"].custom-radio:disabled {
   100% {
     box-shadow: 0 0 0 14px #33c00400;
   }
+}
+
+
+#importantCategory {
+  color: #a1a1a1;
 }

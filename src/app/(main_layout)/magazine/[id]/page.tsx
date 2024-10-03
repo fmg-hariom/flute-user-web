@@ -37,13 +37,11 @@ export default function Blogs(props: any) {
               </span>
             </div>
             <div>
-              <h2
-                className={`text-3xl md:text-5xl  text-[#D9D9D9] mt-7 mb-2 leading-tight ${Montserrats.className} font-extrabold`}
-              >
+              <h2 className="leading-[38px] text-[32px]  sm:leading-[52px] sm:text-[42px] font-bold text-[#A1A1A1] font-sohne break-words mt-7 mb-2">
                 {store.magazine.detail?.title}
               </h2>
               <div
-                className="mb-4 magazine-sub-title px-0"
+                className="leading-[26px] text-[18px]  sm:leading-[34px] sm:text-[22px] font-[400] text-[#A1A1A1] font-sohne break-words mt-4 mb-4"
                 dangerouslySetInnerHTML={{
                   __html: `${store.magazine.detail?.sub_title}`,
                 }}
@@ -63,7 +61,7 @@ export default function Blogs(props: any) {
                 alt=""
               />
             </div>
-            <div className="bg-[#242424] py-[20px] px-2 sm:px-[80px] rounded-lg shadow-insets mt-2 ">
+            <div className=" blog-details py-[20px] px-2 sm:px-[80px] rounded-lg shadow-insets leading-[28px] text-[18px] sm:leading-[32px] mt-2 text-[#A1A1A1]  sm:text-[20px] font-[400] font-serif">
               <div
                 dangerouslySetInnerHTML={{
                   __html: `${store.magazine.detail?.content}`,
@@ -84,17 +82,21 @@ export default function Blogs(props: any) {
                   />
                   {/* </div> */}
                   <div className="ml-5 h-full">
-                    <span className="text-[#D9D9D9] font-bold text-[15px] md:text-[16px] flex justify-start lg:justify-normal y">
+                    <span className="text-[#A1A1A1] font-bold text-[15px] md:text-[16px] flex justify-start lg:justify-normal font-sohne  y">
                       Written by
                     </span>
-                    <h3 className="text-[#D9D9D9] font-bold text-[20px] md:text-[28px]   lg:justify-normal">
+                    <h3 className="text-[#A1A1A1] font-bold text-[20px] md:text-[28px]   lg:justify-normal">
                       {store.magazine.detail?.author_names || "Flute"}
                     </h3>
 
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 text-[#A1A1A1] ">
                       {store.magazine.detail.category_names?.map(
                         (category: any, index: any) => (
-                          <div className="categories" key={index}>
+                          <div
+                            className="categories   "
+                            id="importantCategory"
+                            key={index}
+                          >
                             {category}
                           </div>
                         )

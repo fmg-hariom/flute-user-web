@@ -76,6 +76,8 @@ const config = {
       },
       fontFamily: {
         sans: ['Poppins'],
+       
+
         Secular_One: ['Secular One', 'sans-serif'],
           // Custom font families added from @font-face declarations
         charter: ['charterregular'],       // Regular font
@@ -83,6 +85,24 @@ const config = {
         charterItalic: ['charteritalic'],   // Italic font
         charterBoldItalic: ['charterbold_italic'], // Bold Italic font
           myriadRegular: ['Myriad Pro Regular'],
+            mediumContentSans: [
+          'medium-content-sans-serif-font',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"Segoe UI"',
+          'Roboto',
+          'Oxygen',
+          'Ubuntu',
+          'Cantarell',
+          '"Open Sans"',
+          '"Helvetica Neue"',
+          'sans-serif'
+        ],
+
+         'kay-pho-du': ['"Kay Pho Du"', 'serif'],
+          sohne: ['sohne', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+        serif: ['source-serif-pro', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+
        
 
       },
