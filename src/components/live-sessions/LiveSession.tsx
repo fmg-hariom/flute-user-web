@@ -29,6 +29,7 @@ const LiveSession = (props: Props) => {
                 <Carousel
                     opts={{
                         align: "start",
+                        dragFree: false,
                     }}
                     className="w-full"
                 >
