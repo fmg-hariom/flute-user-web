@@ -106,7 +106,7 @@ export default function Profile(props: any) {
                         </span>
                       </div>
                       <p>
-                        {detail?.sessions} sessions
+                        {/* {detail?.sessions} sessions */}
                         <br />
                         Exp: {detail?.experience} years
                       </p>
@@ -266,7 +266,7 @@ export default function Profile(props: any) {
                                 </svg>
                               </span>
                               <h2 className="lg:text-[22px] text-[#ECEDEF] font-semibold">
-                                Video call{" "}
+                                Video call
                               </h2>
                               <h2 className="lg:text-[21px] font-semibold">
                                 {/* <span className="inline-block me-1">

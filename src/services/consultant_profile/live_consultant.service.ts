@@ -112,12 +112,10 @@ const useLiveConsultantProfileStore = create(
                         // item.profile_photo = item.
                         // item.is_live = item.service_status.some(f => [ServiceType.LIVE, ServiceType.LIVE_AUDIO, ServiceType.LIVE_CHAT, ServiceType.LIVE_VIDEO].includes(f.type) && f.status == ServiceStatus.STREAMING)
                     }
-                    set(prev => ({ ...prev, live_consultant_profile: { ...prev.live_consultant_profile, list: paginate ? [...prev.live_consultant_profile.list, ...request.data?.records] : request.data?.records } }))
+                    set(prev => ({ ...prev, live_consultant_profile: { ...prev.live_consultant_profile, list: [...prev.live_consultant_profile.list, ...request.data?.records] } }))
                 },
 
                 home_list: async () => {
-
-
 
                     const request = await Api.get<{ records: ConsultantProfile[] }>(api.consultantProfileBaseUrl("/live-consultant"), {
                         query: {
