@@ -442,9 +442,9 @@ input[type="radio"].custom-radio:disabled {
   bottom: auto;
   transform: translate(-50%, -50%);
   background: rgb(186, 185, 185);
-  padding: 20px;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* padding: 20px; */
+  border-radius: 18px;
+  box-shadow: 0 4px 8px rgba(48, 48, 48, 0.1);
   max-width: 90%;
   max-height: 82%;
   overflow: scroll;

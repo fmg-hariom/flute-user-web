@@ -20,8 +20,6 @@ export default function Blogs(props: any) {
     setIsModalOpen(true);
   };
 
-   
-
   // Function to close the modal
   const closeModal = () => {
     setIsModalOpen(false);
@@ -71,7 +69,7 @@ export default function Blogs(props: any) {
 
               <div className="border my-6 border-[#8f8e8e]"></div>
               <div className="flex justify-start lg:justify-between items-center flex-col md:flex-row ">
-                <div className="flex items-center w-full lg:justify-between md:justify-normal  md:w-auto mb-4 md:mb-0">
+                <div className="flex items-start sm:items-center w-full lg:justify-between md:justify-normal  md:w-auto mb-4 md:mb-0">
                   {/* <div className="text-[12px]"> */}
 
                   <img
@@ -89,11 +87,11 @@ export default function Blogs(props: any) {
                     }
                   />
                   {/* </div> */}
-                  <div className="ml-5 h-full">
+                  {/* <div className="ml-5 h-full w-full">
                     <span className="text-[#A1A1A1] font-bold text-[15px] md:text-[16px] flex justify-start lg:justify-normal font-sohne ">
                       Written by
                     </span>
-                    <h3 className="text-[#A1A1A1] font-bold text-[20px] md:text-[28px] lg:justify-normal">
+                    <h3 className="text-[#A1A1A1] font-bold text-[20px] md:text-[28px] lg:justify-normal inline-block">
                       {store.magazine.detail?.author_names || "Flute"}
                     </h3>
 
@@ -102,6 +100,31 @@ export default function Blogs(props: any) {
                         (category: any, index: any) => (
                           <div
                             className="categories   "
+                            id="importantCategory"
+                            key={index}
+                          >
+                            {category}
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div> */}
+
+                  <div className="ml-5 h-full w-full">
+                    <span className="text-[#A1A1A1] font-bold text-[15px] md:text-[16px] flex justify-start lg:justify-normal font-sohne ">
+                      Written by
+                    </span>
+                    <h3 className="text-[#A1A1A1] font-bold text-[20px] md:text-[28px] lg:justify-normal inline-block">
+                      {store.magazine.detail?.author_names || "Flute"}
+                    </h3>
+
+                    <div className="flex gap-2 mt-2 text-[#A1A1A1] flex-wrap">
+                      {" "}
+                      {/* Added flex-wrap */}
+                      {store.magazine.detail.category_names?.map(
+                        (category: any, index: any) => (
+                          <div
+                            className="categories whitespace-nowrap"
                             id="importantCategory"
                             key={index}
                           >
@@ -202,7 +225,7 @@ export default function Blogs(props: any) {
         >
           <div className="flex flex-col items-center">
             {/* Display the selected image */}
-            <img src={selectedImage} className="rounded-lg w-full h-auto" />
+            <img src={selectedImage} className="border-none w-full h-auto" />
 
             {/* <button
               className="mt-4 px-4 py-2 bg-red-600 text-white rounded"
