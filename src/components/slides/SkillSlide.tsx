@@ -34,9 +34,12 @@ export const SkillSlide = ({ slides }: Props) => {
       >
         <CarouselContent>
           {slides?.map((slide, index: number) => (
-            <CarouselItem key={index} className=" basis-1/1  select-none">
+            <CarouselItem
+              key={index}
+              className="w-1/3  sm:w-auto sm:basis-1/1  select-none"
+            >
               <Card
-                className={` border-[2.359px] border-[#232323] bg-[#202020]/75 text-black text-center py-5 flex flex-col justify-center items-center rounded-[20px] w-[105px] h-[140px] md:min-w-[200px] md:min-h-[240px] cursor-pointer`}
+                className={` border-[2.359px] border-[#232323] bg-[#202020]/75 text-black text-center py-5 flex flex-col justify-center items-center rounded-[20px] px-4 h-[140px] md:min-w-[200px] md:min-h-[240px] cursor-pointer`}
                 onClick={() => {
                   router.push(
                     `/consultant/astrologer?skill_id=${slide.id}&title=${slide.skill_name}`

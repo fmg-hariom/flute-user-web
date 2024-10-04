@@ -223,9 +223,14 @@ export default function Blogs(props: any) {
           className="modal"
           overlayClassName="overlay"
         >
-          <div className="flex flex-col items-center">
+          {/* <div className="flex flex-col items-center"> */}
+          <div className="image-container w-full h:full md:h-[750px] relative overflow-hidden">
             {/* Display the selected image */}
-            <img src={selectedImage} className="border-none w-full h-auto" />
+            <img
+              src={selectedImage}
+              className="border-none w-full h-full object-cover" // Use object-cover to contain the image
+              alt="Selected"
+            />
 
             {/* <button
               className="mt-4 px-4 py-2 bg-red-600 text-white rounded"

@@ -105,9 +105,9 @@ export default function FluteMagazineView(props: any) {
               <div className="gap-2 columns-1  md:columns-3">
                 {/* <div className="gap-2 columns-1  md:columns-3"> */}
                 <div className="mb-3 md:mb-0">
-                  <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
+                  {/* <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
                     Search
-                  </label>
+                  </label> */}
                   <div className="relative">
                     <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                       <svg
@@ -129,7 +129,8 @@ export default function FluteMagazineView(props: any) {
                     <input
                       type="search"
                       id="default-search"
-                      className="block w-full p-4 ps-10 text-sm text-white border rounded-md   bg-transparent  "
+                      // className="block w-[70%] p-4 ps-10 text-sm text-white border rounded-md  bg-transparent "
+                      className="block w-full sm:w-[70%] p-4 ps-10 text-sm text-white border border-[#7d7d7dfd] rounded-xl  bg-transparent "
                       placeholder="Search"
                       required
                       onChange={handleSearch}
@@ -139,7 +140,7 @@ export default function FluteMagazineView(props: any) {
                 <div className="text-center mb-3 md:mb-0">
                   <button
                     type="button"
-                    className="border-white w-full md:w-fit rounded-md bg-transparent border-solid	border text-white py-3 px-10"
+                    className="border-white w-full md:w-fit rounded-xl bg-transparent border border-[#7d7d7dfd] text-white py-3 px-10"
                     onClick={handleShowCategory}
                   >
                     Categories
@@ -153,7 +154,7 @@ export default function FluteMagazineView(props: any) {
                         <DialogTrigger asChild>
                           <button
                             type="button"
-                            className="rounded-md md:w-[99px] h-[49px] w-full  custom-select border px-2 ps-10 bg-icon sort-icon filter-select border-white bg-transparent"
+                            className="rounded-xl md:w-[99px] h-[49px] w-full  custom-select border px-2 ps-10 bg-icon sort-icon filter-select border-[#7d7d7dfd] bg-transparent"
                           >
                             Sort
                           </button>
@@ -269,7 +270,7 @@ export default function FluteMagazineView(props: any) {
                           src={`${item.featured_image_mobile}`}
                           alt=""
                         />
-                        <div className="p-2">
+                        <div className="p-4">
                           <h2
                             className={`text-[20px] text-[#959393] font-bold mb-2 line-clamp-2   ${Montserrats.className} `}
                           >
