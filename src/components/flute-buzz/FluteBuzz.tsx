@@ -43,9 +43,9 @@ const FluteBuzz = (props: Props) => {
       <div className="my-6 mx-2 md:mx-12">
         <Carousel
           opts={{
-            align: "start",
+            align: "center",
           }}
-          className="w-full"
+          className="w-full  custom-style  sm:px-0"
           setApi={setApi}
         >
           <CarouselContent>
@@ -57,7 +57,7 @@ const FluteBuzz = (props: Props) => {
                 >
                   <div className="p-1 flex justify-center">
                     <a href={slide?.reference_link} target="_blank">
-                      <div className="rounded-[30px] overflow-hidden w-[320px] lg:w-[500px]">
+                      <div className="rounded-[30px] overflow-hidden  lg:w-[500px]">
                         <div className="h-60 w-full flex items-center justify-center bg-gray-200 relative overflow-hidden">
                           <img
                             className="object-cover h-full w-full"
