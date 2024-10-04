@@ -116,8 +116,30 @@
   font-weight: 600;
   line-height: 32.5px;
   letter-spacing: 0.24197041988372803px;
-  
 }
+@media only screen and (max-width: 600px) {
+  .header-p {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    /* letter-spacing: 0.24197041988372803px; */
+  }
+
+  .x-arrow {
+    width: 270px;
+    height: 0px;
+    display: inline-block;
+    border: 3px solid #302c28;
+    border-radius: 12px;
+  }
+
+  .heading-2 {
+    font-weight: 600;
+    line-height: 52px;
+    letter-spacing: 0.0024em;
+  }
+}
+
 .mt-14 {
   margin-top: 14px;
 }
@@ -408,4 +430,32 @@ input[type="radio"].custom-radio:disabled {
 
 #importantCategory {
   color: #a1a1a1;
+}
+
+/* css for open image popup */
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  background: rgb(186, 185, 185);
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
+  max-height: 82%;
+  overflow: scroll;
+}
+
+.overlay {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
 }

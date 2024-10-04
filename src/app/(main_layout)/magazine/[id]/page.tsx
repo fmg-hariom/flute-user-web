@@ -1,13 +1,31 @@
 "use client";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import useMagazineStore from "@/services/magazine/magazine.service";
+import ReactModal from "react-modal";
 
 export default function Blogs(props: any) {
   const store = useMagazineStore();
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState("");
+
   useEffect(() => {
     store.get.detail(props?.params?.id);
   }, [props?.params?.id]);
+
+  // Function to open the modal with image and name
+  const openModal = (image: any) => {
+    setSelectedImage(image);
+
+    setIsModalOpen(true);
+  };
+
+   
+
+  // Function to close the modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="px-0 bg-black text-white">
@@ -55,13 +73,20 @@ export default function Blogs(props: any) {
               <div className="flex justify-start lg:justify-between items-center flex-col md:flex-row ">
                 <div className="flex items-center w-full lg:justify-between md:justify-normal  md:w-auto mb-4 md:mb-0">
                   {/* <div className="text-[12px]"> */}
+
                   <img
                     src={
                       store.magazine.detail?.author_image ||
                       "https://placehold.co/200x200"
                     }
-                    className="rounded-[100%] w-[50px] h-[50px] md:w-[110px] md:h-[110px]  border-[#8f8e8e] border-[3px] md:mr-2"
-                    alt=""
+                    className="rounded-[100%] w-[50px] h-[50px] md:w-[110px] md:h-[110px]  border-[#8f8e8e] border-[3px] md:mr-2 cursor-pointer"
+                    alt="Author"
+                    onClick={() =>
+                      openModal(
+                        store.magazine.detail?.author_image ||
+                          "https://placehold.co/200x200"
+                      )
+                    }
                   />
                   {/* </div> */}
                   <div className="ml-5 h-full">
@@ -165,6 +190,29 @@ export default function Blogs(props: any) {
           </div>
         )}
       </main>
+
+      <div>
+        {/* Modal for displaying image */}
+        <ReactModal
+          isOpen={isModalOpen}
+          onRequestClose={closeModal}
+          contentLabel="Image Modal"
+          className="modal"
+          overlayClassName="overlay"
+        >
+          <div className="flex flex-col items-center">
+            {/* Display the selected image */}
+            <img src={selectedImage} className="rounded-lg w-full h-auto" />
+
+            {/* <button
+              className="mt-4 px-4 py-2 bg-red-600 text-white rounded"
+              onClick={closeModal}
+            >
+              Close
+            </button> */}
+          </div>
+        </ReactModal>
+      </div>
     </div>
   );
 }
