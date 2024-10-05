@@ -43,6 +43,8 @@ export default function FluteMagazineView(props: any) {
 
   const per_page = store?.magazine.per_page;
 
+  console.log("ksdjfnkjdfvnvkjfdv", per_page);
+
   // * States
   const [showCategories, setShowCategories] = useState(false);
   const [search, setSearch] = useState("");
@@ -71,6 +73,7 @@ export default function FluteMagazineView(props: any) {
 
   // Handler for resetting search input
   const handleSearchReset = () => {
+    console.log("radhe");
     setIsSearchFocused(false);
   };
 
@@ -136,25 +139,49 @@ export default function FluteMagazineView(props: any) {
               >
                 <div className="mb-3 md:mb-0 relative">
                   <div className="relative">
-                    <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                      <svg
-                        className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                        />
-                      </svg>
+                    <div className="absolute inset-y-0 start-0 flex items-center ps-3 ">
+                      {isSearchFocused && isMobileView ? (
+                        <div
+                          className="absolute inset-y-0 start-0 flex items-center ps-3 cursor-pointer"
+                          onClick={handleSearchReset}
+                        >
+                          <svg
+                            className="w-5 h-5 text-[#dddddd] dark:text-gray-400 mr-6"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 1024 1024"
+                            stroke="currentColor"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M224 480h640a32 32 0 110 64H224a32 32 0 010-64z"
+                            />
+                            <path
+                              fill="currentColor"
+                              d="M237.248 512l265.408 265.344a32 32 0 01-45.312 45.312l-288-288a32 32 0 010-45.312l288-288a32 32 0 1145.312 45.312L237.248 512z"
+                            />
+                          </svg>
+                        </div>
+                      ) : (
+                        <svg
+                          className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                          />
+                        </svg>
+                      )}
                     </div>
                     <input
-                      type="search"
+                      type="text"
                       id="default-search"
                       className={`block w-full ${
                         isSearchFocused && isMobileView
@@ -166,27 +193,6 @@ export default function FluteMagazineView(props: any) {
                       onFocus={handleSearchFocus}
                       onChange={handleSearch}
                     />
-                    {isSearchFocused && isMobileView && (
-                      <div
-                        className="absolute inset-y-0 end-0 flex items-center pe-3 cursor-pointer"
-                        onClick={handleSearchReset}
-                      >
-                        <svg
-                          className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </div>
-                    )}
                   </div>
                 </div>
 
@@ -214,7 +220,7 @@ export default function FluteMagazineView(props: any) {
                               Sort
                             </button>
                           </DialogTrigger>
-                          <DialogContent className="sm:max-w-md">
+                          <DialogContent className="w-[75%] sm:max-w-72 border rounded-lg">
                             <DialogHeader>
                               <DialogTitle>Sort</DialogTitle>
                             </DialogHeader>
@@ -232,7 +238,7 @@ export default function FluteMagazineView(props: any) {
                                     />
                                     <Label
                                       htmlFor="r1"
-                                      className="text-white text-xl font-medium"
+                                      className="text-white text-[17px] sm:text-xl font-medium"
                                     >
                                       Newest to Oldest
                                     </Label>
@@ -250,7 +256,7 @@ export default function FluteMagazineView(props: any) {
                                     />
                                     <Label
                                       htmlFor="r2"
-                                      className="text-white text-xl font-medium"
+                                      className="text-white text-[17px] sm:text-xl font-medium"
                                     >
                                       Oldest to Newest
                                     </Label>
@@ -322,21 +328,20 @@ export default function FluteMagazineView(props: any) {
                           alt=""
                         />
                         <div className="p-4">
-                          <h2
-                            className={`text-[20px] text-[#959393] font-bold mb-2 line-clamp-2   ${Montserrats.className} `}
-                          >
-                            {" "}
-                            {item.title}
-                          </h2>
+                          <div className="h-[125px]">
+                            <h2
+                              className={`text-[20px] text-[#959393] font-bold mb-2 line-clamp-2    ${Montserrats.className} `}
+                            >
+                              {" "}
+                              {item.title}
+                            </h2>
 
-                          {/* <h2 className=" text-[16px] mb-6  line-clamp-2  h-6 text-[#959393] ">
-                            {item.sub_title}
-                          </h2> */}
-                          <h2 className="text-[16px] mb-6 text-[#959393] line-clamp-2 ">
-                            {item.sub_title}
-                          </h2>
+                            <h2 className="text-[16px] mb-6 text-[#959393] line-clamp-2 ">
+                              {item.sub_title}
+                            </h2>
+                          </div>
 
-                          <div className="flex justify-between px-1">
+                          <div className="flex justify-between px-1 ">
                             <div>
                               <span className="inline-block align-middle me-2">
                                 <svg
@@ -399,15 +404,15 @@ export default function FluteMagazineView(props: any) {
             </div>
 
             <div>
-              <div className="flex items-center flex-wrap justify-center px-4 py-3 sm:px-6">
-                <div className="hidden md:flex sm:flex-1 sm:items-center sm:justify-center">
+              <div className="flex items-center flex-wrap justify-center px-2 sm:py-3 sm:px-6">
+                <div className=" md:flex sm:flex-1 sm:items-center sm:justify-center">
                   <div>
                     <nav
                       aria-label="Pagination"
                       className="isolate inline-flex  rounded-md shadow-sm"
                     >
                       <div
-                        className="relative m-1 inline-flex items-center rounded px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300  focus:z-20 focus:outline-offset-0"
+                        className="relative m-1 inline-flex items-center rounded px-1 sm:px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300  focus:z-20 focus:outline-offset-0"
                         onClick={() => handlePaginate("back")}
                       >
                         <span className="sr-only">Previous</span>
@@ -430,14 +435,13 @@ export default function FluteMagazineView(props: any) {
                           Back
                         </span>
                       </div>
-                      {/* Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" */}
-                      {/* {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => { */}
-                      {randerPage.map((item) => {
+
+                      {/* {randerPage.map((item) => {
                         return (
                           <a
                             onClick={() => handlePaginate(item)}
                             aria-current="page"
-                            className={`relative z-10 m-1 inline-flex items-center  rounded px-4 py-2 text-sm font-semibold  focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2   ${
+                            className={`relative z-10 m-1 inline-flex items-center  rounded px-2 sm:px-4 py-1 sm:py-2 text-sm font-semibold  focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2   ${
                               store.magazine.page == item
                                 ? " text-dark bg-white"
                                 : " text-white ring-1 ring-inset ring-gray-300 bg-none"
@@ -446,7 +450,44 @@ export default function FluteMagazineView(props: any) {
                             {item}
                           </a>
                         );
-                      })}
+                      })} */}
+
+                      {randerPage
+                        .filter((item) => {
+                          // Conditionally apply filtering for mobile view only
+                          if (window.innerWidth <= 640) {
+                            // Mobile screen size (you can adjust this as per your need)
+                            if (store.magazine.page <= 2) {
+                              return item <= 3; // Show first 3 pages when current page is 1 or 2
+                            } else if (
+                              store.magazine.page >=
+                              randerPage.length - 1
+                            ) {
+                              return item >= randerPage.length - 2; // Show last 3 pages when close to the end
+                            } else {
+                              return (
+                                item >= store.magazine.page - 1 &&
+                                item <= store.magazine.page + 1
+                              ); // Show 1 before and 1 after the current page
+                            }
+                          }
+                          return true; // No filtering for web version
+                        })
+                        .map((item) => (
+                          <a
+                            onClick={() => handlePaginate(item)}
+                            aria-current="page"
+                            key={item}
+                            className={`relative z-10 m-1 inline-flex items-center rounded  px-4 py-1 sm:py-2 text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+                              store.magazine.page == item
+                                ? "text-dark bg-white"
+                                : "text-white ring-1 ring-inset ring-gray-300 bg-none"
+                            }`}
+                          >
+                            {item}
+                          </a>
+                        ))}
+
                       <div
                         className="relative m-1 inline-flex rounded items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300  focus:z-20 focus:outline-offset-0"
                         onClick={() => handlePaginate("next")}
@@ -474,7 +515,7 @@ export default function FluteMagazineView(props: any) {
                     </nav>
                   </div>
 
-                  <form className="flex items-center sm:ms-10">
+                  <form className=" hidden sm:flex sm:items-center sm:ms-10">
                     <label className="block mb-2 text-sm font-medium text-white ">
                       Result per page
                     </label>
@@ -494,17 +535,8 @@ export default function FluteMagazineView(props: any) {
                   </form>
                 </div>
               </div>
-              {/* <div className="flex items-center flex-wrap justify-center">
-                <div className="showing-data">
-                  <p className="text-sm text-gray-300 text-center md:text-start">
-                    Showing <span className="font-medium">1</span> to{" "}
-                    <span className="font-medium">{per_page}</span> of{" "}
-                    <span className="font-medium">{total_posts}</span> results
-                  </p>
-                </div>
-              </div> */}
 
-              <div className="flex items-center flex-wrap justify-center">
+              <div className=" w-full flex items-center  justify-center mt-4">
                 <div className="showing-data">
                   <p className="text-sm text-gray-300 text-center md:text-start">
                     Showing{" "}

@@ -22,7 +22,8 @@ export type Magazine = {
     total_page: number,
     author_image: string
     author_names: string
-    likes: any
+    likes: any,
+    pagination:number
 };
 
 
@@ -45,6 +46,7 @@ const useMagazineStore = create(
                 home_list: [] as Magazine[],
                 detail: null as Magazine | null,
                 category_list: [] as MagazineCategory[],
+                pagination: 10,
                 total: 0,
                 page: 1,
                 size: 10,
@@ -88,8 +90,8 @@ const useMagazineStore = create(
                             ...prev.magazine, list: request.data?.records,
                             total_posts: request?.data?.total_posts,
                             total_pages: request?.data?.total_pages,
-                            current_page: request?.data?.pagination?.current_page,
-                            per_page: request?.data?.pagination?.per_page,
+                            current_page: request?.pagination?.current_page,
+                            per_page: request?.pagination?.per_page,  
                         }
                     }))
                 },

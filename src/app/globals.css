@@ -222,7 +222,7 @@
   line-height: 52px;
 }
 .magazine-view .responsive-image {
-  height: 277px;
+  height: auto;
   object-fit: cover;
 }
 .magazine-view .card-design {
@@ -378,12 +378,22 @@ input[type="radio"].custom-radio:disabled {
   list-style: auto;
 }
 
+.blog-details ol {
+  list-style: auto;
+  padding: 20px 0;
+  padding-left: 35px;
+}
+
 .blog-details strong {
   font-size: 24px;
 }
+.blog-details p {
+  padding: 20px 0;
+}
 @media only screen and (max-width: 600px) {
-  .blog-details ul {
-    padding-left: 15px;
+  .blog-details ul,
+  .blog-details ol {
+    padding-left: 25px;
     list-style: auto;
   }
   .blog-details strong {
