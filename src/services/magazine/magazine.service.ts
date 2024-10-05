@@ -68,10 +68,17 @@ const useMagazineStore = create(
                     const {
                         magazine: { page, size, category, search, sort }
                     } = get();
-
-                    const request = await PokerApi.get<{ records: Magazine[], total_posts: any, total_pages: any, pagination: any }>(api.contentManagementProfileBaseUrl(category == "all" || !category ? '/blogs' : `/blogs/category/${category}`), {
+                    
+                    const request = await PokerApi.get<{ records: Magazine[], total_posts: any, total_pages: any, pagination: any }>(
+                        api.contentManagementProfileBaseUrl(`/blogs`), {
                         query: {
-                            page: page, size, search,
+                            page: page, size, ...(search &&  {
+                                search:search
+                            }),
+
+                            ...(category && {
+                                category_id:category,
+                            }),
 
                             ...(
                                 sort && {
@@ -79,7 +86,9 @@ const useMagazineStore = create(
                                 }
                             )
                         }
-                    })
+                    });
+
+                    console.log("api request: ",request)
 
                     if (!request?.status || !request?.data?.records?.length) {
                         return;

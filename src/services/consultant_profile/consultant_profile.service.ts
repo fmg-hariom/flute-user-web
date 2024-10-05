@@ -238,12 +238,12 @@ const useConsultantProfileStore = create(
                     if (!request.status) {
                         return;
                     }
-                    // request.data.chat_price = request.data.price_list?.find(f => f.feature === Feature.CHAT);
-                    // request.data.audio_call_price = request.data.price_list?.find(f => f.feature === Feature.AUDIO_CALL);
-                    // request.data.video_call_price = request.data.price_list?.find(f => f.feature === Feature.VIDEO_CALL);
+                    request.data.chat_price = request.data.price_list?.find(f => f.feature === Feature.CHAT);
+                    request.data.audio_call_price = request.data.price_list?.find(f => f.feature === Feature.AUDIO_CALL);
+                    request.data.video_call_price = request.data.price_list?.find(f => f.feature === Feature.VIDEO_CALL);
 
-                    // request.data.profile_photo = request.data.photos.find(f => f.photo_type === 1);
-                    // request.data.is_live = request.data.service_status?.some(f => [ServiceType.LIVE, ServiceType.LIVE_AUDIO, ServiceType.LIVE_CHAT, ServiceType.LIVE_VIDEO].includes(f.type) && f.status == ServiceStatus.STREAMING)
+                    request.data.profile_photo = request.data.photos.find(f => f.photo_type === 1);
+                    request.data.is_live = request.data.service_status?.some(f => [ServiceType.LIVE, ServiceType.LIVE_AUDIO, ServiceType.LIVE_CHAT, ServiceType.LIVE_VIDEO].includes(f.type) && f.status == ServiceStatus.STREAMING)
                     set(prev => ({ ...prev, consultant_profile: { ...prev.consultant_profile, detail: request.data } }))
                 },
                 paginate: ({

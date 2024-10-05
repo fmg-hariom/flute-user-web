@@ -73,12 +73,11 @@ export default function FluteMagazineView(props: any) {
 
   // Handler for resetting search input
   const handleSearchReset = () => {
-    console.log("radhe");
     setIsSearchFocused(false);
   };
 
   useEffect(() => {
-    console.log("🚀 ~ FluteMagazineView ~ props:", props);
+    console.log("🚀 ~ FluteMagazineView ~ props1:", props);
 
     store.get.paginate({ category: props?.searchParams?.category_id });
   }, [props?.searchParams?.category_id]);
