@@ -105,7 +105,7 @@ export const Slides = ({
                     src={slide?.image}
                     width={320}
                     height={230}
-                    className="w-[320px] h-[230px] sm:w-full sm:max-w-[384px] object-contain"
+                    className="w-[320px]  sm:w-full sm:max-w-[384px] object-contain"
                     alt=""
                     quality={90}
                   />
