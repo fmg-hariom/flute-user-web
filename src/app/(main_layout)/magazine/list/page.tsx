@@ -42,10 +42,37 @@ export default function FluteMagazineView(props: any) {
   const current_page = store?.magazine.current_page;
 
   const per_page = store?.magazine.per_page;
-  console.log("all data", per_page);
+
   // * States
   const [showCategories, setShowCategories] = useState(false);
   const [search, setSearch] = useState("");
+
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(false);
+
+  // Detect mobile view on mount and resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth <= 600); // Assuming mobile is <= 600px
+    };
+
+    handleResize(); // Check on component mount
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Handler for search input focus
+  const handleSearchFocus = () => {
+    if (isMobileView) {
+      setIsSearchFocused(true);
+    }
+  };
+
+  // Handler for resetting search input
+  const handleSearchReset = () => {
+    setIsSearchFocused(false);
+  };
 
   useEffect(() => {
     console.log("🚀 ~ FluteMagazineView ~ props:", props);
@@ -102,12 +129,12 @@ export default function FluteMagazineView(props: any) {
         <div className="magazine-view">
           <div className="container py-33 px-[10px] md:px-[36px] mx-auto">
             <form action="" className="border-bottom pb-8 mb-4">
-              <div className="gap-2 columns-1  md:columns-3">
-                {/* <div className="gap-2 columns-1  md:columns-3"> */}
-                <div className="mb-3 md:mb-0">
-                  {/* <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
-                    Search
-                  </label> */}
+              <div
+                className={`gap-2 ${
+                  isSearchFocused && isMobileView ? "columns-1" : "columns-3"
+                } `}
+              >
+                <div className="mb-3 md:mb-0 relative">
                   <div className="relative">
                     <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                       <svg
@@ -129,90 +156,114 @@ export default function FluteMagazineView(props: any) {
                     <input
                       type="search"
                       id="default-search"
-                      // className="block w-[70%] p-4 ps-10 text-sm text-white border rounded-md  bg-transparent "
-                      className="block w-full sm:w-[70%] p-4 ps-10 text-sm text-white border border-[#7d7d7dfd] rounded-xl  bg-transparent "
+                      className={`block w-full ${
+                        isSearchFocused && isMobileView
+                          ? "w-full"
+                          : "sm:w-[70%]"
+                      } pt-[15px] pr-[8px] pb-[15px] pl-[34px] md:pl-[60px] sm:p-4  ps-10 text-sm text-white border border-[#7d7d7dfd] rounded-xl bg-transparent`}
                       placeholder="Search"
                       required
+                      onFocus={handleSearchFocus}
                       onChange={handleSearch}
                     />
+                    {isSearchFocused && isMobileView && (
+                      <div
+                        className="absolute inset-y-0 end-0 flex items-center pe-3 cursor-pointer"
+                        onClick={handleSearchReset}
+                      >
+                        <svg
+                          className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </div>
+                    )}
                   </div>
                 </div>
-                <div className="text-center mb-3 md:mb-0">
-                  <button
-                    type="button"
-                    className="border-white w-full md:w-fit rounded-xl bg-transparent border border-[#7d7d7dfd] text-white py-3 px-10"
-                    onClick={handleShowCategory}
-                  >
-                    Categories
-                  </button>
-                </div>
 
-                <div>
-                  <div className="flex items-center justify-center sm:justify-end">
-                    <div className=" w-full md:w-fit ">
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <button
-                            type="button"
-                            className="rounded-xl md:w-[99px] h-[49px] w-full  custom-select border px-2 ps-10 bg-icon sort-icon filter-select border-[#7d7d7dfd] bg-transparent"
-                          >
-                            Sort
-                          </button>
-                        </DialogTrigger>
-
-                        <DialogContent className="sm:max-w-md">
-                          <DialogHeader>
-                            <DialogTitle>Sort</DialogTitle>
-                          </DialogHeader>
-                          <hr className="bg-[#5B5B5B]" />
-                          <div className="flex items-center">
-                            <RadioGroup value={store.magazine.sort}>
-                              <DialogClose asChild>
-                                <div className="flex items-center space-x-2">
-                                  <RadioGroupItem
-                                    value="DESC"
-                                    id="r1"
-                                    onClick={(e) =>
-                                      store.get.paginate({
-                                        sort: "DESC",
-                                      })
-                                    }
-                                  />
-                                  <Label
-                                    htmlFor="r1"
-                                    className="text-white text-xl font-medium"
-                                  >
-                                    Newest to Oldest
-                                  </Label>
-                                </div>
-                              </DialogClose>
-
-                              <DialogClose asChild>
-                                <div className="flex items-center space-x-2">
-                                  <RadioGroupItem
-                                    value="ASC"
-                                    id="r2"
-                                    onClick={(e) =>
-                                      store.get.paginate({
-                                        sort: "ASC",
-                                      })
-                                    }
-                                  />
-                                  <Label
-                                    htmlFor="r2"
-                                    className="text-white text-xl font-medium"
-                                  >
-                                    Oldest to Newest
-                                  </Label>
-                                </div>
-                              </DialogClose>
-                            </RadioGroup>
-                          </div>
-                        </DialogContent>
-                      </Dialog>
+                {/* Conditionally hide Categories and Sort only in mobile view */}
+                {(!isSearchFocused || !isMobileView) && (
+                  <>
+                    <div className="text-center mb-3 md:mb-0">
+                      <button
+                        type="button"
+                        className="border-white w-full md:w-fit rounded-xl bg-transparent border border-[#7d7d7dfd] text-white py-3 sm:px-10"
+                        onClick={handleShowCategory}
+                      >
+                        Categories
+                      </button>
                     </div>
-                  </div>
-                </div>
+
+                    <div className="flex items-center justify-center sm:justify-end">
+                      <div className="w-full md:w-fit">
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <button
+                              type="button"
+                              className="rounded-xl md:w-[99px] h-[49px] w-full custom-select border px-2 ps-10 bg-icon sort-icon filter-select border-[#7d7d7dfd] bg-transparent"
+                            >
+                              Sort
+                            </button>
+                          </DialogTrigger>
+                          <DialogContent className="sm:max-w-md">
+                            <DialogHeader>
+                              <DialogTitle>Sort</DialogTitle>
+                            </DialogHeader>
+                            <hr className="bg-[#5B5B5B]" />
+                            <div className="flex items-center">
+                              <RadioGroup value={store.magazine.sort}>
+                                <DialogClose asChild>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem
+                                      value="DESC"
+                                      id="r1"
+                                      onClick={() =>
+                                        store.get.paginate({ sort: "DESC" })
+                                      }
+                                    />
+                                    <Label
+                                      htmlFor="r1"
+                                      className="text-white text-xl font-medium"
+                                    >
+                                      Newest to Oldest
+                                    </Label>
+                                  </div>
+                                </DialogClose>
+
+                                <DialogClose asChild>
+                                  <div className="flex items-center space-x-2">
+                                    <RadioGroupItem
+                                      value="ASC"
+                                      id="r2"
+                                      onClick={() =>
+                                        store.get.paginate({ sort: "ASC" })
+                                      }
+                                    />
+                                    <Label
+                                      htmlFor="r2"
+                                      className="text-white text-xl font-medium"
+                                    >
+                                      Oldest to Newest
+                                    </Label>
+                                  </div>
+                                </DialogClose>
+                              </RadioGroup>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </form>
 

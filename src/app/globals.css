@@ -389,6 +389,10 @@ input[type="radio"].custom-radio:disabled {
   .blog-details strong {
     font-size: 22px;
   }
+
+  span.special_property {
+    font-size: 58px !important;
+  }
 }
 
 /* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */
