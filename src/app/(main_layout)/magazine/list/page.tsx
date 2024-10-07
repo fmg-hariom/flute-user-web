@@ -201,7 +201,7 @@ export default function FluteMagazineView(props: any) {
                     <div className="text-center mb-3 md:mb-0">
                       <button
                         type="button"
-                        className="border-white w-full md:w-fit rounded-xl bg-transparent border border-[#7d7d7dfd] text-white py-3 sm:px-10"
+                        className="border-[#939292] w-full md:w-fit rounded-xl bg-transparent border border-[#939292] text-white py-3 sm:px-10"
                         onClick={handleShowCategory}
                       >
                         Categories
@@ -214,7 +214,7 @@ export default function FluteMagazineView(props: any) {
                           <DialogTrigger asChild>
                             <button
                               type="button"
-                              className="rounded-xl md:w-[99px] h-[49px] w-full custom-select border px-2 ps-10 bg-icon sort-icon filter-select border-[#7d7d7dfd] bg-transparent"
+                              className="rounded-xl md:w-[99px] h-[49px] w-full custom-select border px-2 ps-10 bg-icon sort-icon filter-select border-[#939292] bg-transparent"
                             >
                               Sort
                             </button>
@@ -411,7 +411,7 @@ export default function FluteMagazineView(props: any) {
                       className="isolate inline-flex  rounded-md shadow-sm"
                     >
                       <div
-                        className="relative m-1 inline-flex items-center rounded px-1 sm:px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300  focus:z-20 focus:outline-offset-0"
+                        className="relative m-1 inline-flex items-center rounded pr-2 sm:px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300  focus:z-20 focus:outline-offset-0"
                         onClick={() => handlePaginate("back")}
                       >
                         <span className="sr-only">Previous</span>
@@ -488,7 +488,7 @@ export default function FluteMagazineView(props: any) {
                         ))}
 
                       <div
-                        className="relative m-1 inline-flex rounded items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300  focus:z-20 focus:outline-offset-0"
+                        className="relative m-1 inline-flex rounded items-center rounded-r-md pl-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300  focus:z-20 focus:outline-offset-0"
                         onClick={() => handlePaginate("next")}
                       >
                         <span className="sr-only">Next</span>
