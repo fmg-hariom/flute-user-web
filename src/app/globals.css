@@ -361,13 +361,25 @@ input[type="radio"].custom-radio:disabled {
 .magazine-sub-title p span {
   /* font-size: 12px !important; */
 }
-
+.content-before::before {
+  content: ", ";
+}
+.ReactModal__Content:focus-visible {
+  /* This will style the modal when it gains focus */
+  outline: none; /* Example: removing the focus outline */
+}
 @media only screen and (max-width: 676px) {
   .custom-style .min-w-0.shrink-0.grow-0.pl-4 {
     width: 100%;
   }
   .custom-style .w-\[98\%\] {
     padding-left: 10px;
+  }
+  .content-before::before {
+    content: "";
+  }
+  .content-before {
+    display: block;
   }
 }
 

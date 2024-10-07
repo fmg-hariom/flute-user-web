@@ -69,8 +69,9 @@ export default function Blogs(props: any) {
               />
 
               <div className="border my-6 border-[#8f8e8e]"></div>
+
               <div className="flex justify-start lg:justify-between items-center flex-col md:flex-row ">
-                <div className="flex items-start sm:items-center w-full lg:justify-between md:justify-normal  md:w-auto mb-4 md:mb-0">
+                <div className="flex items-start sm:items-start  w-full lg:justify-between md:justify-normal  md:w-auto mb-4 md:mb-0">
                   {/* <div className="text-[12px]"> */}
 
                   <img
@@ -78,7 +79,7 @@ export default function Blogs(props: any) {
                       store.magazine.detail?.author_image ||
                       "https://placehold.co/200x200"
                     }
-                    className="rounded-[100%] w-[70px] h-[75px] md:w-[110px] md:h-[110px]  border-[#8f8e8e] border-[2px] md:mr-2 cursor-pointer"
+                    className="rounded-[100%] w-[75px] h-[75px] md:w-[144.8px] md:h-[120px] sm:mt-3 border-[#8f8e8e] border-[2px] md:mr-2 cursor-pointer"
                     alt="Author"
                     onClick={() =>
                       openModal(
@@ -116,10 +117,15 @@ export default function Blogs(props: any) {
                       Written by
                     </span>
                     <h3 className="text-[#A1A1A1] font-bold text-[20px] md:text-[28px] lg:justify-normal inline-block">
-                      {store.magazine.detail?.author_names || "Flute"}
+                      <span className="leading-[27px]">
+                        {store.magazine.detail?.author_names || "Flute"}
+                      </span>
+                      <span className="content-before leading-[27px]">
+                        {store.magazine.detail?.position || "Flute"}
+                      </span>
                     </h3>
 
-                    <h3 className=" blog-details py-[5px] sm:max-w-[880px]  px-1 rounded-lg leading-[26px] text-[18px] sm:leading-[32px] mt-1 text-[#A1A1A1]  sm:text-[22px] font-[400] tracking-[0.5px] font-serif">
+                    <h3 className=" ml-[-80px] sm:ml-0 mt-  blog-details py-[5px] sm:max-w-[880px]  px-1 rounded-lg leading-[26px] text-[18px] sm:leading-[32px] sm:mt-1 text-[#A1A1A1]  sm:text-[22px] font-[400] tracking-[0.5px] font-serif">
                       <div
                         dangerouslySetInnerHTML={{
                           __html: `${store.magazine.detail?.tag_line}`,
