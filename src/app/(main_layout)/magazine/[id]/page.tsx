@@ -41,7 +41,7 @@ export default function Blogs(props: any) {
                 {store.magazine.detail?.title}
               </h2>
               <div
-                className="leading-[26px] text-[18px]  sm:leading-[34px] sm:text-[22px] font-[400] text-[#A1A1A1] font-sohne break-words mt-4 mb-4"
+                className="leading-[28px] text-[20px]  sm:leading-[34px] sm:text-[24px] font-[400] text-[#A1A1A1] font-sohne break-words mt-4 mb-4"
                 dangerouslySetInnerHTML={{
                   __html: `${store.magazine.detail?.sub_title}`,
                 }}
