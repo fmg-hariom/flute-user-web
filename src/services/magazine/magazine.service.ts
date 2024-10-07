@@ -19,6 +19,7 @@ export type Magazine = {
     title_image_web: string
     title_image_mobile: string
     category_names: any
+    tag_line:any
     total_page: number,
     author_image: string
     author_names: string

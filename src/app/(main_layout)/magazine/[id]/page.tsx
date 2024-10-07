@@ -78,7 +78,7 @@ export default function Blogs(props: any) {
                       store.magazine.detail?.author_image ||
                       "https://placehold.co/200x200"
                     }
-                    className="rounded-[100%] w-[50px] h-[50px] md:w-[110px] md:h-[110px]  border-[#8f8e8e] border-[3px] md:mr-2 cursor-pointer"
+                    className="rounded-[100%] w-[70px] h-[75px] md:w-[110px] md:h-[110px]  border-[#8f8e8e] border-[2px] md:mr-2 cursor-pointer"
                     alt="Author"
                     onClick={() =>
                       openModal(
@@ -119,9 +119,17 @@ export default function Blogs(props: any) {
                       {store.magazine.detail?.author_names || "Flute"}
                     </h3>
 
-                    <div className="flex gap-2 mt-2 text-[#A1A1A1] flex-wrap">
+                    <h3 className=" blog-details py-[5px] sm:max-w-[880px]  px-1 rounded-lg leading-[26px] text-[18px] sm:leading-[32px] mt-1 text-[#A1A1A1]  sm:text-[22px] font-[400] tracking-[0.5px] font-serif">
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: `${store.magazine.detail?.tag_line}`,
+                        }}
+                      />
+                    </h3>
+
+                    {/* <div className="flex gap-2 mt-2 text-[#A1A1A1] flex-wrap">
                       {" "}
-                      {/* Added flex-wrap */}
+                      
                       {store.magazine.detail.category_names?.map(
                         (category: any, index: any) => (
                           <div
@@ -133,7 +141,7 @@ export default function Blogs(props: any) {
                           </div>
                         )
                       )}
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <div className="flex items-center w-full justify-between md:w-auto  ">
