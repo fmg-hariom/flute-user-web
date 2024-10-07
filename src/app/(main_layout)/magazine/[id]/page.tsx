@@ -31,7 +31,7 @@ export default function Blogs(props: any) {
         {store.magazine?.detail ? (
           <div className="container mx-auto px-2 sm:px-12 max-w-[1850px]">
             <div className="pt-6">
-              <span className="inline-block align-middle text-[#bcbaba] text-[23px] rounded-sm p-1 px-2  ">
+              <span className="inline-block align-middle text-[#bcbaba] text-[20px] rounded-sm p-1 px-2  ">
                 {/* <span className="inline-block align-middle bg-slate-200 rounded-sm p-1 px-2 text-sm  text-dark"> */}
                 {store.magazine.detail?.date}
               </span>
@@ -61,7 +61,7 @@ export default function Blogs(props: any) {
                 alt=""
               />
             </div>
-            <div className=" blog-details py-[20px] px-2 md:px-[22px] lg:px-[80px] rounded-lg shadow-insets leading-[28px] text-[18px] sm:leading-[32px] mt-2 text-[#A1A1A1]  sm:text-[20px] font-[400] font-serif">
+            <div className=" blog-details py-[20px] px-2 md:px-[22px] lg:px-[80px] rounded-lg shadow-insets leading-[28px] text-[20px] sm:leading-[32px] mt-2 text-[#A1A1A1]  sm:text-[22px] font-[400] font-serif">
               <div
                 dangerouslySetInnerHTML={{
                   __html: `${store.magazine.detail?.content}`,
