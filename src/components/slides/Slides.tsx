@@ -70,7 +70,7 @@ export const Slides = ({
               {content_type == 1 ? (
                 <div
                   key={index}
-                  className={`h-44 w-[120px] sm:h-60 sm:w-56 flex items-center justify-center rounded-2xl pt-9 overflow-hidden `}
+                  className={`h-44 w-[120px] sm:h-60 sm:w-56 flex items-center justify-center rounded-2xl pt-7 overflow-hidden `}
                   style={{
                     backgroundImage: `radial-gradient(${radiant1}, ${radiant1})`,
                   }}

@@ -46,9 +46,7 @@ const MobileBanner = (props: Props) => {
           align: "center",
         }}
         setApi={setApi}
-        onChange={(e) => {
-          console.log(e);
-        }}
+        onChange={(e) => {}}
         className="w-full  custom-style  sm:px-0"
       >
         <CarouselContent className="">

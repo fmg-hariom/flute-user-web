@@ -158,7 +158,8 @@ export default function Home() {
               );
             })}
           </div>
-          <div className="relative mb-8 rounded-lg">
+
+          <div className="relative mb-8 rounded-lg ">
             <Banner />
           </div>
 
@@ -206,7 +207,7 @@ export default function Home() {
 
             return (
               <>
-                <div className="py-4 sm:py-8 px-2 sm:px-16   w-full sm:w-[100%] bg-black text-white">
+                <div className="py-4 sm:py-6 px-2 sm:px-16   w-full sm:w-[100%] bg-black text-white">
                   <Slides
                     content_type={item.content_type}
                     title={`${item.title}`}

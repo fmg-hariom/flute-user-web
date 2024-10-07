@@ -15,7 +15,7 @@ const Banner = (props: Props) => {
   const store = useDashboardStore();
 
   const plugin: any = React.useRef(
-    Autoplay({ delay: 1000, stopOnInteraction: true })
+    Autoplay({ delay: 2000, stopOnInteraction: true })
   );
 
   return (
@@ -27,20 +27,25 @@ const Banner = (props: Props) => {
         opts={{
           align: "center",
         }}
-        className="hidden sm:block w-full px-4 sm:px-0  "
+        className="hidden sm:block w-full   px-4 sm:px-0 "
       >
-        <CarouselContent>
+        <CarouselContent className="">
+          {/* <CarouselContent className="h-[600px]"> */}
           {store.dashboard.banners?.length ? (
             store.dashboard.banners.map((slide, index: number) => (
-              <CarouselItem key={index} className=" ">
-                <Image
-                  src={slide?.media}
-                  alt={`${slide?.title}`}
-                  layout="responsive"
-                  width={1920}
-                  height={1080}
-                  className="rounded-lg"
-                />
+              <CarouselItem key={index} className="w-full">
+                <div className="w-full ">
+                  <img src={slide?.media} />
+                  {/* <Image
+                    src={slide?.media}
+                    alt={`${slide?.title}`}
+                    layout="responsive"
+                    
+                    className="w-full h-full  object-cover rounded-lg"
+                    width={1}
+                    height={1}
+                  /> */}
+                </div>
               </CarouselItem>
             ))
           ) : (
