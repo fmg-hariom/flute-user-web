@@ -6,6 +6,8 @@ import { Montserrat_Alternates } from "next/font/google";
 import { useEffect } from "react";
 import useConsultantProfileStore from "@/services/consultant_profile/consultant_profile.service";
 import DownloadAppDialog from "@/components/common/dialogs/DownloadAppDialog";
+import useReviewStore from "@/services/review/review.service";
+import { findPercentage } from "@/lib/utils";
 
 const montserratAlternates = Montserrat_Alternates({
   weight: "400", // Specify the font weights you need
@@ -19,9 +21,12 @@ export default function Profile(props: any) {
     get,
   } = useConsultantProfileStore();
 
+  const { review, ...reviewStore } = useReviewStore();
+
   useEffect(() => {
     console.log(props?.params?.id);
     get.detail(props?.params?.id);
+    reviewStore.get.paginate({ id: props?.params?.id })
   }, []);
   return (
     <div className="py-4 sm:py-8 bg-black text-white">
@@ -106,7 +111,7 @@ export default function Profile(props: any) {
                         </span>
                       </div>
                       <p>
-                        {/* {detail?.sessions} sessions */}
+                        {typeof detail?.sessions == "object" ? detail?.sessions?.count : detail?.sessions} sessions
                         <br />
                         Exp: {detail?.experience} years
                       </p>
@@ -364,42 +369,29 @@ export default function Profile(props: any) {
                 <div className="lg:w-[50%] mb-4 lg:mb-0  w-full xl:border-e-2 xl:border-[#373737]">
                   <div className="bg-[#373737] w-full lg:max-w-[473px] p-5  mt-3  flex flex-wrap items-center rounded-[18px]">
                     <div className="lg:w-[70%] w-full pe-3">
-                      <div className="flex items-center mb-2">
-                        <h2 className="text-[19px] me-1">5</h2>{" "}
-                        <div className="h-[11px] bg-[#555555] w-full overflow-hidden rounded-[44px]  relative">
-                          <div className="absolute left-0 top-0 bottom-0 bg-[#FFA643] w-full rounded-[44px]"></div>
-                        </div>
-                      </div>
-                      <div className="flex items-center mb-2">
-                        <h2 className="text-[19px] me-1">4</h2>{" "}
-                        <div className="h-[11px] bg-[#555555] w-full overflow-hidden rounded-[44px]  relative">
-                          <div className="absolute left-0 top-0 bottom-0 bg-[#FFA643] w-[75%] rounded-[44px]"></div>
-                        </div>
-                      </div>
-                      <div className="flex items-center mb-2">
-                        <h2 className="text-[19px] me-1">3</h2>{" "}
-                        <div className="h-[11px] bg-[#555555] overflow-hidden w-full rounded-[44px]  relative">
-                          <div className="absolute left-0 top-0 bottom-0 bg-[#FFA643] w-[65%] rounded-[44px]"></div>
-                        </div>
-                      </div>
-                      <div className="flex items-center mb-2">
-                        <h2 className="text-[19px] me-1">2</h2>{" "}
-                        <div className="h-[11px] bg-[#555555] overflow-hidden w-full rounded-[44px]  relative">
-                          <div className="absolute left-0 top-0 bottom-0 bg-[#FFA643] w-[45%] rounded-[44px]"></div>
-                        </div>
-                      </div>
-                      <div className="flex items-center mb-2">
-                        <h2 className="text-[19px] me-1">1</h2>{" "}
-                        <div className="h-[11px] bg-[#555555] overflow-hidden rounded-[44px] w-full relative">
-                          <div className="absolute left-0 top-0 bottom-0 bg-[#FFA643] w-[30%] rounded-[44px]"></div>
-                        </div>
-                      </div>
+                      {
+                        review.detail?.rating_count ?
+                          Object.keys(review.detail?.rating_count as any).map((key) => {
+                            const item = (review.detail?.rating_count as any)[key];
+                            const percentage = Math.round(findPercentage(item, review.detail?.total_user_count || 0))
+                            console.log("🚀 ~ Object.keys ~ percentage:", percentage)
+                            return (
+                              <div className="flex items-center mb-2">
+                                <h2 className="text-[19px] me-1">{key}</h2>{" "}
+                                <div className="h-[11px] bg-[#555555] w-full overflow-hidden rounded-[44px]  relative">
+                                  <div className={`absolute left-0 top-0 bottom-0 bg-[#FFA643] w-[${percentage}%] rounded-[44px]`}></div>
+                                </div>
+                              </div>
+                            )
+                          })
+                          : <></>
+                      }
                     </div>
                     <div className="lg:w-[30%] w-full text-center">
                       <h2>
                         <span className="text-[44px] font-bold inline-block align-middle">
                           {" "}
-                          4.5
+                          {review.detail?.avg_rating || 0}
                         </span>{" "}
                         <svg
                           className="inline-block"
@@ -419,7 +411,7 @@ export default function Profile(props: any) {
                           />
                         </svg>
                       </h2>
-                      <span className="text-[#A0A0A0]">273 Reviews</span>
+                      <span className="text-[#A0A0A0]">{review.detail?.total_user_count || 0} Reviews</span>
                     </div>
                   </div>
                 </div>
@@ -451,1047 +443,119 @@ export default function Profile(props: any) {
               <h2 className="lg:text-[33px] border-b-2 mb-11 text-[#D9D9D9] pb-6">
                 Summary
               </h2>
-              <div className="lg:columns-2">
-                <div className=" mb-8">
-                  <div className="flex items-center">
-                    <div className="shrink-0">
-                      <img
-                        src="/images/astrologers/djGCYIrB_400x400.png"
-                        className="w-[71px] h-[71px] object-cover bg-[#373737] rounded-full"
-                        alt=""
-                      />
-                    </div>
-                    <div className="ms-2 grow lg:ms-6">
-                      <h3 className="md:text-[25px] mb-1 font-bold">
-                        Vachi Savadatti
-                      </h3>
-                      <div className="flex flex-wrap">
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="22"
-                          height="22"
-                          viewBox="0 0 22 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12.7271 3.53383L14.3039 6.6873C14.5189 7.12628 15.0922 7.54734 15.576 7.62797L18.4338 8.10279C20.2614 8.40738 20.6915 9.73328 19.3745 11.0413L17.1527 13.263C16.7765 13.6393 16.5704 14.3649 16.6869 14.8846L17.323 17.6349C17.8247 19.8119 16.669 20.654 14.7428 19.5162L12.0642 17.9305C11.5804 17.6438 10.7831 17.6438 10.2904 17.9305L7.61169 19.5162C5.69452 20.654 4.52988 19.8029 5.03157 17.6349L5.66764 14.8846C5.78411 14.3649 5.57805 13.6393 5.20179 13.263L2.98002 11.0413C1.67204 9.73328 2.0931 8.40738 3.92069 8.10279L6.77853 7.62797C7.25334 7.54734 7.8267 7.12628 8.04171 6.6873L9.61845 3.53383C10.4785 1.82271 11.876 1.82271 12.7271 3.53383Z"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-[#A0A0A0] mt-4">
-                      Buttons in a design system are a visual component or
-                      pattern used to trigger an action or navigate to another
-                      page or section of a website or application.
-                    </p>
-                  </div>
-                </div>
-                <div className=" mb-8">
-                  <div className="flex items-center">
-                    <div className="shrink-0">
-                      <img
-                        src="/images/astrologers/djGCYIrB_400x400.png"
-                        className="w-[71px] h-[71px] object-cover bg-[#373737] rounded-full"
-                        alt=""
-                      />
-                    </div>
-                    <div className="ms-2 grow lg:ms-6">
-                      <h3 className="md:text-[25px] mb-1 font-bold">
-                        Vachi Savadatti
-                      </h3>
-                      <div className="flex flex-wrap">
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="22"
-                          height="22"
-                          viewBox="0 0 22 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12.7271 3.53383L14.3039 6.6873C14.5189 7.12628 15.0922 7.54734 15.576 7.62797L18.4338 8.10279C20.2614 8.40738 20.6915 9.73328 19.3745 11.0413L17.1527 13.263C16.7765 13.6393 16.5704 14.3649 16.6869 14.8846L17.323 17.6349C17.8247 19.8119 16.669 20.654 14.7428 19.5162L12.0642 17.9305C11.5804 17.6438 10.7831 17.6438 10.2904 17.9305L7.61169 19.5162C5.69452 20.654 4.52988 19.8029 5.03157 17.6349L5.66764 14.8846C5.78411 14.3649 5.57805 13.6393 5.20179 13.263L2.98002 11.0413C1.67204 9.73328 2.0931 8.40738 3.92069 8.10279L6.77853 7.62797C7.25334 7.54734 7.8267 7.12628 8.04171 6.6873L9.61845 3.53383C10.4785 1.82271 11.876 1.82271 12.7271 3.53383Z"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-[#A0A0A0] mt-4">
-                      Buttons in a design system are a visual component or
-                      pattern used to trigger an action or navigate to another
-                      page or section of a website or application.
-                    </p>
-                  </div>
-                </div>
-                <div className=" mb-8">
-                  <div className="flex items-center">
-                    <div className="shrink-0">
-                      <img
-                        src="/images/astrologers/djGCYIrB_400x400.png"
-                        className="w-[71px] h-[71px] object-cover bg-[#373737] rounded-full"
-                        alt=""
-                      />
-                    </div>
-                    <div className="ms-2 grow lg:ms-6">
-                      <h3 className="md:text-[25px] mb-1 font-bold">
-                        Vachi Savadatti
-                      </h3>
-                      <div className="flex flex-wrap">
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="22"
-                          height="22"
-                          viewBox="0 0 22 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12.7271 3.53383L14.3039 6.6873C14.5189 7.12628 15.0922 7.54734 15.576 7.62797L18.4338 8.10279C20.2614 8.40738 20.6915 9.73328 19.3745 11.0413L17.1527 13.263C16.7765 13.6393 16.5704 14.3649 16.6869 14.8846L17.323 17.6349C17.8247 19.8119 16.669 20.654 14.7428 19.5162L12.0642 17.9305C11.5804 17.6438 10.7831 17.6438 10.2904 17.9305L7.61169 19.5162C5.69452 20.654 4.52988 19.8029 5.03157 17.6349L5.66764 14.8846C5.78411 14.3649 5.57805 13.6393 5.20179 13.263L2.98002 11.0413C1.67204 9.73328 2.0931 8.40738 3.92069 8.10279L6.77853 7.62797C7.25334 7.54734 7.8267 7.12628 8.04171 6.6873L9.61845 3.53383C10.4785 1.82271 11.876 1.82271 12.7271 3.53383Z"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-[#A0A0A0] mt-4">
-                      Buttons in a design system are a visual component or
-                      pattern used to trigger an action or navigate to another
-                      page or section of a website or application.
-                    </p>
-                  </div>
-                </div>
-                <div className=" mb-8">
-                  <div className="flex items-center">
-                    <div className="shrink-0">
-                      <img
-                        src="/images/astrologers/djGCYIrB_400x400.png"
-                        className="w-[71px] h-[71px] object-cover bg-[#373737] rounded-full"
-                        alt=""
-                      />
-                    </div>
-                    <div className="ms-2 grow lg:ms-6">
-                      <h3 className="md:text-[25px] mb-1 font-bold">
-                        Vachi Savadatti
-                      </h3>
-                      <div className="flex flex-wrap">
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="22"
-                          height="22"
-                          viewBox="0 0 22 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12.7271 3.53383L14.3039 6.6873C14.5189 7.12628 15.0922 7.54734 15.576 7.62797L18.4338 8.10279C20.2614 8.40738 20.6915 9.73328 19.3745 11.0413L17.1527 13.263C16.7765 13.6393 16.5704 14.3649 16.6869 14.8846L17.323 17.6349C17.8247 19.8119 16.669 20.654 14.7428 19.5162L12.0642 17.9305C11.5804 17.6438 10.7831 17.6438 10.2904 17.9305L7.61169 19.5162C5.69452 20.654 4.52988 19.8029 5.03157 17.6349L5.66764 14.8846C5.78411 14.3649 5.57805 13.6393 5.20179 13.263L2.98002 11.0413C1.67204 9.73328 2.0931 8.40738 3.92069 8.10279L6.77853 7.62797C7.25334 7.54734 7.8267 7.12628 8.04171 6.6873L9.61845 3.53383C10.4785 1.82271 11.876 1.82271 12.7271 3.53383Z"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-[#A0A0A0] mt-4">
-                      Buttons in a design system are a visual component or
-                      pattern used to trigger an action or navigate to another
-                      page or section of a website or application.
-                    </p>
-                  </div>
-                </div>
-                <div className=" mb-8">
-                  <div className="flex items-center">
-                    <div className="shrink-0">
-                      <img
-                        src="/images/astrologers/djGCYIrB_400x400.png"
-                        className="w-[71px] h-[71px] object-cover bg-[#373737] rounded-full"
-                        alt=""
-                      />
-                    </div>
-                    <div className="ms-2 grow lg:ms-6">
-                      <h3 className="md:text-[25px] mb-1 font-bold">
-                        Vachi Savadatti
-                      </h3>
-                      <div className="flex flex-wrap">
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="22"
-                          height="22"
-                          viewBox="0 0 22 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12.7271 3.53383L14.3039 6.6873C14.5189 7.12628 15.0922 7.54734 15.576 7.62797L18.4338 8.10279C20.2614 8.40738 20.6915 9.73328 19.3745 11.0413L17.1527 13.263C16.7765 13.6393 16.5704 14.3649 16.6869 14.8846L17.323 17.6349C17.8247 19.8119 16.669 20.654 14.7428 19.5162L12.0642 17.9305C11.5804 17.6438 10.7831 17.6438 10.2904 17.9305L7.61169 19.5162C5.69452 20.654 4.52988 19.8029 5.03157 17.6349L5.66764 14.8846C5.78411 14.3649 5.57805 13.6393 5.20179 13.263L2.98002 11.0413C1.67204 9.73328 2.0931 8.40738 3.92069 8.10279L6.77853 7.62797C7.25334 7.54734 7.8267 7.12628 8.04171 6.6873L9.61845 3.53383C10.4785 1.82271 11.876 1.82271 12.7271 3.53383Z"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-[#A0A0A0] mt-4">
-                      Buttons in a design system are a visual component or
-                      pattern used to trigger an action or navigate to another
-                      page or section of a website or application.
-                    </p>
-                  </div>
-                </div>
-                <div className=" mb-8">
-                  <div className="flex items-center">
-                    <div className="shrink-0">
-                      <img
-                        src="/images/astrologers/djGCYIrB_400x400.png"
-                        className="w-[71px] h-[71px] object-cover bg-[#373737] rounded-full"
-                        alt=""
-                      />
-                    </div>
-                    <div className="ms-2 grow lg:ms-6">
-                      <h3 className="md:text-[25px] mb-1 font-bold">
-                        Vachi Savadatti
-                      </h3>
-                      <div className="flex flex-wrap">
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="22"
-                          height="22"
-                          viewBox="0 0 22 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12.7271 3.53383L14.3039 6.6873C14.5189 7.12628 15.0922 7.54734 15.576 7.62797L18.4338 8.10279C20.2614 8.40738 20.6915 9.73328 19.3745 11.0413L17.1527 13.263C16.7765 13.6393 16.5704 14.3649 16.6869 14.8846L17.323 17.6349C17.8247 19.8119 16.669 20.654 14.7428 19.5162L12.0642 17.9305C11.5804 17.6438 10.7831 17.6438 10.2904 17.9305L7.61169 19.5162C5.69452 20.654 4.52988 19.8029 5.03157 17.6349L5.66764 14.8846C5.78411 14.3649 5.57805 13.6393 5.20179 13.263L2.98002 11.0413C1.67204 9.73328 2.0931 8.40738 3.92069 8.10279L6.77853 7.62797C7.25334 7.54734 7.8267 7.12628 8.04171 6.6873L9.61845 3.53383C10.4785 1.82271 11.876 1.82271 12.7271 3.53383Z"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-[#A0A0A0] mt-4">
-                      Buttons in a design system are a visual component or
-                      pattern used to trigger an action or navigate to another
-                      page or section of a website or application.
-                    </p>
-                  </div>
-                </div>
-                <div className=" mb-8">
-                  <div className="flex items-center">
-                    <div className="shrink-0">
-                      <img
-                        src="/images/astrologers/djGCYIrB_400x400.png"
-                        className="w-[71px] h-[71px] object-cover bg-[#373737] rounded-full"
-                        alt=""
-                      />
-                    </div>
-                    <div className="ms-2 grow lg:ms-6">
-                      <h3 className="md:text-[25px] mb-1 font-bold">
-                        Vachi Savadatti
-                      </h3>
-                      <div className="flex flex-wrap">
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="22"
-                          height="22"
-                          viewBox="0 0 22 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12.7271 3.53383L14.3039 6.6873C14.5189 7.12628 15.0922 7.54734 15.576 7.62797L18.4338 8.10279C20.2614 8.40738 20.6915 9.73328 19.3745 11.0413L17.1527 13.263C16.7765 13.6393 16.5704 14.3649 16.6869 14.8846L17.323 17.6349C17.8247 19.8119 16.669 20.654 14.7428 19.5162L12.0642 17.9305C11.5804 17.6438 10.7831 17.6438 10.2904 17.9305L7.61169 19.5162C5.69452 20.654 4.52988 19.8029 5.03157 17.6349L5.66764 14.8846C5.78411 14.3649 5.57805 13.6393 5.20179 13.263L2.98002 11.0413C1.67204 9.73328 2.0931 8.40738 3.92069 8.10279L6.77853 7.62797C7.25334 7.54734 7.8267 7.12628 8.04171 6.6873L9.61845 3.53383C10.4785 1.82271 11.876 1.82271 12.7271 3.53383Z"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-[#A0A0A0] mt-4">
-                      Buttons in a design system are a visual component or
-                      pattern used to trigger an action or navigate to another
-                      page or section of a website or application.
-                    </p>
-                  </div>
-                </div>
-                <div className=" mb-8">
-                  <div className="flex items-center">
-                    <div className="shrink-0">
-                      <img
-                        src="/images/astrologers/djGCYIrB_400x400.png"
-                        className="w-[71px] h-[71px] object-cover bg-[#373737] rounded-full"
-                        alt=""
-                      />
-                    </div>
-                    <div className="ms-2 grow lg:ms-6">
-                      <h3 className="md:text-[25px] mb-1 font-bold">
-                        Vachi Savadatti
-                      </h3>
-                      <div className="flex flex-wrap">
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="22"
-                          height="22"
-                          viewBox="0 0 22 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12.7271 3.53383L14.3039 6.6873C14.5189 7.12628 15.0922 7.54734 15.576 7.62797L18.4338 8.10279C20.2614 8.40738 20.6915 9.73328 19.3745 11.0413L17.1527 13.263C16.7765 13.6393 16.5704 14.3649 16.6869 14.8846L17.323 17.6349C17.8247 19.8119 16.669 20.654 14.7428 19.5162L12.0642 17.9305C11.5804 17.6438 10.7831 17.6438 10.2904 17.9305L7.61169 19.5162C5.69452 20.654 4.52988 19.8029 5.03157 17.6349L5.66764 14.8846C5.78411 14.3649 5.57805 13.6393 5.20179 13.263L2.98002 11.0413C1.67204 9.73328 2.0931 8.40738 3.92069 8.10279L6.77853 7.62797C7.25334 7.54734 7.8267 7.12628 8.04171 6.6873L9.61845 3.53383C10.4785 1.82271 11.876 1.82271 12.7271 3.53383Z"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-[#A0A0A0] mt-4">
-                      Buttons in a design system are a visual component or
-                      pattern used to trigger an action or navigate to another
-                      page or section of a website or application.
-                    </p>
-                  </div>
-                </div>
-                <div className=" mb-8">
-                  <div className="flex items-center">
-                    <div className="shrink-0">
-                      <img
-                        src="/images/astrologers/djGCYIrB_400x400.png"
-                        className="w-[71px] h-[71px] object-cover bg-[#373737] rounded-full"
-                        alt=""
-                      />
-                    </div>
-                    <div className="ms-2 grow lg:ms-6">
-                      <h3 className="md:text-[25px] mb-1 font-bold">
-                        Vachi Savadatti
-                      </h3>
-                      <div className="flex flex-wrap">
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="22"
-                          height="22"
-                          viewBox="0 0 22 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12.7271 3.53383L14.3039 6.6873C14.5189 7.12628 15.0922 7.54734 15.576 7.62797L18.4338 8.10279C20.2614 8.40738 20.6915 9.73328 19.3745 11.0413L17.1527 13.263C16.7765 13.6393 16.5704 14.3649 16.6869 14.8846L17.323 17.6349C17.8247 19.8119 16.669 20.654 14.7428 19.5162L12.0642 17.9305C11.5804 17.6438 10.7831 17.6438 10.2904 17.9305L7.61169 19.5162C5.69452 20.654 4.52988 19.8029 5.03157 17.6349L5.66764 14.8846C5.78411 14.3649 5.57805 13.6393 5.20179 13.263L2.98002 11.0413C1.67204 9.73328 2.0931 8.40738 3.92069 8.10279L6.77853 7.62797C7.25334 7.54734 7.8267 7.12628 8.04171 6.6873L9.61845 3.53383C10.4785 1.82271 11.876 1.82271 12.7271 3.53383Z"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-[#A0A0A0] mt-4">
-                      Buttons in a design system are a visual component or
-                      pattern used to trigger an action or navigate to another
-                      page or section of a website or application.
-                    </p>
-                  </div>
-                </div>
-                <div className=" mb-8">
-                  <div className="flex items-center">
-                    <div className="shrink-0">
-                      <img
-                        src="/images/astrologers/djGCYIrB_400x400.png"
-                        className="w-[71px] h-[71px] object-cover bg-[#373737] rounded-full"
-                        alt=""
-                      />
-                    </div>
-                    <div className="ms-2 grow lg:ms-6">
-                      <h3 className="md:text-[25px] mb-1 font-bold">
-                        Vachi Savadatti
-                      </h3>
-                      <div className="flex flex-wrap">
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="23"
-                          height="22"
-                          viewBox="0 0 23 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                            fill="#FFA643"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                        <svg
-                          width="22"
-                          height="22"
-                          viewBox="0 0 22 22"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12.7271 3.53383L14.3039 6.6873C14.5189 7.12628 15.0922 7.54734 15.576 7.62797L18.4338 8.10279C20.2614 8.40738 20.6915 9.73328 19.3745 11.0413L17.1527 13.263C16.7765 13.6393 16.5704 14.3649 16.6869 14.8846L17.323 17.6349C17.8247 19.8119 16.669 20.654 14.7428 19.5162L12.0642 17.9305C11.5804 17.6438 10.7831 17.6438 10.2904 17.9305L7.61169 19.5162C5.69452 20.654 4.52988 19.8029 5.03157 17.6349L5.66764 14.8846C5.78411 14.3649 5.57805 13.6393 5.20179 13.263L2.98002 11.0413C1.67204 9.73328 2.0931 8.40738 3.92069 8.10279L6.77853 7.62797C7.25334 7.54734 7.8267 7.12628 8.04171 6.6873L9.61845 3.53383C10.4785 1.82271 11.876 1.82271 12.7271 3.53383Z"
-                            stroke="#FFA643"
-                            stroke-width="0.895874"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-[#A0A0A0] mt-4">
-                      Buttons in a design system are a visual component or
-                      pattern used to trigger an action or navigate to another
-                      page or section of a website or application.
-                    </p>
-                  </div>
-                </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 ">
+                {
+                  review.list?.length ?
+                    review.list?.map((item) => {
+                      return (
+                        <div className=" mb-8">
+                          <div className="flex items-center">
+                            <div className="shrink-0">
+                              <img
+                                src={item?.profile_image}
+                                className="w-[71px] h-[71px] object-cover bg-[#373737] rounded-full"
+                                alt=""
+                              />
+                            </div>
+                            <div className="ms-2 grow lg:ms-6">
+                              <h3 className="md:text-[25px] mb-1 font-bold">
+                                {item?.first_name}
+                              </h3>
+                              <div className="flex flex-wrap">
+                                <svg
+                                  width="23"
+                                  height="22"
+                                  viewBox="0 0 23 22"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
+                                    fill="#FFA643"
+                                    stroke="#FFA643"
+                                    stroke-width="0.895874"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                  />
+                                </svg>
+                                <svg
+                                  width="23"
+                                  height="22"
+                                  viewBox="0 0 23 22"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
+                                    fill="#FFA643"
+                                    stroke="#FFA643"
+                                    stroke-width="0.895874"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                  />
+                                </svg>
+                                <svg
+                                  width="23"
+                                  height="22"
+                                  viewBox="0 0 23 22"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
+                                    fill="#FFA643"
+                                    stroke="#FFA643"
+                                    stroke-width="0.895874"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                  />
+                                </svg>
+                                <svg
+                                  width="23"
+                                  height="22"
+                                  viewBox="0 0 23 22"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
+                                    fill="#FFA643"
+                                    stroke="#FFA643"
+                                    stroke-width="0.895874"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                  />
+                                </svg>
+                                <svg
+                                  width="22"
+                                  height="22"
+                                  viewBox="0 0 22 22"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M12.7271 3.53383L14.3039 6.6873C14.5189 7.12628 15.0922 7.54734 15.576 7.62797L18.4338 8.10279C20.2614 8.40738 20.6915 9.73328 19.3745 11.0413L17.1527 13.263C16.7765 13.6393 16.5704 14.3649 16.6869 14.8846L17.323 17.6349C17.8247 19.8119 16.669 20.654 14.7428 19.5162L12.0642 17.9305C11.5804 17.6438 10.7831 17.6438 10.2904 17.9305L7.61169 19.5162C5.69452 20.654 4.52988 19.8029 5.03157 17.6349L5.66764 14.8846C5.78411 14.3649 5.57805 13.6393 5.20179 13.263L2.98002 11.0413C1.67204 9.73328 2.0931 8.40738 3.92069 8.10279L6.77853 7.62797C7.25334 7.54734 7.8267 7.12628 8.04171 6.6873L9.61845 3.53383C10.4785 1.82271 11.876 1.82271 12.7271 3.53383Z"
+                                    stroke="#FFA643"
+                                    stroke-width="0.895874"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                  />
+                                </svg>
+                              </div>
+                            </div>
+                          </div>
+                          <div>
+                            <p className="text-[#A0A0A0] mt-4">
+                              {item?.review_text}
+                            </p>
+                          </div>
+                        </div>
+                      )
+                    })
+                    : <></>
+                }
+
+
               </div>
             </div>
           </div>
