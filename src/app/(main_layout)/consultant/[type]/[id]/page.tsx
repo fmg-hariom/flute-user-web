@@ -8,6 +8,9 @@ import useConsultantProfileStore from "@/services/consultant_profile/consultant_
 import DownloadAppDialog from "@/components/common/dialogs/DownloadAppDialog";
 import useReviewStore from "@/services/review/review.service";
 import { findPercentage } from "@/lib/utils";
+import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 const montserratAlternates = Montserrat_Alternates({
   weight: "400", // Specify the font weights you need
@@ -26,7 +29,7 @@ export default function Profile(props: any) {
   useEffect(() => {
     console.log(props?.params?.id);
     get.detail(props?.params?.id);
-    reviewStore.get.paginate({ id: props?.params?.id })
+    reviewStore.get.paginate({ id: props?.params?.id, sort: "newest", paginate: true })
   }, []);
   return (
     <div className="py-4 sm:py-8 bg-black text-white">
@@ -417,33 +420,107 @@ export default function Profile(props: any) {
                 </div>
 
                 <div className="flex-none lg:w-[50%] w-full">
-                  <div className="flex flex-col justify-center items-center ">
-                    <svg
-                      width="53"
-                      height="53"
-                      viewBox="0 0 53 53"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M30.2729 7.94704L34.1256 15.6524C34.651 16.725 36.0519 17.7538 37.234 17.9508L44.217 19.111C48.6825 19.8553 49.7333 23.095 46.5154 26.291L41.0867 31.7197C40.1673 32.6391 39.6638 34.4122 39.9484 35.6819L41.5026 42.4021C42.7284 47.7214 39.9046 49.7791 35.1982 46.9991L28.6531 43.1245C27.471 42.424 25.5228 42.424 24.3188 43.1245L17.7737 46.9991C13.0892 49.7791 10.2435 47.6995 11.4693 42.4021L13.0235 35.6819C13.3081 34.4122 12.8046 32.6391 11.8852 31.7197L6.45647 26.291C3.26051 23.095 4.28935 19.8553 8.75493 19.111L15.7379 17.9508C16.8981 17.7538 18.299 16.725 18.8244 15.6524L22.6771 7.94704C24.7785 3.76602 28.1934 3.76602 30.2729 7.94704Z"
-                        stroke="white"
-                        stroke-width="4.37803"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                    <br />
-                    <h2 className="text-[29px]">Rate Now</h2>
-                  </div>
+                  <DownloadAppDialog trigger={
+
+
+
+
+                    <div className="flex flex-col justify-center items-center cursor-pointer">
+                      <svg
+                        width="53"
+                        height="53"
+                        viewBox="0 0 53 53"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M30.2729 7.94704L34.1256 15.6524C34.651 16.725 36.0519 17.7538 37.234 17.9508L44.217 19.111C48.6825 19.8553 49.7333 23.095 46.5154 26.291L41.0867 31.7197C40.1673 32.6391 39.6638 34.4122 39.9484 35.6819L41.5026 42.4021C42.7284 47.7214 39.9046 49.7791 35.1982 46.9991L28.6531 43.1245C27.471 42.424 25.5228 42.424 24.3188 43.1245L17.7737 46.9991C13.0892 49.7791 10.2435 47.6995 11.4693 42.4021L13.0235 35.6819C13.3081 34.4122 12.8046 32.6391 11.8852 31.7197L6.45647 26.291C3.26051 23.095 4.28935 19.8553 8.75493 19.111L15.7379 17.9508C16.8981 17.7538 18.299 16.725 18.8244 15.6524L22.6771 7.94704C24.7785 3.76602 28.1934 3.76602 30.2729 7.94704Z"
+                          stroke="white"
+                          stroke-width="4.37803"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      <br />
+                      <h2 className="text-[29px]">Rate Now</h2>
+                    </div>
+                  } />
                 </div>
               </div>
             </div>
             <div className="pt-5 lg:pt-16">
-              <h2 className="lg:text-[33px] border-b-2 mb-11 text-[#D9D9D9] pb-6">
-                Summary
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 ">
+              <div className="flex items-center justify-between border-b-2 mb-11 pb-6" >
+
+                <h2 className="lg:text-[33px]   text-[#D9D9D9] ">
+                  Summary
+                </h2>
+
+                <div className="sm:me-3 mb-3 sm:mb-0 w-full sm:w-fit">
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <button
+                        type="button"
+                        className="rounded-full w-full sm:w-[99px] h-[49px] custom-select border px-2 ps-10 bg-icon sort-icon filter-select border-white bg-transparent"
+                      >
+                        Sort
+                      </button>
+                    </DialogTrigger>
+
+                    <DialogContent className="w-[95%] sm:max-w-md">
+                      <DialogHeader>
+                        <DialogTitle>Sort</DialogTitle>
+                      </DialogHeader>
+                      <hr className="bg-[#5B5B5B]" />
+                      <div className="flex items-center">
+                        <RadioGroup value={review.sort}  >
+                          {[
+                            {
+                              label: "Newest",
+                              value: "newest",
+                            },
+                            {
+                              label: "Oldest",
+                              value: "oldest",
+                            },
+                            {
+                              label: "Highest",
+                              value: "highest",
+                            },
+                            {
+                              label: "Lowest",
+                              value: "lowest",
+                            },
+
+                          ].map((item) => {
+                            return (
+                              <DialogClose asChild>
+                                <div className="flex items-center space-x-2">
+                                  <RadioGroupItem
+                                    value={item.value}
+                                    id={item.value}
+                                    onClick={(e) => {
+                                      console.log("review sort clicked: ", item.value)
+
+                                      reviewStore.get.paginate({ id: props?.params?.id, sort: item.value as any })
+                                    }}
+                                  />
+                                  <Label
+                                    htmlFor={item.value}
+                                    className="text-white text-lg font-normal"
+                                  >
+                                    {item.label}
+                                  </Label>
+                                </div>
+                              </DialogClose>
+                            );
+                          })}
+                        </RadioGroup>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-1 ">
                 {
                   review.list?.length ?
                     review.list?.map((item) => {
@@ -453,7 +530,7 @@ export default function Profile(props: any) {
                             <div className="shrink-0">
                               <img
                                 src={item?.profile_image}
-                                className="w-[71px] h-[71px] object-cover bg-[#373737] rounded-full"
+                                className="w-[71px] h-[71px] object-cover object-top bg-[#373737] rounded-full align-top"
                                 alt=""
                               />
                             </div>
@@ -462,85 +539,53 @@ export default function Profile(props: any) {
                                 {item?.first_name}
                               </h3>
                               <div className="flex flex-wrap">
-                                <svg
-                                  width="23"
-                                  height="22"
-                                  viewBox="0 0 23 22"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                                    fill="#FFA643"
-                                    stroke="#FFA643"
-                                    stroke-width="0.895874"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                  />
-                                </svg>
-                                <svg
-                                  width="23"
-                                  height="22"
-                                  viewBox="0 0 23 22"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                                    fill="#FFA643"
-                                    stroke="#FFA643"
-                                    stroke-width="0.895874"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                  />
-                                </svg>
-                                <svg
-                                  width="23"
-                                  height="22"
-                                  viewBox="0 0 23 22"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                                    fill="#FFA643"
-                                    stroke="#FFA643"
-                                    stroke-width="0.895874"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                  />
-                                </svg>
-                                <svg
-                                  width="23"
-                                  height="22"
-                                  viewBox="0 0 23 22"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
-                                    fill="#FFA643"
-                                    stroke="#FFA643"
-                                    stroke-width="0.895874"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                  />
-                                </svg>
-                                <svg
-                                  width="22"
-                                  height="22"
-                                  viewBox="0 0 22 22"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    d="M12.7271 3.53383L14.3039 6.6873C14.5189 7.12628 15.0922 7.54734 15.576 7.62797L18.4338 8.10279C20.2614 8.40738 20.6915 9.73328 19.3745 11.0413L17.1527 13.263C16.7765 13.6393 16.5704 14.3649 16.6869 14.8846L17.323 17.6349C17.8247 19.8119 16.669 20.654 14.7428 19.5162L12.0642 17.9305C11.5804 17.6438 10.7831 17.6438 10.2904 17.9305L7.61169 19.5162C5.69452 20.654 4.52988 19.8029 5.03157 17.6349L5.66764 14.8846C5.78411 14.3649 5.57805 13.6393 5.20179 13.263L2.98002 11.0413C1.67204 9.73328 2.0931 8.40738 3.92069 8.10279L6.77853 7.62797C7.25334 7.54734 7.8267 7.12628 8.04171 6.6873L9.61845 3.53383C10.4785 1.82271 11.876 1.82271 12.7271 3.53383Z"
-                                    stroke="#FFA643"
-                                    stroke-width="0.895874"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                  />
-                                </svg>
+
+                                {
+                                  Array.from({ length: 5 }).map((_, index) => {
+                                    const star = index + 1;
+                                    if (star <= parseInt(item.rating)) {
+
+                                      return (
+                                        <svg
+                                          width="23"
+                                          height="22"
+                                          viewBox="0 0 23 22"
+                                          fill="none"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                          <path
+                                            d="M13.0553 3.53407L14.632 6.68755C14.847 7.12653 15.4204 7.54759 15.9041 7.62822L18.762 8.10303C20.5896 8.40763 21.0196 9.73352 19.7026 11.0415L17.4809 13.2633C17.1046 13.6395 16.8986 14.3652 17.015 14.8848L17.6511 17.6351C18.1528 19.8121 16.9971 20.6542 15.071 19.5165L12.3923 17.9308C11.9085 17.6441 11.1112 17.6441 10.6185 17.9308L7.93981 19.5165C6.02264 20.6542 4.85801 19.8031 5.3597 17.6351L5.99577 14.8848C6.11223 14.3652 5.90618 13.6395 5.52991 13.2633L3.30814 11.0415C2.00017 9.73352 2.42123 8.40763 4.24881 8.10303L7.10665 7.62822C7.58146 7.54759 8.15482 7.12653 8.36983 6.68755L9.94657 3.53407C10.8066 1.82295 12.2042 1.82295 13.0553 3.53407Z"
+                                            fill="#FFA643"
+                                            stroke="#FFA643"
+                                            stroke-width="0.895874"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                          />
+                                        </svg>
+                                      )
+                                    } else {
+                                      return (<svg
+                                        width="22"
+                                        height="22"
+                                        viewBox="0 0 22 22"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                      >
+                                        <path
+                                          d="M12.7271 3.53383L14.3039 6.6873C14.5189 7.12628 15.0922 7.54734 15.576 7.62797L18.4338 8.10279C20.2614 8.40738 20.6915 9.73328 19.3745 11.0413L17.1527 13.263C16.7765 13.6393 16.5704 14.3649 16.6869 14.8846L17.323 17.6349C17.8247 19.8119 16.669 20.654 14.7428 19.5162L12.0642 17.9305C11.5804 17.6438 10.7831 17.6438 10.2904 17.9305L7.61169 19.5162C5.69452 20.654 4.52988 19.8029 5.03157 17.6349L5.66764 14.8846C5.78411 14.3649 5.57805 13.6393 5.20179 13.263L2.98002 11.0413C1.67204 9.73328 2.0931 8.40738 3.92069 8.10279L6.77853 7.62797C7.25334 7.54734 7.8267 7.12628 8.04171 6.6873L9.61845 3.53383C10.4785 1.82271 11.876 1.82271 12.7271 3.53383Z"
+                                          stroke="#FFA643"
+                                          stroke-width="0.895874"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round"
+                                        />
+                                      </svg>)
+                                    }
+                                  })
+                                }
+
+
+
+
                               </div>
                             </div>
                           </div>
@@ -554,7 +599,21 @@ export default function Profile(props: any) {
                     })
                     : <></>
                 }
-
+                {
+                  review.show_more ?
+                    <div className="text-center">
+                      <button
+                        type="button"
+                        className=" mt-10  !text-[18px] md:!text-[36px]   bg-black hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-10 py-5  dark:bg-black dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+                        onClick={() => {
+                          reviewStore.get.paginate({ id: props?.params?.id, page: review.page + 1, paginate: true })
+                        }}
+                      >
+                        Show More
+                      </button>
+                    </div>
+                    : <></>
+                }
 
               </div>
             </div>
