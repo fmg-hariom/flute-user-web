@@ -6,4 +6,5 @@ export default {
   buzzBaseUrl: (path: string) => `/flute/flute_buzz/v1${path}`,
   dashboardBaseUrl: (path: string) => `/flute/dashboard/v1${path}`,
   metaBaseUrl: (path: string) => `/meta${path}`,
+  coachRatingBaseUrl: (path: string) => `/coach-rating${path}`
 }
