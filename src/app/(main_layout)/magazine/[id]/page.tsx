@@ -79,7 +79,7 @@ export default function Blogs(props: any) {
                       store.magazine.detail?.author_image ||
                       "https://placehold.co/200x200"
                     }
-                    className="rounded-[100%] w-[75px] h-[75px] md:w-[144.8px] md:h-[120px] sm:mt-3 border-[#8f8e8e] border-[2px] md:mr-2 cursor-pointer"
+                    className="rounded-[100%] mt-2 w-[78px] h-[78px] md:w-[144.8px] md:h-[120px] sm:mt-2 border-[#8f8e8e] border-[2px] md:mr-2 cursor-pointer"
                     alt="Author"
                     onClick={() =>
                       openModal(
@@ -116,16 +116,16 @@ export default function Blogs(props: any) {
                     <span className="text-[#A1A1A1] font-bold text-[15px] md:text-[16px] flex justify-start lg:justify-normal font-sohne ">
                       Written by
                     </span>
-                    <h3 className="text-[#A1A1A1] font-bold text-[20px] md:text-[28px] lg:justify-normal inline-block">
-                      <span className="leading-[27px]">
+                    <h3 className="text-[#A1A1A1]  text-[20px] md:text-[28px] lg:justify-normal inline-block">
+                      <span className="leading-[27px] font-bold">
                         {store.magazine.detail?.author_names || "Flute"}
                       </span>
-                      <span className="content-before leading-[27px]">
+                      <span className="content-before  text-[18px] leading-[27px]">
                         {store.magazine.detail?.position || "Flute"}
                       </span>
                     </h3>
 
-                    <h3 className=" ml-[-80px] sm:ml-0 mt-  blog-details py-[5px] sm:max-w-[880px]  px-1 rounded-lg leading-[26px] text-[18px] sm:leading-[32px] sm:mt-1 text-[#A1A1A1]  sm:text-[22px] font-[400] tracking-[0.5px] font-serif">
+                    <h3 className=" ml-[-94px] sm:ml-0 mt-  blog-details py-[5px] sm:max-w-[880px]  px-1 rounded-lg leading-[26px] text-[18px] sm:leading-[32px] sm:mt-1 text-[#A1A1A1]  sm:text-[22px] font-[400] tracking-[0.5px] font-serif">
                       <div
                         dangerouslySetInnerHTML={{
                           __html: `${store.magazine.detail?.tag_line}`,
