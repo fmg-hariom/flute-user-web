@@ -201,7 +201,7 @@ export default function FluteMagazineView(props: any) {
                     <div className="text-center mb-3 md:mb-0">
                       <button
                         type="button"
-                        className="border-[#939292] w-full md:w-fit rounded-xl bg-transparent border border-[#939292] text-white py-3 sm:px-10"
+                        className="border-[#939292] w-full md:w-fit rounded-xl bg-transparent border text-white py-3 sm:px-10"
                         onClick={handleShowCategory}
                       >
                         Categories
@@ -525,11 +525,11 @@ export default function FluteMagazineView(props: any) {
                         store.get.paginate({ size: parseInt(e.target.value) })
                       }
                     >
-                      <option selected>10</option>
-                      <option value="20">20</option>
-                      <option value="30">30</option>
-                      <option value="40">40</option>
-                      <option value="50">50</option>
+                      <option selected>12</option>
+                      <option value="24">24</option>
+                      <option value="36">36</option>
+                      <option value="48">48</option>
+                      <option value="60">60</option>
                     </select>
                   </form>
                 </div>

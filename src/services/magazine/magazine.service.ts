@@ -51,7 +51,7 @@ const useMagazineStore = create(
                 pagination: 10,
                 total: 0,
                 page: 1,
-                size: 10,
+                size: 12,
                 total_pages: 0,
                 current_page: 0,
                 per_page: 0,
