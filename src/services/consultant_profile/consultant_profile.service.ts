@@ -224,7 +224,7 @@ const useConsultantProfileStore = create(
                         item.profile_photo = item.photos.find(f => f.photo_type === 1);
                         item.is_live = item.service_status.some(f => [ServiceType.LIVE, ServiceType.LIVE_AUDIO, ServiceType.LIVE_CHAT, ServiceType.LIVE_VIDEO].includes(f.type) && f.status == ServiceStatus.STREAMING)
                     }
-                    set(prev => ({ ...prev, consultant_profile: { ...prev.consultant_profile, list: request.data?.records } }))
+                    set(prev => ({ ...prev, consultant_profile: { ...prev.consultant_profile, list: paginate ? [...prev.consultant_profile.list, ...request.data?.records] : request.data?.records } }))
                 },
 
                 detail: async (id: string | number) => {
@@ -274,7 +274,7 @@ const useConsultantProfileStore = create(
                                 page: page || prev.consultant_profile.page,
                                 size: size || prev.consultant_profile.size,
                                 search: search || prev.consultant_profile.search,
-                                paginate: paginate ?? true,
+                                paginate: paginate ?? false,
                                 skill_id: skill_id || "",
                                 consultant_type: consultant_type || "",
                                 category_id: category_id || "",

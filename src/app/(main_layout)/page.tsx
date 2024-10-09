@@ -148,9 +148,8 @@ export default function Home() {
                 >
                   <img src={item.imagePath} className="w-6" />
                   <p
-                    className={`text-sm font-normal text-[#A0A0A0] ${
-                      index == 0 ? "text-[#FFA643]" : ""
-                    }`}
+                    className={`text-sm font-normal text-[#A0A0A0] ${index == 0 ? "text-[#FFA643]" : ""
+                      }`}
                   >
                     {item.title}
                   </p>
@@ -212,10 +211,9 @@ export default function Home() {
                     content_type={item.content_type}
                     title={`${item.title}`}
                     slides={slides}
-                    radiant1={`${
-                      item.categories?.[0]?.category_card_bg_color?.[0]
-                        ?.color || "#DDC3A2"
-                    }`}
+                    radiant1={`${item.categories?.[0]?.category_card_bg_color?.[0]
+                      ?.color || "#DDC3A2"
+                      }`}
                     radiant2={"#DFB881"}
                     viewAllId={item.category_ids?.[0]}
                   />

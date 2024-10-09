@@ -376,14 +376,15 @@ export default function Profile(props: any) {
                         review.detail?.rating_count ?
                           Object.keys(review.detail?.rating_count as any).map((key) => {
                             const item = (review.detail?.rating_count as any)[key];
-                            const percentage = Math.round(findPercentage(item, review.detail?.total_user_count || 0))
-                            console.log("🚀 ~ Object.keys ~ percentage:", percentage)
+                            let percentage = Math.round(findPercentage(item, review.detail?.total_user_count || 0))
                             return (
                               <div className="flex items-center mb-2">
                                 <h2 className="text-[19px] me-1">{key}</h2>{" "}
                                 <div className="h-[11px] bg-[#555555] w-full overflow-hidden rounded-[44px]  relative">
-                                  <div className={`absolute left-0 top-0 bottom-0 bg-[#FFA643] w-[${percentage}%] rounded-[44px]`}></div>
+                                  <div className={`absolute left-0 top-0 bottom-0 bg-[#FFA643] w-[${percentage}%] rounded-[44px]`}>
+                                  </div>
                                 </div>
+
                               </div>
                             )
                           })
