@@ -32,7 +32,7 @@ export default function ViewAll(props: any) {
   const store = useConsultantProfileStore();
 
   useEffect(() => {
-    store.get.paginate({ ...props?.searchParams });
+    store.get.paginate({ ...props?.searchParams, page: 1 });
   }, [props?.searchParams]);
 
   const handleSearch: ChangeEventHandler<HTMLInputElement> = (e) => {
