@@ -174,7 +174,7 @@ const useConsultantProfileStore = create(
                 list: [] as ConsultantProfile[],
                 detail: null as ConsultantProfile | null,
                 total: 0,
-                page: 0,
+                page: 1,
                 size: 10,
                 search: null as string | null,
                 paginate: true as boolean,
@@ -182,6 +182,7 @@ const useConsultantProfileStore = create(
                 consultant_type: null as string | null,
                 category_id: null as string | null,
                 sort: 'asc' as 'asc' | 'desc',
+                show_more: true,
                 // timeOut: null as any
             }
         },
@@ -212,9 +213,16 @@ const useConsultantProfileStore = create(
                         }
                     })
 
-                    if (!request.status) {
+                    if (!request.status || !request?.data?.records?.length) {
+                        set(prev => ({
+                            ...prev, consultant_profile: {
+                                ...prev.consultant_profile,
+                                show_more: false,
+                            }
+                        }));
                         return;
                     }
+
                     for (let item of request.data?.records) {
 
                         item.chat_price = item.price_list?.find(f => f.feature === Feature.CHAT);
@@ -224,7 +232,7 @@ const useConsultantProfileStore = create(
                         item.profile_photo = item.photos.find(f => f.photo_type === 1);
                         item.is_live = item.service_status.some(f => [ServiceType.LIVE, ServiceType.LIVE_AUDIO, ServiceType.LIVE_CHAT, ServiceType.LIVE_VIDEO].includes(f.type) && f.status == ServiceStatus.STREAMING)
                     }
-                    set(prev => ({ ...prev, consultant_profile: { ...prev.consultant_profile, list: paginate ? [...prev.consultant_profile.list, ...request.data?.records] : request.data?.records } }))
+                    set(prev => ({ ...prev, consultant_profile: { ...prev.consultant_profile, list: paginate ? [...prev.consultant_profile.list, ...request.data?.records] : request.data?.records, show_more: true } }))
                 },
 
                 detail: async (id: string | number) => {

@@ -556,17 +556,21 @@ export default function ViewAll(props: any) {
                 <></>
               )}
             </div>
-            <div className="text-center">
-              <button
-                type="button"
-                className="text-white mt-10 !text-[18px] md:!text-[36px] show-more-btn bg-semi-dark bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-10 py-5  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-                onClick={() => {
-                  store.get.paginate({ page: store.consultant_profile.page + 1, paginate: true })
-                }}
-              >
-                Show More
-              </button>
-            </div>
+            {
+              store.consultant_profile.show_more ?
+                <div className="text-center">
+                  <button
+                    type="button"
+                    className="text-white mt-10 !text-[18px] md:!text-[36px] show-more-btn bg-semi-dark bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-10 py-5  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+                    onClick={() => {
+                      store.get.paginate({ page: store.consultant_profile.page + 1, paginate: true, ...props?.searchParams })
+                    }}
+                  >
+                    Show More
+                  </button>
+                </div>
+                : <></>
+            }
           </div>
         </div>
       </main>
