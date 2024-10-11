@@ -6,5 +6,10 @@ export default {
   buzzBaseUrl: (path: string) => `/flute/flute_buzz/v1${path}`,
   dashboardBaseUrl: (path: string) => `/flute/dashboard/v1${path}`,
   metaBaseUrl: (path: string) => `/meta${path}`,
-  coachRatingBaseUrl: (path: string) => `/coach-rating${path}`
+  coachRatingBaseUrl: (path: string) => `/coach-rating${path}`,
+  testimonialBaseUrl:(path:string) => `/flute/api/v1${path}`
 }
+
+
+// https://blogs.pokerdate.net/flute/api/v1/testimonials
+// https://dev-api.fluteconnect.com/api/v1/consultant/profile/dashboard?page=0&size=10

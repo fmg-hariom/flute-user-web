@@ -91,7 +91,6 @@ export default function Home() {
     liveConsultantProfileStore.get.home_list();
   }, []);
 
-  console.log("store.dashboard.list: ", store.dashboard.list);
   return (
     <>
       <div className="py-4 sm:py-8 px-2 sm:px-16 bg-black text-white">
@@ -238,7 +237,9 @@ export default function Home() {
       </div>
       <FluteMag />
       <FluteBuzz />
-      <FluteTestimonial />
+      {window.innerWidth > 600 && <FluteTestimonial />}
+
+      {/* <FluteTestimonial /> */}
       <GetApp />
     </>
   );
