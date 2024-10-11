@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { combine } from 'zustand/middleware'
- 
+
 import Api from '@/api/Api';
 import api from '@/configs/api';
 import PokerApi from '@/api/PokerApi';
