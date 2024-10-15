@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 
 type Props = {
   title: string;
-  slides: Array<{ image: string; name: string; [key: string]: any }>;
+  slides: Array<{ image: string; name: string;[key: string]: any }>;
   radiant1: string;
   radiant2: string;
   viewAllId?: any;
@@ -108,6 +108,13 @@ export const Slides = ({
                     className="w-[320px]  sm:w-full sm:max-w-[384px] object-contain"
                     alt=""
                     quality={90}
+                    onClick={() => {
+                      if (slide?.is_clickable) {
+                        router.push(
+                          `/consultant/listeners?category_id=${slide?.category_id}`
+                        );
+                      }
+                    }}
                   />
                 </>
               ) : (

@@ -200,6 +200,8 @@ export default function Home() {
                 image: l.card_image,
                 name: l.category_name,
                 id: l.id,
+                category_id: l?.category_id,
+                is_clickable: l?.is_clickable
               }));
             }
 

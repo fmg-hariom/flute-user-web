@@ -31,6 +31,7 @@ export type Dashboard = {
         status: string
         category_name: string
         category_id: number
+        is_clickable?: boolean
     }>
     categories: Array<{
         "id": 4,
@@ -93,7 +94,7 @@ const useDashboardStore = create(
                         }
                     })
 
-                    
+
 
                     if (!request.data.length) {
                         return;

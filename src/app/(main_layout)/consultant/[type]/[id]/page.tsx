@@ -320,7 +320,6 @@ export default function Profile(props: any) {
                 </h2>
                 <p className="lg:text-[26px] text-[16px]">
                   {detail?.services}
-                  {detail?.description}
                 </p>
               </div>
               <div className="mt-5">
@@ -332,31 +331,25 @@ export default function Profile(props: any) {
                 </p>
               </div>
               <div className="mt-5 gap-2 columns-2 xl:columns-5 ">
-                <img
-                  src="/images/avatars/squre-img.png"
-                  className="w-full rounded-[8px] mb-2"
-                  alt=""
-                />
-                <img
-                  src="/images/avatars/squre-img.png"
-                  className="w-full rounded-[8px] mb-2"
-                  alt=""
-                />
-                <img
-                  src="/images/avatars/squre-img.png"
-                  className="w-full rounded-[8px] mb-2"
-                  alt=""
-                />
-                <img
-                  src="/images/avatars/squre-img.png"
-                  className="w-full rounded-[8px] mb-2"
-                  alt=""
-                />
-                <img
-                  src="/images/avatars/squre-img.png"
-                  className="w-full rounded-[8px] mb-2"
-                  alt=""
-                />
+                {
+                  detail?.photos?.length ?
+
+                    detail?.photos.map((item) => {
+                      if (item?.photo_type != 1) {
+
+                        return (
+                          <img
+                            src={item?.url}
+                            className="w-full rounded-[8px] mb-2"
+                            alt=""
+                          />
+                        )
+                      }
+                    })
+                    : <></>
+                }
+
+
               </div>
             </div>
           </div>
