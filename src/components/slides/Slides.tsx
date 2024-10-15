@@ -111,7 +111,7 @@ export const Slides = ({
                     onClick={() => {
                       if (slide?.is_clickable) {
                         router.push(
-                          `/consultant/listeners?category_id=${slide?.category_id}&consultant_type=3`
+                          `/consultant/listeners?category_id=${slide?.category_id}&consultant_type=3&title=Listeners`
                         );
                       }
                     }}
