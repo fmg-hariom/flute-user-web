@@ -237,7 +237,7 @@ export default function Home() {
       </div>
       <FluteMag />
       <FluteBuzz />
-      {window.innerWidth > 600 && <FluteTestimonial />}
+      {/* {window.innerWidth > 600 && <FluteTestimonial />} */}
 
       {/* <FluteTestimonial /> */}
       <GetApp />
