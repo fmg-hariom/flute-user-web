@@ -25,7 +25,7 @@ import useMagazineStore from "@/services/magazine/magazine.service";
 import useConsultantProfileStore from "@/services/consultant_profile/consultant_profile.service";
 import { SkillSlide } from "@/components/slides/SkillSlide";
 import useBuzzStore from "@/services/buzz/buzz.service";
-import React from "react";
+import React, { useState } from "react";
 import useLiveConsultantProfileStore from "@/services/consultant_profile/live_consultant.service";
 import FluteTestimonial from "@/components/testimonial/FluteTestimonial";
 
@@ -91,6 +91,12 @@ export default function Home() {
     liveConsultantProfileStore.get.home_list();
   }, []);
 
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <>
       <div className="py-4 sm:py-8 px-2 sm:px-16 bg-black text-white">
@@ -147,8 +153,9 @@ export default function Home() {
                 >
                   <img src={item.imagePath} className="w-6" />
                   <p
-                    className={`text-sm font-normal text-[#A0A0A0] ${index == 0 ? "text-[#FFA643]" : ""
-                      }`}
+                    className={`text-sm font-normal text-[#A0A0A0] ${
+                      index == 0 ? "text-[#FFA643]" : ""
+                    }`}
                   >
                     {item.title}
                   </p>
@@ -201,7 +208,7 @@ export default function Home() {
                 name: l.category_name,
                 id: l.id,
                 category_id: l?.category_id,
-                is_clickable: l?.is_clickable
+                is_clickable: l?.is_clickable,
               }));
             }
 
@@ -212,9 +219,10 @@ export default function Home() {
                     content_type={item.content_type}
                     title={`${item.title}`}
                     slides={slides}
-                    radiant1={`${item.categories?.[0]?.category_card_bg_color?.[0]
-                      ?.color || "#DDC3A2"
-                      }`}
+                    radiant1={`${
+                      item.categories?.[0]?.category_card_bg_color?.[0]
+                        ?.color || "#DDC3A2"
+                    }`}
                     radiant2={"#DFB881"}
                     viewAllId={item.category_ids?.[0]}
                   />
@@ -238,9 +246,10 @@ export default function Home() {
       <FluteMag />
       <FluteBuzz />
       {/* {window.innerWidth > 600 && <FluteTestimonial />} */}
+      {isClient && window.innerWidth > 600 && <FluteTestimonial />}
 
       {/* <FluteTestimonial /> */}
-      <GetApp />  
+      <GetApp />
     </>
   );
 }
