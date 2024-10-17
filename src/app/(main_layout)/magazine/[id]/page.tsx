@@ -37,8 +37,11 @@ export default function Blogs(props: any) {
               </span>
             </div>
             <div>
-              <h2 className="leading-[38px] text-[32px]  sm:leading-[52px] sm:text-[42px] font-bold text-[#A1A1A1] font-sohne break-words mt-7 mb-2">
+              <h2 className="leading-[38px] text-[32px]  sm:leading-[52px] sm:text-[42px] font-bold text-[#A1A1A1] font-sohne break-words mt-7 mb-1">
                 {store.magazine.detail?.title}
+              </h2>
+              <h2 className="leading-[38px] text-[32px]  sm:leading-[52px] sm:text-[42px] font-bold text-[#A1A1A1] font-sohne break-words  mb-2">
+                {store.magazine.detail?.second_line_title}
               </h2>
               <div
                 className="leading-[28px] text-[20px]  sm:leading-[34px] sm:text-[24px] font-[400] text-[#A1A1A1] font-sohne break-words mt-4 mb-4"

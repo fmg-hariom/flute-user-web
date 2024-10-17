@@ -289,6 +289,7 @@ export default function FluteMagazineView(props: any) {
                           onClick={() => {
                             router.push(
                               // `/magazine/list?category_id=${item.slug}`
+                              // `/magazine/list?category_id=${item.id}`
                               `/magazine/list?category_id=${item.id}`
                             );
                             setShowCategories(false);
@@ -315,7 +316,7 @@ export default function FluteMagazineView(props: any) {
                       className="card-design   rounded-lg mb-8"
                       key={item.id}
                     >
-                      <a href={`/magazine/${item.id}`}>
+                      <a href={`/magazine/${item.slug}`}>
                         <img
                           className="rounded-t-lg w-full responsive-image hidden md:block"
                           src={`${item.featured_image_web}`}

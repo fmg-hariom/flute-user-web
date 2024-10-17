@@ -240,7 +240,7 @@ export default function Home() {
       {/* {window.innerWidth > 600 && <FluteTestimonial />} */}
 
       {/* <FluteTestimonial /> */}
-      <GetApp />
+      <GetApp />  
     </>
   );
 }

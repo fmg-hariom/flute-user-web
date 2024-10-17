@@ -26,6 +26,8 @@ export type Magazine = {
     author_names: string
     likes: any,
     pagination:number
+    second_line_title:any
+    slug:any
 };
 
 
