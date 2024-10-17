@@ -46,7 +46,7 @@ const useTestominalStore = create(
                     } = get();
 
 
-                    const request = await Api.get<Testimonial[]>(api.testimonialBaseUrl("/testimonials"), {
+                    const request = await PokerApi.get<Testimonial[]>(api.testimonialBaseUrl("/testimonials"), {
                         query: {
                             page, size,
                         }
@@ -62,9 +62,6 @@ const useTestominalStore = create(
                             list: request.data,
                         }
                     }))
-
-
-
 
                 }
 

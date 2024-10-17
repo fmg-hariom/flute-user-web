@@ -12,5 +12,4 @@ export default {
 }
 
 
-// https://blogs.pokerdate.net/flute/api/v1/testimonials
-// https://dev-api.fluteconnect.com/api/v1/consultant/profile/dashboard?page=0&size=10
+ 

@@ -43,7 +43,7 @@ const useSocialIcons = create(
                         SocialIcon :{page , size}
                     }=get();
 
-                    const request = await Api.get<SocialIcons[]>(api.socialiconsBaseUrl("/social-icons"),{
+                    const request = await PokerApi.get<SocialIcons[]>(api.socialiconsBaseUrl("/social-icons"),{
                         query:{
                             page , size,
                         }

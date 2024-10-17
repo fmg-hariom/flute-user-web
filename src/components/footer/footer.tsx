@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { Logo } from "../ui/Logo";
 import logo1 from "../../../public/images/footer/Group 788.png";
@@ -18,7 +18,7 @@ const Footer = (props: Props) => {
 
   useEffect(() => {
     iconsStore.get.list();
-  });
+  }, []);
 
   console.log("social icon from api", iconsStore);
   return (
