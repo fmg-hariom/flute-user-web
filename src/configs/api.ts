@@ -7,7 +7,8 @@ export default {
   dashboardBaseUrl: (path: string) => `/flute/dashboard/v1${path}`,
   metaBaseUrl: (path: string) => `/meta${path}`,
   coachRatingBaseUrl: (path: string) => `/coach-rating${path}`,
-  testimonialBaseUrl:(path:string) => `/flute/api/v1${path}`
+  testimonialBaseUrl:(path:string) => `/flute/api/v1${path}`,
+  socialiconsBaseUrl:(path:string) => `/flute/api/v1${path}`
 }
 
 

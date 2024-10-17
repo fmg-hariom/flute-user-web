@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   Carousel,
@@ -15,7 +15,12 @@ import useTestominalStore from "@/services/testimonial/testimonial.service";
 const FluteTestimonial = () => {
   const store = useTestominalStore();
 
-  console.log("store", store);
+  useEffect(() => {
+    store.get.list();
+  }, []);
+
+  console.log("Testimonial Store Data:", store.testo);
+
   return (
     <div className="min-h-screen bg-[#181c23] flex flex-col items-center justify-center">
       <Carousel

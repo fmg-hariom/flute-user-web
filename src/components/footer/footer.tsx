@@ -1,4 +1,6 @@
-import React from "react";
+"use client"
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Logo } from "../ui/Logo";
 import logo1 from "../../../public/images/footer/Group 788.png";
@@ -7,9 +9,18 @@ import logo3 from "../../../public/images/footer/Ellipse 48.png";
 import logo4 from "../../../public/images/footer/Ellipse 49.png";
 import logo5 from "../../../public/images/footer/Ellipse 50.png";
 import logo6 from "../../../public/images/footer/Ellipse 51.png";
+
+import useSocialIcons from "@/services/footer/footer.service";
 type Props = {};
 
 const Footer = (props: Props) => {
+  const iconsStore = useSocialIcons();
+
+  useEffect(() => {
+    iconsStore.get.list();
+  });
+
+  console.log("social icon from api", iconsStore);
   return (
     <>
       <div className="w-screen flex flex-row flex-wrap justify-between bg-[#131313] py-6 sm:py-9 px-4 sm:px-16">
