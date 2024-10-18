@@ -41,7 +41,7 @@ const FluteMag = (props: Props) => {
 
   return (
     <div className="w-screen flex flex-col justify-center h-[680px] bg-[#E7F59A] py-8 sm:py-9 px-1 sm:px-16 text-black">
-      <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-bold text-[#302C28] ">
+      <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-bold text-[#959393] ">
         Flute Magazine
       </h2>
       <div className=" w-48 sm:w-56 md:w-72 rounded container h-[4px] my-3 bg-[#302C28]"></div>
