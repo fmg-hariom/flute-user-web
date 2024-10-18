@@ -19,7 +19,7 @@ const FluteTestimonial = () => {
     store.get.list();
   }, []);
 
-  console.log("Testimonial Store Data:", store.testo);
+  console.log("Testimonial Store Data:", store.testo.list);
 
   return (
     <div className="min-h-screen bg-[#181c23] flex flex-col items-center justify-center">
