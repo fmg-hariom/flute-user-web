@@ -26,14 +26,18 @@ const Footer = (props: Props) => {
 
   const data = iconsStore?.SocialIcon?.list;
 
+  const handleClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <>
       <div className="w-screen flex flex-col sm:flex-row  justify-between bg-[#000] py-6 sm:py-9  px-4 sm:px-10 lg:px-32  text-[#D9D9D9]">
         <div>
           <div className="w-full flex flex-col items-center sm:items-start ">
-            {/* <Logo width={98} height={99} /> */}
-
-            {/* <img src="flute_white.png" width={99} height={98} /> */}
             <img
               src="/flute_white.png"
               className="w-20 h-20 sm:w-[99px] sm:h-[98px]"
@@ -116,10 +120,12 @@ const Footer = (props: Props) => {
           <h3 className="cursor-pointer">Privacy Policy</h3>
         </div>
 
-        <div className="hidden sm:block sm:mt-8">
+        {/* icon for indicates to the top of the page   */}
+
+        <div className="hidden sm:block sm:mt-8" onClick={handleClick}>
           <svg
             className="cursor-pointer"
-            width="39"
+            width="38"
             height="37"
             viewBox="0 0 41 41"
             fill="none"
