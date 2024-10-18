@@ -35,7 +35,7 @@ const Footer = (props: Props) => {
 
             {/* <img src="flute_white.png" width={99} height={98} /> */}
             <img
-              src="flute_white.png"
+              src="/flute_white.png"
               className="w-20 h-20 sm:w-[99px] sm:h-[98px]"
               alt="flute"
             />
