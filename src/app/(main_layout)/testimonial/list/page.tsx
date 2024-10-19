@@ -38,7 +38,7 @@ const TestimonialList = () => {
   return (
     <div className="py-4 sm:py-4  bg-black text-white">
       <main>
-        {data ? (
+        {data?.length ? (
           <>
             <div className="relative isolate overflow-hidden bg-[linear-gradient(142.13deg,_#FEF8FF21_1.8%,_#FEF8FF00_99.75%)] py-22">
               <div className="mx-auto px-6 lg:px-8">
