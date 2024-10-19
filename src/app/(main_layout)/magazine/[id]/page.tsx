@@ -91,29 +91,6 @@ export default function Blogs(props: any) {
                       )
                     }
                   />
-                  {/* </div> */}
-                  {/* <div className="ml-5 h-full w-full">
-                    <span className="text-[#A1A1A1] font-bold text-[15px] md:text-[16px] flex justify-start lg:justify-normal font-sohne ">
-                      Written by
-                    </span>
-                    <h3 className="text-[#A1A1A1] font-bold text-[20px] md:text-[28px] lg:justify-normal inline-block">
-                      {store.magazine.detail?.author_names || "Flute"}
-                    </h3>
-
-                    <div className="flex gap-2 mt-2  text-[#A1A1A1] ">
-                      {store.magazine.detail.category_names?.map(
-                        (category: any, index: any) => (
-                          <div
-                            className="categories   "
-                            id="importantCategory"
-                            key={index}
-                          >
-                            {category}
-                          </div>
-                        )
-                      )}
-                    </div>
-                  </div> */}
 
                   <div className="ml-5 h-full w-full">
                     <span className="text-[#A1A1A1] font-bold text-[15px] md:text-[16px] flex justify-start lg:justify-normal font-sohne ">
@@ -135,22 +112,6 @@ export default function Blogs(props: any) {
                         }}
                       />
                     </h3>
-
-                    {/* <div className="flex gap-2 mt-2 text-[#A1A1A1] flex-wrap">
-                      {" "}
-                      
-                      {store.magazine.detail.category_names?.map(
-                        (category: any, index: any) => (
-                          <div
-                            className="categories whitespace-nowrap"
-                            id="importantCategory"
-                            key={index}
-                          >
-                            {category}
-                          </div>
-                        )
-                      )}
-                    </div> */}
                   </div>
                 </div>
                 <div className="flex items-center w-full justify-between md:w-auto  ">

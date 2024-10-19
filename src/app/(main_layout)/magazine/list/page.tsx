@@ -118,9 +118,6 @@ export default function FluteMagazineView(props: any) {
               </h2>
               <span className="x-arrow"></span>
               <p className="mt-14 text-[20px] header-p font-[600]  sm:text-[28px] font-workSans text-[#302c28]">
-                {/* <p
-                className={`mt-14 text-lg header-p !text-[14px] md:!text-[16px]  text-dark ${Montserrats.className}`}
-              > */}
                 Harmonizing Life: Honest Talks, Real Stories, and Expert Advice
                 for Your Journey
               </p>
@@ -435,22 +432,6 @@ export default function FluteMagazineView(props: any) {
                           Back
                         </span>
                       </div>
-
-                      {/* {randerPage.map((item) => {
-                        return (
-                          <a
-                            onClick={() => handlePaginate(item)}
-                            aria-current="page"
-                            className={`relative z-10 m-1 inline-flex items-center  rounded px-2 sm:px-4 py-1 sm:py-2 text-sm font-semibold  focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2   ${
-                              store.magazine.page == item
-                                ? " text-dark bg-white"
-                                : " text-white ring-1 ring-inset ring-gray-300 bg-none"
-                            }`}
-                          >
-                            {item}
-                          </a>
-                        );
-                      })} */}
 
                       {randerPage
                         .filter((item) => {
