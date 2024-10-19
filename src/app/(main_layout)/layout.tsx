@@ -4,9 +4,13 @@ import Head from "next/head";
 
 export default function Layout({
   children,
+  ...rest
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  console.log("rest ,,,", rest);
+
   return (
     <>
       {/* Head section to include font CDNs */}
@@ -27,3 +31,6 @@ export default function Layout({
     </>
   );
 }
+
+
+// http://localhost:3000/magazine/trust-in-marriage-is-till-death-do-us-part-just-a-myth?type=app

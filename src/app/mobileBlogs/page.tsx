@@ -1,34 +1,38 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import useMagazineStore from "@/services/magazine/magazine.service";
 import ReactModal from "react-modal";
 
-export default function Blogs(props: any) {
-  const store = useMagazineStore();
+const MobileBlogs = (props:any) => {
+   const store = useMagazineStore();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState("");
+   const [isModalOpen, setIsModalOpen] = useState(false);
+   const [selectedImage, setSelectedImage] = useState("");
 
-  useEffect(() => {
-    store.get.detail(props?.params?.id);
-  }, [props?.params?.id]);
+     useEffect(() => {
+       store.get.detail(props?.params?.id);
+     }, [props?.params?.id]);
 
-  // Function to open the modal with image and name
-  const openModal = (image: any) => {
-    setSelectedImage(image);
+     // Function to open the modal with image and name
+     const openModal = (image: any) => {
+       setSelectedImage(image);
 
-    setIsModalOpen(true);
-  };
+       setIsModalOpen(true);
+     };
 
-  // Function to close the modal
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+     // Function to close the modal
+     const closeModal = () => {
+       setIsModalOpen(false);
+     };
 
-  console.log("mmmmmmmmmmmmmmmm", store.magazine?.detail);
+     console.log(",,,,,,,", store.magazine?.detail);
+
   return (
     <div className="px-0 bg-black text-white">
       <main>
+
+        <div>kjn</div>
         {store.magazine?.detail ? (
           <div className="container mx-auto px-2 sm:px-12 max-w-[1850px]">
             <div className="pt-6">
@@ -116,7 +120,7 @@ export default function Blogs(props: any) {
                   </div>
                 </div>
                 <div className="flex items-center w-full justify-between md:w-auto  ">
-                  <div className="px-0 md:px-8 flex flex-row  items-center justify-center mt-1">
+                  <div>
                     <span className="inline-block align-middle me-1">
                       <svg
                         width="30"
@@ -216,4 +220,6 @@ export default function Blogs(props: any) {
       </div>
     </div>
   );
-}
+};
+
+export default MobileBlogs;

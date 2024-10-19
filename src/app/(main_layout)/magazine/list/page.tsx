@@ -9,6 +9,7 @@ import { ChangeEventHandler, useEffect, useState } from "react";
 import useMagazineStore from "@/services/magazine/magazine.service";
 import { Copy, Radio } from "lucide-react";
 
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -314,6 +315,7 @@ export default function FluteMagazineView(props: any) {
                       key={item.id}
                     >
                       <a href={`/magazine/${item.slug}`}>
+                      
                         <img
                           className="rounded-t-lg w-full responsive-image hidden md:block"
                           src={`${item.featured_image_web}`}
