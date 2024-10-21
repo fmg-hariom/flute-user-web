@@ -115,7 +115,7 @@ export default function FluteMagazineView(props: any) {
           <div className="mx-auto px-2 lg:px-8">
             <div className="mx-auto  lg:mx-0 text-center">
               <h2 className="  heading-2  md:!text-[40px]  text-dark  ">
-                Flute Magazine
+                Flute Magazine 
               </h2>
               <span className="x-arrow"></span>
               <p className="mt-14 text-[20px] header-p font-[600]  sm:text-[28px] font-workSans text-[#302c28]">
@@ -333,6 +333,12 @@ export default function FluteMagazineView(props: any) {
                             >
                               {" "}
                               {item.title}
+                            </h2>
+                            <h2
+                              className={`text-[20px] text-[#959393] font-bold mb-2 line-clamp-2    ${Montserrats.className} `}
+                            >
+                              {" "}
+                              {item.second_line_title}
                             </h2>
 
                             <h2 className="text-[16px] mb-6 text-[#959393] line-clamp-2 ">

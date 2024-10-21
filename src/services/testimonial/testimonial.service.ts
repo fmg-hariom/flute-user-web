@@ -12,7 +12,7 @@ export type Testimonial = {
     content: string
     author: string
     
-}
+} 
 
 let timeOut: any
 
@@ -28,7 +28,7 @@ const useTestominalStore = create(
                 author: null as any,
                 total: 0,
                 page: 1,
-                size: 6,
+                size: 2,
                 total_pages: 0,
                 current_page: 0,
                 search: null as string | null,
@@ -40,9 +40,9 @@ const useTestominalStore = create(
         },
         (set, get) => ({
             get: {
-                list: async () => {
+                list: async (loadMore = false) => {
                     const {
-                        testo: { page, size }
+                        testo: { page, size , list }
                     } = get();
 
 
@@ -59,17 +59,29 @@ const useTestominalStore = create(
                     set(prev => ({
                         ...prev, testo: {
                             ...prev.testo,
-                            list: request.data,
+                            // list: request.data,
+                            list :loadMore ? [...list , ...request.data] : request.data,
+                            current_page:page,
+                                        total_pages: Math.ceil(request.total / size),
+
                         }
                     }))
 
                 }
+            },
 
-
-            }
-        })
-    )
-)
-
+  incrementPage: () => {
+        const { testo } = get();
+        set({
+          testo: {
+            ...testo,
+            page: testo.page + 1,
+            
+          },
+        });
+      },
+    })
+  )
+);
 
 export default useTestominalStore

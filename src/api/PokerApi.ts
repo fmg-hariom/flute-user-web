@@ -16,6 +16,7 @@ const api: AxiosInstance = axios.create({
 
 // Define the response and error types for your API calls
 interface ApiResponse<T> {
+  total: number;
   pagination: any;
   status: boolean;
   message: string;

@@ -1,14 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import {
-  Carousel,
-  CarouselApi,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { CarouselApi } from "@/components/ui/carousel";
 
 import useTestominalStore from "@/services/testimonial/testimonial.service";
 import { useRouter } from "next/navigation";
@@ -34,6 +27,11 @@ const TestimonialList = () => {
 
   const data = store?.testo?.list;
   console.log("Testimonial Store Data:", data);
+
+  const handleShowMore = () => {
+    store.incrementPage();
+    store.get.list(true);
+  };
 
   return (
     <div className="py-4 sm:py-4  bg-black text-white">
@@ -122,7 +120,10 @@ const TestimonialList = () => {
       </main>
 
       <div className="mt-[40px] flex justify-center">
-        <button className="bg-[#31363f] hover:[#222222] text-[#acacac] text-xl sm:text-2xl font-bold py-2 px-12 rounded-xl">
+        <button
+          className="bg-[#31363f] hover:[#222222] text-[#acacac] text-xl sm:text-2xl font-bold py-2 px-12 rounded-xl"
+          onClick={handleShowMore}
+        >
           Show More
         </button>
       </div>

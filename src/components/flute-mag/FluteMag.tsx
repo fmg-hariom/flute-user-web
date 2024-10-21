@@ -40,8 +40,8 @@ const FluteMag = (props: Props) => {
   }, [api]);
 
   return (
-    <div className="w-screen flex flex-col justify-center h-[680px] bg-[#E7F59A] py-8 sm:py-9 px-1 sm:px-16 text-black">
-      <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-bold text-[#959393] ">
+    <div className="w-screen flex flex-col justify-center  bg-[#E7F59A] py-8 sm:py-9 px-1 sm:px-16 text-black">
+      <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-bold text-[#302C28] ">
         Flute Magazine
       </h2>
       <div className=" w-48 sm:w-56 md:w-72 rounded container h-[4px] my-3 bg-[#302C28]"></div>
@@ -65,7 +65,7 @@ const FluteMag = (props: Props) => {
               >
                 <div className="p-1 flex justify-center ">
                   <div className="rounded-[30px] overflow-hidden  lg:w-[500px]">
-                    <div className="h-60 w-full flex items-center justify-center bg-gray-200 relative overflow-hidden">
+                    <div className="h-[330px] w-full flex items-center justify-center bg-gray-200 relative overflow-hidden">
                       <img
                         className="h-full max-h-full w-full max-w-full"
                         src={slide?.featured_image_web}
@@ -77,11 +77,16 @@ const FluteMag = (props: Props) => {
                         }}
                       />
                     </div>
-                    <div className="p-6 py-3 bg-[#111111] h-[140px] flex flex-col items-start justify-between">
+                    <div className="p-6 py-3 bg-[#111111] h-[145px] flex flex-col items-start justify-between">
                       <h2
                         className={`text-[20px] text-[#959393] font-bold mb-2 line-clamp-2  ${Montserrats.className} `}
                       >
                         {slide?.title}
+                      </h2>
+                      <h2
+                        className={`text-[20px] text-[#959393] font-bold mb-2 line-clamp-2  ${Montserrats.className} `}
+                      >
+                        {slide?.second_line_title}
                       </h2>
                       <p className="text-[#959393] text-[16px] line-clamp-2">
                         {slide?.sub_title}

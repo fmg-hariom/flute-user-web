@@ -26,11 +26,11 @@ export default function FluteBuzzView(props: any) {
         <div className="relative isolate overflow-hidden bg-[#82BBE0] py-22">
           <div className="mx-auto px-6 lg:px-8">
             <div className="mx-auto  lg:mx-0 text-center">
-              <h2 className="  heading-2 !text-[26px] md:!text-[40px]    text-dark  ">
+              <h2 className="   text-[23px]  font-[700] leading-[54px] sm:text-[40px]  text-dark  ">
                 FLUTE BUZZ: Hot off The Press
               </h2>
-              <span className="x-arrow"></span>
-              <p className="mt-14 text-lg header-p  !text-[14px] md:!text-[16px]	 text-dark">
+              <div className=" w-[280px] sm:w-[510px]  rounded container h-[5px] my-3 mb-3 bg-[#302c28]"></div>
+              <p className="mt-14 text-[20px] header-p font-[600]  sm:text-[28px] font-workSans text-[#302c28]">
                 All the Freash Buzz About the Flute
               </p>
             </div>
@@ -56,7 +56,7 @@ export default function FluteBuzzView(props: any) {
                         />
                         <img
                           className="rounded-t-lg w-full responsive-image block md:hidden"
-                          src={`${item.featured_image_mobile}`}
+                          src={`${item.image}`}
                           alt="Flute Buzz Mobile"
                         />
                         <div className="p-5">
