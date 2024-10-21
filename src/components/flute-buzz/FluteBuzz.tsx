@@ -44,7 +44,7 @@ const FluteBuzz = (props: Props) => {
       <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-bold text-[#302C28] ">
         Flute Buzz
       </h2>
-      <div className=" w-48   rounded container h-[4px] my-3 bg-[#302C28]"></div>
+      <div className=" w-32 sm:w-48   rounded container h-[4px] my-3 bg-[#302C28]"></div>
       <div className="my-6 mx-2 md:mx-12 h-">
         <Carousel
           opts={{

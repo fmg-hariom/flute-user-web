@@ -26,11 +26,11 @@ export default function FluteBuzzView(props: any) {
         <div className="relative isolate overflow-hidden bg-[#82BBE0] py-22">
           <div className="mx-auto px-6 lg:px-8">
             <div className="mx-auto  lg:mx-0 text-center">
-              <h2 className="   text-[23px]  font-[700] leading-[54px] sm:text-[40px]  text-dark  ">
+              <h2 className="   text-[22px]  font-[700] sm:leading-[54px] sm:text-[40px]  text-dark  ">
                 FLUTE BUZZ: Hot off The Press
               </h2>
               <div className=" w-[280px] sm:w-[510px]  rounded container h-[5px] my-3 mb-3 bg-[#302c28]"></div>
-              <p className="mt-14 text-[20px] header-p font-[600]  sm:text-[28px] font-workSans text-[#302c28]">
+              <p className="mt-14 text-[19px] header-p font-[600]  sm:text-[28px] font-workSans text-[#302c28]">
                 All the Freash Buzz About the Flute
               </p>
             </div>
