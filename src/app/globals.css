@@ -496,3 +496,19 @@ input[type="radio"].custom-radio:disabled {
   height: 600px;
 }
 } */
+
+
+
+
+/* Default placeholder for larger screens */
+.search-input::placeholder {
+  color: "#gray-400";
+  content: "Search by name, country, language or gender";
+}
+
+/* Change placeholder text for mobile screens (640px or less) */
+@media (max-width: 640px) {
+  .search-input::placeholder {
+    content: "Search"; /* This is the mobile placeholder */
+  }
+}

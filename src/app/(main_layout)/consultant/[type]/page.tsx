@@ -19,7 +19,7 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import DownloadAppDialog from "@/components/common/dialogs/DownloadAppDialog";
-import React from "react";
+import React, { useState } from "react";
 
 const montserratAlternates = Montserrat_Alternates({
   weight: "400", // Specify the font weights you need
@@ -42,18 +42,48 @@ export default function ViewAll(props: any) {
     });
   };
 
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(false);
+
+  // Detect mobile view on mount and resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth <= 600); // Assuming mobile is <= 600px
+    };
+
+    handleResize(); // Check on component mount
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Handler for search input focus
+  const handleSearchFocus = () => {
+    if (isMobileView) {
+      setIsSearchFocused(true);
+    }
+  };
+
+  // Handler for resetting search input
+  const handleSearchReset = () => {
+    setIsSearchFocused(false);
+  };
+
   return (
     <div className="py-4 sm:py-8 px-0 bg-black text-white">
       <main>
         <div className="relative isolate overflow-hidden bg-light-blue py-22 ">
-          <div className="mx-auto px-6 lg:px-8">
+          <div className="mx-auto  lg:px-8">
             <div className="mx-auto  lg:mx-0 text-center">
-              <h2 className=" heading-2 !text-[26px] md:!text-[40px]  text-dark ">
+              <h2 className="  heading-2  md:!text-[40px]  text-dark  ">
                 {props?.searchParams?.title || "Astrologers"}
               </h2>
-              <span className="x-arrow"></span>
-              <p className="mt-14 text-lg !text-[14px] md:!text-[16px] header-p text-dark">
-                Connect with the Best Astrologers, anytime & anywhere
+              <div className=" w-[150px]  rounded container h-[4px] my-3 mb-3 bg-[#302c28]"></div>
+
+              <p className="mt-14 text-[19px] header-p font-[600]  sm:text-[28px] font-workSans text-[#302c28]">
+                Connect with the Best{" "}
+                {props?.searchParams?.title || "Astrologers"}, anytime &
+                anywhere
               </p>
             </div>
           </div>
@@ -62,17 +92,24 @@ export default function ViewAll(props: any) {
         <div>
           <div className="container px-[10px] md:px-[36px] py-33 mx-auto">
             <form action="">
-              <div className=" lg:columns-2  place-items-center">
+              <div
+                className={`flex sm:justify-between gap-x-4  place-items-center`}
+              >
                 <div>
-                  <div className="flex px-2 w-full h-[49px] mb-3 lg:mb-0 rounded-full border border-white bg-transparent">
+                  <div className="flex justify-between px-2 w-full h-[49px] mb-3 lg:mb-0 rounded-full border border-white bg-transparent">
                     <input
                       name="username"
                       type="text"
-                      placeholder="Search by name, country, language or gender "
+                      placeholder={
+                        isMobileView
+                          ? "Search"
+                          : "Search by name, country, language or gender"
+                      }
                       autoComplete="off"
-                      className="block flex-1 outline-none border-0 bg-transparent py-1.5 pl-1 text-white placeholder:text-gray-400 "
+                      className="search-input outline-none border-0 bg-transparent py-1.5 pl-1 text-white placeholder:text-gray-400 w-[70px] sm:w-[380px]"
                       onChange={handleSearch}
                     />
+
                     <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm">
                       <svg
                         width="25"
@@ -90,201 +127,207 @@ export default function ViewAll(props: any) {
                   </div>
                 </div>
 
-                <div>
-                  <div className="flex items-center flex-wrap  justify-center lg:justify-end">
-                    <div className="sm:me-3 mb-3 sm:mb-0 w-full sm:w-fit">
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <button
-                            type="button"
-                            className="rounded-full w-full sm:w-[99px] h-[49px] custom-select border px-2 ps-10 bg-icon sort-icon filter-select border-white bg-transparent"
-                          >
-                            Sort
-                          </button>
-                        </DialogTrigger>
+                {/* Conditionally hide Categories and Sort only in mobile view */}
+                {(!isSearchFocused || !isMobileView) && (
+                  <div>
+                    <div className="flex items-center   justify-center lg:justify-end">
+                      <div className="sm:me-3 mb-3 mr-3 sm:mb-0 w-full sm:w-fit">
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <button
+                              type="button"
+                              className="rounded-full w-full sm:w-[99px] h-[49px] custom-select border px-2 ps-10 bg-icon sort-icon filter-select border-white bg-transparent"
+                            >
+                              Sort
+                            </button>
+                          </DialogTrigger>
 
-                        <DialogContent className="w-[95%] sm:max-w-md">
-                          <DialogHeader>
-                            <DialogTitle>Sort</DialogTitle>
-                          </DialogHeader>
-                          <hr className="bg-[#5B5B5B]" />
-                          <div className="flex items-center">
-                            <RadioGroup value={store.consultant_profile.sort}>
-                              {[
-                                {
-                                  label: "Popularity",
-                                  value: "",
-                                },
-                                {
-                                  label: "Price : Low to High",
-                                  value: "",
-                                },
-                                {
-                                  label: "Price : High to Low",
-                                  value: "",
-                                },
-                                {
-                                  label: "Rating : Low to High",
-                                  value: "",
-                                },
-                                {
-                                  label: "Rating : High to Low",
-                                  value: "",
-                                },
-                                {
-                                  label: "Exp : Low to High",
-                                  value: "",
-                                },
-                                {
-                                  label: "Exp : High to Low",
-                                  value: "",
-                                },
-                              ].map((item) => {
-                                return (
-                                  <DialogClose asChild>
-                                    <div className="flex items-center space-x-2">
-                                      <RadioGroupItem
-                                        value={item.value}
-                                        id="r1"
-                                        onClick={(e) => store.get.sort("desc")}
-                                      />
-                                      <Label
-                                        htmlFor="r1"
-                                        className="text-white text-lg font-normal"
+                          <DialogContent className="w-[95%] sm:max-w-md">
+                            <DialogHeader>
+                              <DialogTitle>Sort</DialogTitle>
+                            </DialogHeader>
+                            <hr className="bg-[#5B5B5B]" />
+                            <div className="flex items-center">
+                              <RadioGroup value={store.consultant_profile.sort}>
+                                {[
+                                  {
+                                    label: "Popularity",
+                                    value: "",
+                                  },
+                                  {
+                                    label: "Price : Low to High",
+                                    value: "",
+                                  },
+                                  {
+                                    label: "Price : High to Low",
+                                    value: "",
+                                  },
+                                  {
+                                    label: "Rating : Low to High",
+                                    value: "",
+                                  },
+                                  {
+                                    label: "Rating : High to Low",
+                                    value: "",
+                                  },
+                                  {
+                                    label: "Exp : Low to High",
+                                    value: "",
+                                  },
+                                  {
+                                    label: "Exp : High to Low",
+                                    value: "",
+                                  },
+                                ].map((item) => {
+                                  return (
+                                    <DialogClose asChild>
+                                      <div className="flex items-center space-x-2">
+                                        <RadioGroupItem
+                                          value={item.value}
+                                          id="r1"
+                                          onClick={(e) =>
+                                            store.get.sort("desc")
+                                          }
+                                        />
+                                        <Label
+                                          htmlFor="r1"
+                                          className="text-white text-lg font-normal"
+                                        >
+                                          {item.label}
+                                        </Label>
+                                      </div>
+                                    </DialogClose>
+                                  );
+                                })}
+                              </RadioGroup>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+                      </div>
+                      <div className="sm:me-3 w-full mb-3 sm:mb-0 sm:w-fit">
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <button
+                              type="button"
+                              className="rounded-full w-full sm:w-[99px] h-[49px] custom-select border px-2 ps-10 bg-icon filter-icon filter-select border-white bg-transparent"
+                            >
+                              Filter
+                            </button>
+                          </DialogTrigger>
+
+                          <DialogContent className="w-[95%] sm:max-w-md">
+                            <DialogHeader>
+                              <DialogTitle>Filters</DialogTitle>
+                            </DialogHeader>
+                            <hr className="bg-[#5B5B5B]" />
+                            <div className="">
+                              <div className="mb-2">
+                                <h4 className="text-[#CBCBCB] mb-2">
+                                  Who would you like to talk to?
+                                </h4>
+                                <div className="flex items-center">
+                                  {[
+                                    {
+                                      value: "1",
+                                      label: "Male",
+                                    },
+                                    {
+                                      value: "1",
+                                      label: "Female",
+                                    },
+                                    {
+                                      value: "1",
+                                      label: "Other",
+                                    },
+                                  ].map((item) => {
+                                    return (
+                                      <button
+                                        type="button"
+                                        className="rounded-full w-full sm:w-[99px] h-[45px] border px-2  border-[#FFA643] bg-transparent text-[#FFA643] mr-2 mb-2"
                                       >
                                         {item.label}
-                                      </Label>
-                                    </div>
-                                  </DialogClose>
-                                );
-                              })}
-                            </RadioGroup>
-                          </div>
-                        </DialogContent>
-                      </Dialog>
-                    </div>
-                    <div className="sm:me-3 w-full mb-3 sm:mb-0 sm:w-fit">
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <button
-                            type="button"
-                            className="rounded-full w-full sm:w-[99px] h-[49px] custom-select border px-2 ps-10 bg-icon filter-icon filter-select border-white bg-transparent"
-                          >
-                            Filter
-                          </button>
-                        </DialogTrigger>
+                                      </button>
+                                    );
+                                  })}
+                                </div>
+                              </div>
 
-                        <DialogContent className="w-[95%] sm:max-w-md">
-                          <DialogHeader>
-                            <DialogTitle>Filters</DialogTitle>
-                          </DialogHeader>
-                          <hr className="bg-[#5B5B5B]" />
-                          <div className="">
-                            <div className="mb-2">
-                              <h4 className="text-[#CBCBCB] mb-2">
-                                Who would you like to talk to?
-                              </h4>
-                              <div className="flex items-center">
-                                {[
-                                  {
-                                    value: "1",
-                                    label: "Male",
-                                  },
-                                  {
-                                    value: "1",
-                                    label: "Female",
-                                  },
-                                  {
-                                    value: "1",
-                                    label: "Other",
-                                  },
-                                ].map((item) => {
-                                  return (
-                                    <button
-                                      type="button"
-                                      className="rounded-full w-full sm:w-[99px] h-[45px] border px-2  border-[#FFA643] bg-transparent text-[#FFA643] mr-2 mb-2"
-                                    >
-                                      {item.label}
-                                    </button>
-                                  );
-                                })}
+                              <div className="mb-2">
+                                <h4 className="text-[#CBCBCB] mb-2">
+                                  Who would you like to talk to?
+                                </h4>
+                                <div className="flex items-center flex-wrap flex-grow">
+                                  {[
+                                    {
+                                      value: "1",
+                                      label: "21-30 yrs",
+                                    },
+                                    {
+                                      value: "1",
+                                      label: "31-40 yrs",
+                                    },
+                                    {
+                                      value: "1",
+                                      label: ">40 yrs",
+                                    },
+                                    {
+                                      value: "1",
+                                      label: "Any",
+                                    },
+                                  ].map((item) => {
+                                    return (
+                                      <button
+                                        type="button"
+                                        className="rounded-full w-full sm:w-[99px] max-w-[99px] h-[45px] border px-2  border-[#FFA643] bg-transparent text-[#FFA643] mr-2 mb-2"
+                                      >
+                                        {item.label}
+                                      </button>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+
+                              <div className="mb-2">
+                                <h4 className="text-[#CBCBCB] mb-2">
+                                  Country?
+                                </h4>
+                                <div className="flex items-center">
+                                  {[
+                                    {
+                                      value: "1",
+                                      label: "India",
+                                    },
+                                    {
+                                      value: "1",
+                                      label: "Outside India",
+                                    },
+                                  ].map((item) => {
+                                    return (
+                                      <button
+                                        type="button"
+                                        className="rounded-full w-full  h-[45px] border px-2  border-[#FFA643] bg-transparent text-[#FFA643] mr-2 mb-2"
+                                      >
+                                        {item.label}
+                                      </button>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+
+                              <div className="flex items-center justify-between w-full">
+                                <button className="w-full sm:w-[99px] max-w-[99px] h-[45px] border-none px-2  bg-transparent text-[#CBCBCB] mr-2 mb-2">
+                                  Reset
+                                </button>
+
+                                <button className=" h-[45px] border-none px-8  bg-[#FFA643] text-black rounded-[8.97px] mr-2 mb-2">
+                                  Apply Filters
+                                </button>
                               </div>
                             </div>
-
-                            <div className="mb-2">
-                              <h4 className="text-[#CBCBCB] mb-2">
-                                Who would you like to talk to?
-                              </h4>
-                              <div className="flex items-center flex-wrap flex-grow">
-                                {[
-                                  {
-                                    value: "1",
-                                    label: "21-30 yrs",
-                                  },
-                                  {
-                                    value: "1",
-                                    label: "31-40 yrs",
-                                  },
-                                  {
-                                    value: "1",
-                                    label: ">40 yrs",
-                                  },
-                                  {
-                                    value: "1",
-                                    label: "Any",
-                                  },
-                                ].map((item) => {
-                                  return (
-                                    <button
-                                      type="button"
-                                      className="rounded-full w-full sm:w-[99px] max-w-[99px] h-[45px] border px-2  border-[#FFA643] bg-transparent text-[#FFA643] mr-2 mb-2"
-                                    >
-                                      {item.label}
-                                    </button>
-                                  );
-                                })}
-                              </div>
-                            </div>
-
-                            <div className="mb-2">
-                              <h4 className="text-[#CBCBCB] mb-2">Country?</h4>
-                              <div className="flex items-center">
-                                {[
-                                  {
-                                    value: "1",
-                                    label: "India",
-                                  },
-                                  {
-                                    value: "1",
-                                    label: "Outside India",
-                                  },
-                                ].map((item) => {
-                                  return (
-                                    <button
-                                      type="button"
-                                      className="rounded-full w-full  h-[45px] border px-2  border-[#FFA643] bg-transparent text-[#FFA643] mr-2 mb-2"
-                                    >
-                                      {item.label}
-                                    </button>
-                                  );
-                                })}
-                              </div>
-                            </div>
-
-                            <div className="flex items-center justify-between w-full">
-                              <button className="w-full sm:w-[99px] max-w-[99px] h-[45px] border-none px-2  bg-transparent text-[#CBCBCB] mr-2 mb-2">
-                                Reset
-                              </button>
-
-                              <button className=" h-[45px] border-none px-8  bg-[#FFA643] text-black rounded-[8.97px] mr-2 mb-2">
-                                Apply Filters
-                              </button>
-                            </div>
-                          </div>
-                        </DialogContent>
-                      </Dialog>
-                    </div>
-                    {/* <div className="flex items-center">
+                          </DialogContent>
+                        </Dialog>
+                      </div>
+                      {/* <div className="flex items-center">
                       <span className="me-2 inline-block">
                         <svg
                           width="28"
@@ -320,10 +363,12 @@ export default function ViewAll(props: any) {
                         Recharge
                       </span>
                     </div> */}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </form>
+
             <div className=" mt-12 gap-x-4 grid grid-cols-1 lg:grid-cols-2">
               {store.consultant_profile.list.length ? (
                 store.consultant_profile.list.map((item) => {
@@ -556,21 +601,25 @@ export default function ViewAll(props: any) {
                 <></>
               )}
             </div>
-            {
-              store.consultant_profile.show_more ?
-                <div className="text-center">
-                  <button
-                    type="button"
-                    className="text-white mt-10 !text-[18px] md:!text-[36px] show-more-btn bg-semi-dark bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-10 py-5  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-                    onClick={() => {
-                      store.get.paginate({ page: store.consultant_profile.page + 1, paginate: true, ...props?.searchParams })
-                    }}
-                  >
-                    Show More
-                  </button>
-                </div>
-                : <></>
-            }
+            {store.consultant_profile.show_more ? (
+              <div className="text-center">
+                <button
+                  type="button"
+                  className="text-[#ecedef] mt-10 !text-[18px] md:!text-[36px] show-more-btn bg-semi-dark bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-10 py-5  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+                  onClick={() => {
+                    store.get.paginate({
+                      page: store.consultant_profile.page + 1,
+                      paginate: true,
+                      ...props?.searchParams,
+                    });
+                  }}
+                >
+                  Show More
+                </button>
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </main>
