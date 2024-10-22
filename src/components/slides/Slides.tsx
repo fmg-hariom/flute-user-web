@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import {
   Carousel,
@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 
 type Props = {
   title: string;
-  slides: Array<{ image: string; name: string;[key: string]: any }>;
+  slides: Array<{ image: string; name: string; [key: string]: any }>;
   radiant1: string;
   radiant2: string;
   viewAllId?: any;
@@ -34,11 +34,23 @@ export const Slides = ({
       : null
   );
 
+  const roles = [" View All", <img src="/view_all.png" className="w-6 h-6 " />];
+  const [currentIcon, setCurrentIcon] = useState(roles[0]);
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % roles.length);
+      setCurrentIcon(roles[(index + 1) % roles.length]);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [index]);
+
   return (
     <>
       {title && content_type == 1 ? (
         <div className="flex justify-between py-4 px-4 sm:px-0">
-          <h3 className="text-[#fff] text-[24px] sm:text-[28] md:text-[35px] font-bold">
+          <h3 className=" text-[24px]  font-semibold sm:text-[38px]  text-[#ffffffcc] font-serif">
             {title}
           </h3>
           <button
@@ -49,7 +61,7 @@ export const Slides = ({
               );
             }}
           >
-            View All
+            {currentIcon}
           </button>
         </div>
       ) : (

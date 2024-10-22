@@ -175,7 +175,7 @@ const useConsultantProfileStore = create(
                 detail: null as ConsultantProfile | null,
                 total: 0,
                 page: 1,
-                size: 10,
+                size: 5,
                 search: null as string | null,
                 paginate: true as boolean,
                 skill_id: null as string | null,

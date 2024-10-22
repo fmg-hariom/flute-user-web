@@ -102,7 +102,7 @@ const Listeners = (props: Props) => {
       </div>
       <h4 className='py-4 px-7 sm:px-16 text-white text-xl sm:text-2xl font-semibold bg-[#094A44]'>View All</h4>
     </div>
-  )
+  ) 
 }
 
 export default Listeners
