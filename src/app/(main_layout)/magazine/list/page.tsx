@@ -158,6 +158,8 @@ export default function FluteMagazineView(props: any) {
                             />
                           </svg>
                         </div>
+
+                        
                       ) : (
                         <svg
                           className="w-4 h-4 text-gray-500 dark:text-gray-400"

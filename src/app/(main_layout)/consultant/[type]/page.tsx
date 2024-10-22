@@ -96,34 +96,66 @@ export default function ViewAll(props: any) {
                 className={`flex sm:justify-between gap-x-4  place-items-center`}
               >
                 <div>
-                  <div className="flex justify-between px-2 w-full h-[49px] mb-3 lg:mb-0 rounded-full border border-white bg-transparent">
+                  <div className="relative">
+                    <div className="absolute inset-y-0 start-0 flex items-center ps-3 ">
+                      {isSearchFocused && isMobileView ? (
+                        <div
+                          className="absolute inset-y-0 start-0 flex items-center ps-3 cursor-pointer"
+                          onClick={handleSearchReset}
+                        >
+                          <svg
+                            className="w-5 h-5 text-[#dddddd] dark:text-gray-400 mr-6"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 1024 1024"
+                            stroke="currentColor"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="M224 480h640a32 32 0 110 64H224a32 32 0 010-64z"
+                            />
+                            <path
+                              fill="currentColor"
+                              d="M237.248 512l265.408 265.344a32 32 0 01-45.312 45.312l-288-288a32 32 0 010-45.312l288-288a32 32 0 1145.312 45.312L237.248 512z"
+                            />
+                          </svg>
+                        </div>
+                      ) : (
+                        <svg
+                          className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                          />
+                        </svg>
+                      )}
+                    </div>
                     <input
-                      name="username"
                       type="text"
+                      id="default-search"
+                      // className="search-input outline-none border-0 bg-transparent py-1.5 pl-1 text-white placeholder:text-gray-400 w-[70px] sm:w-[380px]"
+                      className={`block w-full ${
+                        isSearchFocused && isMobileView
+                          ? "w-[330px]"
+                          : "sm:w-[400px]"
+                      } pt-[15px] pr-[8px] pb-[15px] pl-[34px] md:pl-[60px] sm:p-4  ps-10 text-sm text-white border border-[#7d7d7dfd] rounded-xl bg-transparent`}
                       placeholder={
                         isMobileView
                           ? "Search"
                           : "Search by name, country, language or gender"
                       }
-                      autoComplete="off"
-                      className="search-input outline-none border-0 bg-transparent py-1.5 pl-1 text-white placeholder:text-gray-400 w-[70px] sm:w-[380px]"
+                      required
+                      onFocus={handleSearchFocus}
                       onChange={handleSearch}
                     />
-
-                    <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm">
-                      <svg
-                        width="25"
-                        height="24"
-                        viewBox="0 0 25 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M9.61723 3C11.3335 3 12.9795 3.68482 14.1931 4.90381C15.4067 6.12279 16.0885 7.77609 16.0885 9.5C16.0885 11.11 15.5011 12.59 14.5354 13.73L14.8042 14H15.5907L20.5686 19L19.0752 20.5L14.0973 15.5V14.71L13.8285 14.44C12.6541 15.4465 11.161 15.9996 9.61723 16C7.90096 16 6.25497 15.3152 5.04138 14.0962C3.82779 12.8772 3.146 11.2239 3.146 9.5C3.146 7.77609 3.82779 6.12279 5.04138 4.90381C6.25497 3.68482 7.90096 3 9.61723 3ZM9.61723 5C7.1283 5 5.13715 7 5.13715 9.5C5.13715 12 7.1283 14 9.61723 14C12.1062 14 14.0973 12 14.0973 9.5C14.0973 7 12.1062 5 9.61723 5Z"
-                          fill="white"
-                        />
-                      </svg>
-                    </span>
                   </div>
                 </div>
 
