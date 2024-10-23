@@ -81,7 +81,6 @@ export default function Home() {
   const buzzStore = useBuzzStore();
   const liveConsultantProfileStore = useLiveConsultantProfileStore();
 
-
   useEffect(() => {
     store.get.paginate({});
     skillStore.get.list();
@@ -117,7 +116,10 @@ export default function Home() {
                         className={`${card.className} text-black text-center py-5 flex flex-col justify-center items-center rounded-[20px] cursor-pointer`}
                       >
                         <card.Icon className="w-12" />
-                        <h3>{card.title}</h3>
+                        <h3 className="text-[#302c28] sm:text-[22px] md:text-[28px] font-semibold leading-[33px] font-serif">
+                          {" "}
+                          {card.title}
+                        </h3>
                       </Card>
                       // </Link>
                     }
@@ -137,7 +139,10 @@ export default function Home() {
                     className={`${card.className} text-black text-center py-5 flex flex-col justify-center items-center rounded-[20px] cursor-pointer`}
                   >
                     <card.Icon className="w-12" />
-                    <h3>{card.title}</h3>
+                    <h3 className="text-[#302c28] sm:text-[22px] md:text-[28px] font-semibold leading-[33px] font-serif">
+                      {" "}
+                      {card.title}
+                    </h3>
                   </Card>
                 </Link>
               );
@@ -154,8 +159,9 @@ export default function Home() {
                 >
                   <img src={item.imagePath} className="w-6" />
                   <p
-                    className={`text-sm font-normal text-[#A0A0A0] ${index == 0 ? "text-[#FFA643]" : ""
-                      }`}
+                    className={`text-sm font-normal text-[#A0A0A0] ${
+                      index == 0 ? "text-[#FFA643]" : ""
+                    }`}
                   >
                     {item.title}
                   </p>
@@ -219,9 +225,10 @@ export default function Home() {
                     content_type={item.content_type}
                     title={`${item.title}`}
                     slides={slides}
-                    radiant1={`${item.categories?.[0]?.category_card_bg_color?.[0]
+                    radiant1={`${
+                      item.categories?.[0]?.category_card_bg_color?.[0]
                         ?.color || "#DDC3A2"
-                      }`}
+                    }`}
                     radiant2={"#DFB881"}
                     viewAllId={item.category_ids?.[0]}
                   />

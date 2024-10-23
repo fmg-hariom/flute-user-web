@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { Logo } from "../ui/Logo";
 import useSocialIcons from "@/services/footer/footer.service";
+import AboutUs from "../../app/(main_layout)/about-us/page";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
@@ -11,6 +13,7 @@ const Footer = (props: Props) => {
   const [currentRole, setCurrentRole] = useState(roles[0]);
   const [index, setIndex] = useState(0);
   const iconsStore = useSocialIcons();
+  const router = useRouter();
 
   useEffect(() => {
     iconsStore.get.list();
@@ -32,6 +35,18 @@ const Footer = (props: Props) => {
       behavior: "smooth",
     });
   };
+
+  {
+    /* //  onClick={() => { */
+  }
+  //                           router.push(
+  //
+  //                             `/magazine/list?category_id=${item.id}`
+  //                           );
+  //                           setShowCategories(false);
+  {
+    /* //                         }} */
+  }
 
   return (
     <>
@@ -88,7 +103,14 @@ const Footer = (props: Props) => {
         {/* Mobile view: Show these divs in mobile, hide in sm */}
         <div className="flex sm:hidden">
           <div className="flex flex-col justify-evenly gap-4 text-[#D9D9D9] mt-10">
-            <h3 className="cursor-pointer">About us</h3>
+            <h3
+              className="cursor-pointer"
+              onClick={() => {
+                router.push(`/about-us`);
+              }}
+            >
+              About us
+            </h3>
             <h3 className="cursor-pointer w-[200px]">
               Join as <span className="text-[#FFA643]">{currentRole}</span>
             </h3>
@@ -106,7 +128,14 @@ const Footer = (props: Props) => {
         {/* this is for desktop view  */}
 
         <div className="hidden sm:flex flex-col justify-evenly gap-4 sm:gap-1 text-[#D9D9D9] mt-10 sm:px-10">
-          <h3 className="cursor-pointer">About us</h3>
+          <h3
+            className="cursor-pointer"
+            onClick={() => {
+              router.push(`/about-us`);
+            }}
+          >
+            About us
+          </h3>
           <h3 className="cursor-pointer w-[200px]">
             Join as <span className="text-[#FFA643]">{currentRole}</span>
           </h3>
