@@ -30,7 +30,7 @@ export const Slides = ({
 
   const plugin: any = React.useRef(
     content_type === 2
-      ? Autoplay({ delay: 1500, stopOnInteraction: true })
+      ? Autoplay({ delay: 1577700, stopOnInteraction: true })
       : null
   );
 
@@ -78,7 +78,7 @@ export const Slides = ({
       >
         <CarouselContent>
           {slides?.map((slide, index: number) => (
-            <CarouselItem key={index} className="basis-1/1  ">
+            <CarouselItem key={index} className="basis-1/1 ">
               {content_type == 1 ? (
                 <div
                   key={index}
@@ -113,7 +113,7 @@ export const Slides = ({
                 </div>
               ) : content_type == 2 ? (
                 <>
-                  <Image
+                  {/* <Image
                     src={slide?.image}
                     width={311}
                     height={230}
@@ -127,7 +127,40 @@ export const Slides = ({
                         );
                       }
                     }}
-                  />
+                  /> */}
+                  {/* <div className="image-class">
+                    <img
+                      src={slide?.image}
+                      width={311}
+                      height={230}
+                      className="w-[311px] sm:w-full sm:max-w-[384px] object-contain"
+                      alt=""
+                      onClick={() => {
+                        if (slide?.is_clickable) {
+                          router.push(
+                            `/consultant/listeners?category_id=${slide?.category_id}&consultant_type=3&title=Listeners`
+                          );
+                        }
+                      }}
+                    />
+                  </div> */}
+
+                  <div className="image-class">
+                    <img
+                      src={slide?.image}
+                      width={311}
+                      height={230}
+                      className="w-[311px] sm:w-full sm:max-w-[384px] object-contain"
+                      alt=""
+                      onClick={() => {
+                        if (slide?.is_clickable) {
+                          router.push(
+                            `/consultant/listeners?category_id=${slide?.category_id}&consultant_type=3&title=Listeners`
+                          );
+                        }
+                      }}
+                    />
+                  </div>
                 </>
               ) : (
                 <></>

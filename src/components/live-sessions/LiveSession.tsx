@@ -21,7 +21,7 @@ const LiveSession = (props: Props) => {
 
 
     return (
-        <div className="w-screen flex flex-col justify-center h-[680px] bg-[#C9E2E5] py-8 sm:py-9 px-2 sm:px-16 text-black">
+        <div className="w-screen flex flex-col justify-center h-[680px] bg-[#C9E2E5] py-8 sm:py-9 px- sm:px-16 text-black">
             <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-bold text-[#302C28] ">Live Sessions</h2>
             <div className=" w-48 sm:w-56 md:w-72 rounded container h-[4px] my-3 bg-[#302C28]"></div>
             <h6 className="text-center text-sm sm:text-lg md:text-xl w-full px-8 sm:px-1 font-bold text-[#302C28] ">Connect with top-rated Astrologers through live sessions for instant solutions.</h6>
@@ -38,7 +38,7 @@ const LiveSession = (props: Props) => {
                             <CarouselItem key={index} className="md:basis-1/3 xlg:basis-1/6">
                                 <DownloadAppDialog trigger={
                                     <div className="p-1 flex justify-center">
-                                        <div className="relative flex h-[314px] w-[209px] flex-col text-center h-40 items-center justify-center rounded-3xl duration-300 ease-in-out bg-cover" style={{ backgroundImage: index == 0 ? ` linear-gradient( to bottom,rgba(0, 0, 0, 0) 0%,rgba(0, 0, 0, 0.8) 100%),url('${slide?.profile_image}')` : `url('${slide?.profile_image}') ` }}>
+                                        <div className="relative flex h-[314px] w-[209px] flex-col text-center  items-center justify-center rounded-3xl duration-300 ease-in-out bg-cover" style={{ backgroundImage: index == 0 ? ` linear-gradient( to bottom,rgba(0, 0, 0, 0) 0%,rgba(0, 0, 0, 0.8) 100%),url('${slide?.profile_image}')` : `url('${slide?.profile_image}') ` }}>
                                             <span className="absolute w-4 h-4 rounded-full right-6 top-3">
                                                 {/* <svg width="31" height="30" viewBox="0 0 31 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <circle cx="15.5986" cy="15" r="15" fill="black" fill-opacity="0.5" />
