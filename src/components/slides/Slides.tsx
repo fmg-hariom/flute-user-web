@@ -30,7 +30,7 @@ export const Slides = ({
 
   const plugin: any = React.useRef(
     content_type === 2
-      ? Autoplay({ delay: 1000, stopOnInteraction: true })
+      ? Autoplay({ delay: 1500, stopOnInteraction: true })
       : null
   );
 
@@ -82,7 +82,7 @@ export const Slides = ({
               {content_type == 1 ? (
                 <div
                   key={index}
-                  className={`h-44 w-[120px] sm:h-60 sm:w-56 flex items-center justify-center rounded-2xl pt-7 overflow-hidden `}
+                  className={`h-[145px] w-[120px] sm:h-60 sm:w-56 flex items-center justify-center rounded-2xl pt-7 overflow-hidden `}
                   style={{
                     backgroundImage: `radial-gradient(${radiant1}, ${radiant1})`,
                   }}
@@ -115,9 +115,9 @@ export const Slides = ({
                 <>
                   <Image
                     src={slide?.image}
-                    width={320}
+                    width={311}
                     height={230}
-                    className="w-[320px]  sm:w-full sm:max-w-[384px] object-contain"
+                    className="w-[311px]  sm:w-full sm:max-w-[384px] object-contain"
                     alt=""
                     quality={90}
                     onClick={() => {
