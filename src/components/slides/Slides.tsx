@@ -78,7 +78,12 @@ export const Slides = ({
       >
         <CarouselContent>
           {slides?.map((slide, index: number) => (
-            <CarouselItem key={index} className="basis-1/1 ">
+            <CarouselItem
+              key={index}
+              className={` ${
+                content_type === 2 ? "w-full" : "sm:w-auto sm:basis-1/1"
+              }`}
+            >
               {content_type == 1 ? (
                 <div
                   key={index}
@@ -148,9 +153,9 @@ export const Slides = ({
                   <div className="image-class">
                     <img
                       src={slide?.image}
-                      width={311}
+                      // width={311}
                       height={230}
-                      className="w-[311px] sm:w-full sm:max-w-[384px] object-contain"
+                      className="w-[] sm:w-full sm:max-w-[384px] object-contain"
                       alt=""
                       onClick={() => {
                         if (slide?.is_clickable) {
