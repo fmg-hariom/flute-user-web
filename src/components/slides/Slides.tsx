@@ -30,7 +30,7 @@ export const Slides = ({
 
   const plugin: any = React.useRef(
     content_type === 2
-      ? Autoplay({ delay: 1577700, stopOnInteraction: true })
+      ? Autoplay({ delay: 1500, stopOnInteraction: true })
       : null
   );
 
@@ -81,7 +81,9 @@ export const Slides = ({
             <CarouselItem
               key={index}
               className={` ${
-                content_type === 2 ? "w-full" : "sm:w-auto sm:basis-1/1"
+                content_type === 2
+                  ? "w-full sm:w-auto"
+                  : "sm:w-auto sm:basis-1/1"
               }`}
             >
               {content_type == 1 ? (
