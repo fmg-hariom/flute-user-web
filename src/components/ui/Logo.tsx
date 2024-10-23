@@ -82,7 +82,7 @@ export const Logo = (props: Props) => {
         </svg>
       </span>
 
-      <p className="font-semibold text-[30px] mt-1 leading-[24px] tracking-[1px] text-[#ffffffeb]  sm:hidden">
+      <p className="font-semibold text-[30px] mt-1 leading-[24px] tracking-[1px] text-[#ffffffeb]  sm:hidden font-myriadRegular">
         Flute
       </p>
     </>

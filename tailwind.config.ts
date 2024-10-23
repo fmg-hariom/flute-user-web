@@ -84,7 +84,7 @@ const config = {
         charterBold: ['charterbold'],       // Bold font
         charterItalic: ['charteritalic'],   // Italic font
         charterBoldItalic: ['charterbold_italic'], // Bold Italic font
-          myriadRegular: ['Myriad Pro Regular'],
+         myriadRegular: ['Myriad Pro Regular', 'sans-serif'], // Ensure fallback
             mediumContentSans: [
           'medium-content-sans-serif-font',
           '-apple-system',
@@ -102,7 +102,10 @@ const config = {
          'kay-pho-du': ['"Kay Pho Du"', 'serif'],
           sohne: ['sohne', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
         serif: ['source-serif-pro', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
-         workSans:["Work Sans, sans-serif"]
+         workSans:["Work Sans, sans-serif"],
+     urbanist: ["Urbanist", 'serif'],
+// MyriadPro: ["Myriad Pro", 'sans-serif'],
+                                                
 
       },
       maxWidth: {

@@ -36,21 +36,11 @@ const Footer = (props: Props) => {
     });
   };
 
-  {
-    /* //  onClick={() => { */
-  }
-  //                           router.push(
-  //
-  //                             `/magazine/list?category_id=${item.id}`
-  //                           );
-  //                           setShowCategories(false);
-  {
-    /* //                         }} */
-  }
+ 
 
   return (
     <>
-      <div className="w-screen flex flex-col sm:flex-row  justify-between bg-[#000] py-6 sm:py-9  px-4 sm:px-10 lg:px-32  text-[#D9D9D9]">
+      <div className="w-screen flex flex-col sm:flex-row  justify-between bg-[#131313] py-6 sm:py-9  px-4 sm:px-10 lg:px-32  text-[#D9D9D9]">
         <div>
           <div className="w-full flex flex-col items-center sm:items-start ">
             <img

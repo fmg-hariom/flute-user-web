@@ -25,7 +25,7 @@ export default function Blogs(props: any) {
     setIsModalOpen(false);
   };
 
-  console.log("mmmmmmmmmmmmmmmm", store.magazine?.detail);
+   
   return (
     <div className="px-0 bg-black text-white">
       <main>
@@ -204,11 +204,11 @@ export default function Blogs(props: any) {
           overlayClassName="overlay"
         >
           {/* <div className="flex flex-col items-center"> */}
-          <div className="image-container w-full h:full md:h-[750px] relative overflow-hidden">
+          <div className="image-container w-full h:full sm:h-[750px] relative overflow-hidden">
             {/* Display the selected image */}
             <img
               src={selectedImage}
-              className="border-none w-full h-full object-cover" // Use object-cover to contain the image
+              className="border-none w-full h-full object-cover" 
               alt="Selected"
             />
           </div>
