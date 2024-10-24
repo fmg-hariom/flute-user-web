@@ -46,6 +46,7 @@ const FluteMag = (props: Props) => {
       </h2>
       <div className=" w-48 sm:w-56 md:w-72 rounded container h-[4px] my-3 bg-[#302C28]"></div>
       <div className="my-6 mx-2 md:mx-12 h-">
+        
         <Carousel
           opts={{
             // align: "start",

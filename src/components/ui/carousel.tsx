@@ -62,6 +62,7 @@ const Carousel = React.forwardRef<
       {
         ...opts,
         axis: orientation === "horizontal" ? "x" : "y",
+        dragFree:true,
       },
       plugins
     );
@@ -84,6 +85,10 @@ const Carousel = React.forwardRef<
     const scrollNext = React.useCallback(() => {
       api?.scrollNext();
     }, [api]);
+
+      // const scrollNext = React.useCallback(() => {
+      //   api?.scrollToNext({ animation: true }); // Update this line to enable smooth scrolling
+      // }, [api]);
 
     const handleKeyDown = React.useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {

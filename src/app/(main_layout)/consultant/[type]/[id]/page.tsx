@@ -2,8 +2,9 @@
 import MainHeader from "@/components/headers/MainHeader";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
+
 import { Montserrat, Montserrat_Alternates } from "next/font/google";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import useConsultantProfileStore from "@/services/consultant_profile/consultant_profile.service";
 import DownloadAppDialog from "@/components/common/dialogs/DownloadAppDialog";
 import useReviewStore from "@/services/review/review.service";
@@ -18,6 +19,13 @@ import {
 } from "@/components/ui/dialog";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 const Montserrats = Montserrat({
   subsets: ["latin"], // Include any subsets you need
@@ -56,13 +64,13 @@ export default function Profile(props: any) {
               </div>
 
               <div
-                className={` grow p-2 xl:p-4 xl:ps-5 text-[#ffffffcc]  ${Montserrats.className}`}
+                className={` grow p-1 xl:p-4 xl:ps-5 text-[#ffffffcc]  ${Montserrats.className}`}
               >
                 <div className="card-body">
                   <div className="flex flex-wrap  justify-between">
-                    <div className="grow ml-[60px]">
+                    <div className="grow sm:ml-[60px]">
                       <div className="flex items-center grow h-14">
-                        <h2 className=" text-[16px] sm:text-[46px] me-3 font-semibold">
+                        <h2 className=" text-[28px] sm:text-[46px] me-3 font-semibold">
                           {detail?.first_name}
                         </h2>
                         <span>
@@ -82,7 +90,7 @@ export default function Profile(props: any) {
                           </svg>
                         </span>
                       </div>
-                      <p className="mt-4 text-[14px] sm:text-[34px] leading-[41px] font-normal text-[#ffffffb3]">
+                      <p className="sm:mt-4 text-[16px] sm:text-[34px] leading-[41px] font-normal text-[#ffffffb3]">
                         {detail?.languages?.join(", ")}
                       </p>
                       <div className="border-b-2 my-6  border-indigo-[#ffffffb3]"></div>
@@ -158,7 +166,7 @@ export default function Profile(props: any) {
                       <div className="gap-2 mt-3 lg:mt-14 columns-3">
                         <DownloadAppDialog
                           trigger={
-                            <div className="bg-[#393A3F] text-center py-3 px-3 lg:py-8 lg:px-5 rounded-[24px] border-[0.31px] border-slate-500 cursor-pointer">
+                            <div className="bg-[#393A3F] text-center py-3 sm:px-3 lg:py-8 lg:px-5 rounded-[24px] border-[0.31px] border-slate-500 cursor-pointer">
                               <span className=" inline-block mt-[10px]">
                                 <svg
                                   width="47"
@@ -185,11 +193,11 @@ export default function Profile(props: any) {
                                   />
                                 </svg>
                               </span>
-                              <h2 className="sm:text-[22px] text-[#ECEDEF] font-semibold my-[10px]">
+                              <h2 className=" sm:text-[22px] text-[#ECEDEF] font-semibold my-[10px]">
                                 Live chat{" "}
                               </h2>
                               <h2 className="lg:text-[22px] font-semibold">
-                                <span className="inline-block me-1">
+                                <span className="inline-block sm:me-1">
                                   <span className="text-[#33C004]">
                                     ₹{detail?.chat_price?.discount_price}/m {""}
                                   </span>
@@ -207,7 +215,7 @@ export default function Profile(props: any) {
 
                         <DownloadAppDialog
                           trigger={
-                            <div className="bg-[#393A3F] text-center py-3 px-3 lg:py-8 lg:px-5 rounded-[24px] border-[0.31px] border-slate-500 cursor-pointer">
+                            <div className="bg-[#393A3F] text-center py-3 sm:px-3 lg:py-8 lg:px-5 rounded-[24px] border-[0.31px] border-slate-500 cursor-pointer">
                               <span className=" inline-block mt-[10px]">
                                 <svg
                                   width="47"
@@ -242,7 +250,7 @@ export default function Profile(props: any) {
                                 Audio call{" "}
                               </h2>
                               <h2 className="lg:text-[21px] font-semibold">
-                                <span className="inline-block me-1">
+                                <span className="inline-block sm:me-1">
                                   <span className="text-[#33C004]">
                                     ₹{detail?.audio_call_price?.discount_price}
                                     /m {""}
@@ -261,7 +269,7 @@ export default function Profile(props: any) {
 
                         <DownloadAppDialog
                           trigger={
-                            <div className="bg-[#393A3F] text-center py-3 px-3 lg:py-8 lg:px-5 rounded-[24px] border-[0.31px] border-slate-500 cursor-pointer">
+                            <div className="bg-[#393A3F] text-center py-3 sm:px-3 lg:py-8 lg:px-5 rounded-[24px] border-[0.31px] border-slate-500 cursor-pointer">
                               <span className=" inline-block mt-[10px] ">
                                 <svg
                                   width="46"
@@ -297,7 +305,7 @@ export default function Profile(props: any) {
                                 Video call
                               </h2>
                               <h2 className="lg:text-[21px] font-semibold">
-                                <span className="inline-block me-1">
+                                <span className="inline-block sm:me-1">
                                   <span className="text-[#33C004]">
                                     ₹{detail?.video_call_price?.discount_price}
                                     /m {""}
@@ -352,20 +360,54 @@ export default function Profile(props: any) {
                   {detail?.description}
                 </p>
               </div>
+              {/* **************************** this code for showing other photo of the consultant ****************************** */}
 
-              <div className="mt-5 gap-4   columns-2 sm:columns-3 xl:columns-5 ">
+              {/* <div className="mt-5 gap-4   columns-2 sm:columns-3 xl:columns-5 ">
+                    {detail?.photos?.length ? (
+                      detail?.photos.map((item) => {
+                        if (item?.photo_type == 3) {
+                          return (
+                            <img
+                              src={item?.url}
+                              className="w-full rounded-[8px] mb-4"
+                              alt=""
+                            />
+                          );
+                        }
+                      })
+                    ) : (
+                      <></>
+                    )}
+                  </div> */}
+
+              <div className="mt-5 gap-4">
                 {detail?.photos?.length ? (
-                  detail?.photos.map((item) => {
-                    if (item?.photo_type == 3) {
-                      return (
-                        <img
-                          src={item?.url}
-                          className="w-full rounded-[8px] mb-4"
-                          alt=""
-                        />
-                      );
-                    }
-                  })
+                  <Carousel
+                    opts={{
+                      align: "center",
+                    }}
+                    // setApi={setApi}
+                    className=" sm:basis-1/1 sm:custom-style"
+                  >
+                    <CarouselContent>
+                      {detail.photos.map((item, index) => {
+                        if (item?.photo_type == 3) {
+                          return (
+                            <CarouselItem
+                              key={index}
+                              className="rounded-[8px] mb-4"
+                            >
+                              <img
+                                src={item?.url}
+                                className=" w-[110px] sm:w-[230px] rounded-[8px] object-cover"
+                                alt="Image"
+                              />
+                            </CarouselItem>
+                          );
+                        }
+                      })}
+                    </CarouselContent>
+                  </Carousel>
                 ) : (
                   <></>
                 )}
