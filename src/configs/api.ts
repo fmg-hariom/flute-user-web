@@ -8,7 +8,8 @@ export default {
   metaBaseUrl: (path: string) => `/meta${path}`,
   coachRatingBaseUrl: (path: string) => `/coach-rating${path}`,
   testimonialBaseUrl:(path:string) => `/flute/api/v1${path}`,
-  socialiconsBaseUrl:(path:string) => `/flute/api/v1${path}`
+  socialiconsBaseUrl:(path:string) => `/flute/api/v1${path}`,
+  accordionBaseUrl:(path:string) => `/flute/api/v1${path}`
 }
 
 
