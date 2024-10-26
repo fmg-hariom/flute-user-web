@@ -24,9 +24,9 @@ const ContentSection: React.FC<ContentSectionProps> = ({
   }, [title]);
 
   return (
-    <div className="mb-[40px] sm:my-[70px] font-urbanist flex flex-col  sm:flex-row items-center   w-full">
-      <div className="text-[16px] leading-[25px] sm:font-[500] text-[#ffffffcc] sm:text-[30px] sm:leading-[42px] sm:w-[60%] w-full sm:mr-[20px]">
-        <div className="flex flex-col items-start mb-4">
+    <div className="mb-[40px] sm:my-[70px] font-afacad flex flex-col  sm:flex-row items-center  w-full">
+      <div className="text-[16px] leading-[25px] sm:font-[500]  sm:text-[30px] sm:leading-[42px] sm:w-[60%] w-full sm:mr-[20px]">
+        <div className="flex flex-col items-start mb-8 text-[#ffffff] font-semibold sm:text-[48px] sm:leading-[58px]">
           <h2 ref={headingRef}>{title}</h2>
           <img
             src="theApp/theapptitleimg.png"
@@ -34,7 +34,9 @@ const ContentSection: React.FC<ContentSectionProps> = ({
             alt="decorative line"
           />
         </div>
-        {description}
+        <span className="sm:text-[32px] sm:leading-[36px] text-[##ffffffb3]  sm:font-[400] ">
+          {description}
+        </span>
       </div>
       <div className="w-[35%] sm:w-[40%] h-full flex justify-center   ">
         <img
@@ -51,11 +53,11 @@ const TheApp: React.FC = () => {
   return (
     <div className="w-screen flex flex-col justify-between bg-[#000] py-4 sm:py-6 px-4 sm:px-10 lg:px-20 text-[#D9D9D9] ">
       <div className="w-full flex flex-col justify-center items-center mb-8">
-        <div className="text-[40px] sm:text-[80px] leading-[96px] tracking-[1px] text-[#c1cfe3] font-semibold">
+        <div className="text-[40px] sm:text-[54px] leading-[50px] tracking-[1px] text-[#c1cfe3] font-bold font-urbanist mt-[30px]">
           THE APP
         </div>
         <div className="flex flex-col items-center w-[80%]">
-          <h2 className="my-[10px] mb-6 sm:my-[40px] sm:pt-[40px] text-[#ffffffcc] font-bold text-[20px] leading-[24px] sm:text-[42px] sm:leading-[58px] font-workSans text-center">
+          <h2 className="my-[10px] mb-6 sm:my-[30px] sm:pt-[10px] text-[#ffffffcc] font-[500] text-[20px] leading-[24px] sm:text-[40px] sm:leading-[44px] font-afacad text-center">
             Your <span className="text-[#1EC048]">Go-To Platform </span>for
             Emotional Support, Relationship Development & Spiritual Guidance
           </h2>
@@ -63,7 +65,7 @@ const TheApp: React.FC = () => {
       </div>
 
       <div className="  font-urbanist flex flex-col sm:flex-row items-center  w-full">
-        <div className="text-[16px] leading-[25px] sm:font-[500] text-[#ffffffcc] sm:text-[30px] sm:leading-[42px] sm:w-[60%] w-full sm:mr-[20px]">
+        <div className="text-[16px] leading-[25px] sm:font-[400] text-[#ffffffcc] sm:text-[36px] sm:leading-[54px] sm:w-[60%] w-full sm:mr-[20px] font-charter">
           Flute is more than just an app—it's a comprehensive platform designed
           to support you through life's emotional, relational, and spiritual
           challenges. Whether you're seeking advice on love, looking for
@@ -125,9 +127,9 @@ const TheApp: React.FC = () => {
         imageSrc="theApp/IAAA.png"
       />
 
-      <div className="mt-[40px] sm:mt-[70px] flex flex-col items-center ">
+      <div className="mt-[20px] sm:my-[35px] flex flex-col items-center ">
         {/* <p className="w-[80%] text-center text-[#ffffffcc] text-[30px] leading-[42px] font-charter"> */}
-        <p className="w-full sm:w-[80%] text-center text-[#ffffffcc] text-[18px] leading-[23.4px] sm:text-[30px] sm:leading-[32px] font-charter ">
+        <p className="w-full sm:w-[80%] text-center text-[#ffffffcc] text-[18px] leading-[23.4px] sm:text-[30px] sm:leading-[54px] font-charter ">
           Flute is your personal tool for navigating life's emotional,
           relational, and spiritual journeys. We’re here to help you connect
           deeply with yourself and others, overcome life's hurdles, and find
@@ -137,11 +139,11 @@ const TheApp: React.FC = () => {
         </p>
       </div>
 
-      <div className="mt-[40px] sm:mt-[70px] ">
+      <div className="mt-[40px] sm:mt-[70px] font-afacad ">
         <button className="bg-[#ffffff] px-[7px] text-[#000000] font-bold leading-[67px] rounded-xl text-[50px] ">
           How is the Flute Different?
         </button>
-        <p className=" text-[#ffffffcc] text-[18px] leading-[23.4px] sm:text-[30px] sm:leading-[32px] font-urbanist mt-[40px] ">
+        <p className=" text-[#ffffffcc] text-[18px] leading-[23.4px] sm:text-[34px] sm:leading-[42px]  mt-[40px] ">
           Flute stands out as a comprehensive, all-in-one platform tailored to
           provide emotional support, relationship guidance, and spiritual
           insights—offering a unique combination of services that no other app
@@ -149,7 +151,7 @@ const TheApp: React.FC = () => {
         </p>
       </div>
 
-      <div className="mt-[40px] sm:mt-[70px] ">
+      <div className="mt-[40px] sm:my-[70px] font-afacad  ">
         <FluteAccordion />
       </div>
     </div>

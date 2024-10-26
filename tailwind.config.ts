@@ -1,14 +1,13 @@
-import { Secular_One } from "next/font/google"
-import type { Config } from "tailwindcss"
- 
+import { Secular_One } from "next/font/google";
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
@@ -75,63 +74,74 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontFamily: {
-        sans: ['Poppins'],
-       
+        sans: ["Poppins"],
 
-        Secular_One: ['Secular One', 'sans-serif'],
-          // Custom font families added from @font-face declarations
-        charter: ['charterregular'],       // Regular font
-        charterBold: ['charterbold'],       // Bold font
-        charterItalic: ['charteritalic'],   // Italic font
-        charterBoldItalic: ['charterbold_italic'], // Bold Italic font
-         myriadRegular: ['Myriad Pro Regular', 'sans-serif'], // Ensure fallback
-            mediumContentSans: [
-          'medium-content-sans-serif-font',
-          '-apple-system',
-          'BlinkMacSystemFont',
+        Secular_One: ["Secular One", "sans-serif"],
+        // Custom font families added from @font-face declarations
+        charter: ["charterregular"], // Regular font
+        charterBold: ["charterbold"], // Bold font
+        charterItalic: ["charteritalic"], // Italic font
+        charterBoldItalic: ["charterbold_italic"], // Bold Italic font
+        myriadRegular: ["Myriad Pro Regular", "sans-serif"], // Ensure fallback
+        mediumContentSans: [
+          "medium-content-sans-serif-font",
+          "-apple-system",
+          "BlinkMacSystemFont",
           '"Segoe UI"',
-          'Roboto',
-          'Oxygen',
-          'Ubuntu',
-          'Cantarell',
+          "Roboto",
+          "Oxygen",
+          "Ubuntu",
+          "Cantarell",
           '"Open Sans"',
           '"Helvetica Neue"',
-          'sans-serif'
+          "sans-serif",
         ],
 
-         'kay-pho-du': ['"Kay Pho Du"', 'serif'],
-          sohne: ['sohne', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
-        serif: ['source-serif-pro', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
-         workSans:["Work Sans, sans-serif"],
-     urbanist: ["Urbanist", 'serif'],
-// MyriadPro: ["Myriad Pro", 'sans-serif'],
-                                                
-
+        "kay-pho-du": ['"Kay Pho Du"', "serif"],
+        sohne: [
+          "sohne",
+          '"Helvetica Neue"',
+          "Helvetica",
+          "Arial",
+          "sans-serif",
+        ],
+        serif: [
+          "source-serif-pro",
+          "Georgia",
+          "Cambria",
+          '"Times New Roman"',
+          "Times",
+          "serif",
+        ],
+        workSans: ["Work Sans, sans-serif"],
+        urbanist: ["Urbanist", "serif"],
+        afacad: ["Afacad", "sans-serif"], // Fix here
+        // MyriadPro: ["Myriad Pro", 'sans-serif'],
       },
       maxWidth: {
-        '1/2': '50%',
+        "1/2": "50%",
       },
       minWidth: {
-        '1/2': '50%',
+        "1/2": "50%",
       },
     },
     screens: {
-      'xsm': '360px',
+      xsm: "360px",
 
-      'sm': '576px',
+      sm: "576px",
 
-      'md': '768px',
+      md: "768px",
 
-      'lg': '960px',
+      lg: "960px",
 
-      'xlg': '1260px',
+      xlg: "1260px",
 
-      'xl': '1440px',
+      xl: "1440px",
 
-      '2xl': '1536px',
-    }
+      "2xl": "1536px",
+    },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default config
+export default config;

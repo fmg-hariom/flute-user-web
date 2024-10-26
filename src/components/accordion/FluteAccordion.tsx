@@ -48,7 +48,7 @@ const FluteAccordion: React.FC = () => {
               className="text-2xl flex justify-between items-center"
               onClick={() => handleToggle(index)}
             >
-              <div className="text-[40px] text-[#191A23] font-[500]">
+              <div className="text-[40px] text-[#191A23] font-[500] ">
                 <span className="mr-4">0{list.number}</span> {list.title}
               </div>
               <span className="text-[40px] text-[#191A23] font-bold border border-black rounded-full w-10 h-10 flex items-center justify-center">
