@@ -103,7 +103,14 @@ const Footer = (props: Props) => {
               Join as <span className="text-[#FFA643]">{currentRole}</span>
             </h3>
             <h3 className="cursor-pointer">Work with us</h3>
-            <h3 className="cursor-pointer">Contact us</h3>
+            <h3
+              className="cursor-pointer"
+              onClick={() => {
+                router.push(`/contact-us`);
+              }}
+            >
+              Contact us
+            </h3>
           </div>
           <div className="flex flex-col justify-evenly gap-4 text-[#D9D9D9] mt-10">
             <h3
@@ -135,7 +142,14 @@ const Footer = (props: Props) => {
             Join as <span className="text-[#FFA643]">{currentRole}</span>
           </h3>
           <h3 className="cursor-pointer">Work with us</h3>
-          <h3 className="cursor-pointer">Contact us</h3>
+          <h3
+            className="cursor-pointer"
+            onClick={() => {
+              router.push(`/contact-us`);
+            }}
+          >
+            Contact us
+          </h3>
         </div>
         <div className="hidden sm:flex  flex-col justify-evenly gap-4 sm:gap-1 text-[#D9D9D9] mt-10 sm:px-10">
           <h3
