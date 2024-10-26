@@ -1,12 +1,18 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
 const MapComponent = () => {
   const mapRef = useRef(null);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    // Ensure component is mounted on client side
+    setIsClient(true);
+  }, []);
 
   const latitude = 26.9024618;
   const longitude = 75.7487774;
@@ -19,6 +25,8 @@ const MapComponent = () => {
     popupAnchor: [1, -34],
     shadowSize: [41, 41],
   });
+
+  if (!isClient) return null; // Render nothing on server
 
   return (
     <MapContainer
