@@ -1,7 +1,17 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import MapComponent from "@/components/mapComponent/MapComponent";
+
+// pages/contact-us.js
+import dynamic from "next/dynamic";
+
+const MapComponent = dynamic(
+  () => import("@/components/mapComponent/MapComponent"),
+  {
+    ssr: false,
+  }
+);
+// import MapComponent from "@/components/mapComponent/MapComponent";
 
 const ContactUs = () => {
   return (
