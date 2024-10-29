@@ -4,22 +4,44 @@ import React, { useState, useEffect } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import useCareer from "@/services/career/career.service";
 
-const FluteCareer = () => {
-  const [positionType, setPositionType] = useState("On-Site");
+// Define interface for career post data structure
+interface CareerPost {
+  ID: number;
+  title: string;
+  location: string;
+  date: string;
+}
+
+// Define interface for career service data
+interface CareerService {
+  Career: {
+    list: {
+      posts: CareerPost[];
+    };
+  };
+  get: {
+    list: (positionType: string) => void;
+  };
+}
+
+const FluteCareer: React.FC = () => {
+  const [positionType, setPositionType] = useState<"on_site" | "remote">(
+    "on_site"
+  );
   const [hoveredLetterIndex, setHoveredLetterIndex] = useState<number | null>(
     null
   );
-  const letters = "CAREERS".split("");
+  const letters: string[] = "CAREERS".split("");
 
-  const careerStore = useCareer();
+  // Type assertion for careerStore
+  const careerStore = useCareer() as unknown as CareerService;
 
   useEffect(() => {
-    careerStore.get.list();
-  }, []);
+    // Fetch data whenever positionType changes
+    careerStore.get.list(positionType);
+  }, [positionType]);
 
-//   const data = careerStore.Career.list.posts;
-
-//   console.log("career list ......", data);
+  const data: CareerPost[] = careerStore.Career.list.posts;
 
   const handleMouseEnter = (index: number) => {
     setHoveredLetterIndex(index);
@@ -29,8 +51,8 @@ const FluteCareer = () => {
     setHoveredLetterIndex(null);
   };
 
-  const handlePositionChange = (type: React.SetStateAction<string>) => {
-    setPositionType(type);
+  const handlePositionChange = (type: string) => {
+    setPositionType(type.toLowerCase() as "on_site" | "remote");
   };
 
   return (
@@ -60,19 +82,19 @@ const FluteCareer = () => {
 
       <div className="flex mt-16 gap-x-20">
         <div
-          onClick={() => handlePositionChange("On-Site")}
+          onClick={() => handlePositionChange("on_site")}
           className={`leading-[52px] tracking-[1px] sm:text-[30px] font-bold cursor-pointer ${
-            positionType === "On-Site"
+            positionType === "on_site"
               ? "text-[#FFA643] sm:text-[40px] "
               : "text-[#ffffffca]"
           }`}
         >
-          On-Site
+          On Site
         </div>
         <div
-          onClick={() => handlePositionChange("Remote")}
+          onClick={() => handlePositionChange("remote")}
           className={`leading-[52px] tracking-[1px] sm:text-[36px] font-bold cursor-pointer ${
-            positionType === "Remote"
+            positionType === "remote"
               ? "text-[#FFA643] sm:text-[40px] "
               : "text-[#ffffffca]"
           }`}
@@ -81,65 +103,22 @@ const FluteCareer = () => {
         </div>
       </div>
 
-      {positionType === "On-Site" && (
-        <>
-          <div className="text-[30px] text-[#ffffffcc] font-bold mb-4 border rounded-2xl flex justify-between w-[70%] py-4 px-6 mt-12">
-            <div>
-              <div className="sm:text-[36px] leading-[43px] font-semibold">
-                Sr. Manager, On-site
-              </div>
-              <div className="sm:text-[34px] leading-[40px] font-normal">
-                Jaipur
-              </div>
-            </div>
-            <div className="flex">
-              <div className="sm:text-[32px] leading-[38px] font-normal mr-8 flex items-start">
-                23 Oct 24
-              </div>
-              <div className="bg-[#d9d9d98d] border rounded-full w-14 h-14 mt-4 flex items-center justify-center">
-                <IoIosArrowForward
-                  style={{ fontWeight: "bold", fontSize: "1.3em" }}
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="text-[30px] text-[#ffffffcc] font-bold mb-4 border rounded-2xl flex justify-between w-[70%] py-4 px-6 mt-12">
-            <div>
-              <div className="sm:text-[36px] leading-[43px] font-semibold">
-                Backend Developer, On-site
-              </div>
-              <div className="sm:text-[34px] leading-[40px] font-normal">
-                Jaipur
-              </div>
-            </div>
-            <div className="flex">
-              <div className="sm:text-[32px] leading-[38px] font-normal mr-8 flex items-start">
-                23 Oct 24
-              </div>
-              <div className="bg-[#d9d9d98d] border rounded-full w-14 h-14 mt-4 flex items-center justify-center">
-                <IoIosArrowForward
-                  style={{ fontWeight: "bold", fontSize: "1.3em" }}
-                />
-              </div>
-            </div>
-          </div>
-        </>
-      )}
-
-      {positionType === "Remote" && (
-        <div className="text-[30px] text-[#ffffffcc] font-bold mb-4 border rounded-2xl flex justify-between w-[70%] py-4 px-6 mt-12">
+      {data?.map((item) => (
+        <div
+          key={item.ID}
+          className="text-[30px] text-[#ffffffcc] font-bold mb-4 border rounded-2xl flex justify-between w-[70%] py-4 px-6 mt-12"
+        >
           <div>
             <div className="sm:text-[36px] leading-[43px] font-semibold">
-              Sr. Manager, Remote
+              {item.title}
             </div>
             <div className="sm:text-[34px] leading-[40px] font-normal">
-              Jaipur
+              {item.location}
             </div>
           </div>
           <div className="flex">
             <div className="sm:text-[32px] leading-[38px] font-normal mr-8 flex items-start">
-              23 Oct 24
+              {item.date}
             </div>
             <div className="bg-[#d9d9d98d] border rounded-full w-14 h-14 mt-4 flex items-center justify-center">
               <IoIosArrowForward
@@ -148,7 +127,7 @@ const FluteCareer = () => {
             </div>
           </div>
         </div>
-      )}
+      ))}
     </div>
   );
 };

@@ -17,6 +17,9 @@ export type Careers = {
   posts_per_page: number;
 };
 
+
+
+
 const useCareer = create(
   combine(
     {
@@ -35,13 +38,14 @@ const useCareer = create(
     },
     (set, get) => ({
       get: {
-        list: async () => {
+        list: async (jobType = "remote") => {
+          // Accept jobType as an argument
           const {
             Career: { total_pages, posts_per_page },
           } = get();
 
           const request = await PokerApi.get<Careers[]>(
-            api.careerBaseUrl("/career?job_type=remote&page=1&size=10"),
+            api.careerBaseUrl(`/career?job_type=${jobType}&page=1&size=10`),
             {
               query: {
                 total_pages,

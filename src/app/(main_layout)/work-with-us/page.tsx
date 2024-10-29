@@ -89,6 +89,12 @@ const WorkWithUs = () => {
         </div>
 
         <FluteCareer />
+
+        <div className="my-20 flex justify-center">
+          <button className="bg-black border border-[#D9D9D9] text-white text-[40px] leading-[50px] font-semibold py-[20px] px-[140px] rounded-full transition-transform duration-300 ease-in-out hover:scale-105">
+            View all Jobs
+          </button>
+        </div>
       </div>
     </>
   );
