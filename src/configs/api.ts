@@ -9,7 +9,8 @@ export default {
   coachRatingBaseUrl: (path: string) => `/coach-rating${path}`,
   testimonialBaseUrl:(path:string) => `/flute/api/v1${path}`,
   socialiconsBaseUrl:(path:string) => `/flute/api/v1${path}`,
-  accordionBaseUrl:(path:string) => `/flute/api/v1${path}`
+  accordionBaseUrl:(path:string) => `/flute/api/v1${path}`,
+  careerBaseUrl:(path:string) => `/flute/api/v1${path}`
 }
 
 

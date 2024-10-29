@@ -11,14 +11,14 @@ const MapComponent = dynamic(
     ssr: false,
   }
 );
-// import MapComponent from "@/components/mapComponent/MapComponent";
+ 
 
 const ContactUs = () => {
   return (
     <>
       <div className="w-screen flex flex-col justify-between bg-[#000] py-4 sm:py-6 px-4 sm:px-10 lg:px-20 text-[#D9D9D9]">
         <div className="w-full flex flex-col justify-center items-center mb-8">
-          <div className="text-[30px] sm:text-[40px] leading-[56px] tracking-[1px] text-[#c1cfe3] font-bold mb-4">
+          <div className="text-[30px] sm:text-[40px] leading-[56px] tracking-[1px] text-[#FFFFFF] font-bold mb-4">
             Contact Us
           </div>
           <div className="w-[100%] rounded pr-20 h-[1px] my-3 bg-[#fffccc]"></div>
@@ -26,7 +26,7 @@ const ContactUs = () => {
           <div className="flex flex-col items-center rounded-lg w-full sm:w-[100%] mt-8">
             <div className="w-full flex relative">
               {/* Blue Section */}
-              <div className="w-[65%] bg-[#193A4B]/70 text-white p-4 rounded-l-[40px] backdrop-blur-sm pl-[125px]">
+              <div className="w-[65%] bg-[#1A1C1E]/70 text-white p-4 rounded-l-[40px] backdrop-blur-sm pl-[125px]">
                 <div className=" font-urbanist">
                   <h2 className="text-[20px] leading-[24px] mb-[20px] sm:text-[48px] sm:leading-[58px] font-bold  sm:pt-[40px]">
                     Get in

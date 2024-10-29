@@ -141,7 +141,14 @@ const Footer = (props: Props) => {
           <h3 className="cursor-pointer w-[200px]">
             Join as <span className="text-[#FFA643]">{currentRole}</span>
           </h3>
-          <h3 className="cursor-pointer">Work with us</h3>
+          <h3
+            className="cursor-pointer"
+            onClick={() => {
+              router.push(`/work-with-us`);
+            }}
+          >
+            Work with us
+          </h3>
           <h3
             className="cursor-pointer"
             onClick={() => {
