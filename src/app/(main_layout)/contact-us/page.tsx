@@ -70,8 +70,8 @@ const ContactUs = () => {
               </div>
 
               {/* Center Card */}
-              <div className="absolute top-7 left-[65%] transform -translate-x-1/2 w-[460px] h-[90%]  bg-white text-black rounded-lg z-10 shadow-lg flex flex-col items-center">
-                <div className="w-full h-full rounded-lg overflow-hidden">
+              <div className=" hidden  absolute top-7 left-[65%] transform -translate-x-1/2 w-[460px] h-[90%]  bg-white text-black rounded-lg z-10 shadow-lg sm:flex flex-col items-center">
+                <div className="w-full h-full rounded-lg overflow-hidden ">
                   <MapComponent />
                 </div>
               </div>

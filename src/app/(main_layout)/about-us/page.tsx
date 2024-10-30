@@ -5,7 +5,7 @@ import React from "react";
 const AboutUs = () => {
   return (
     <>
-      <div className="w-screen flex flex-col  justify-between bg-[#000] py-4 sm:py-6  px-4 sm:px-10 lg:px-20  text-[#D9D9D9]">
+      <div className="w-screen flex flex-col  justify-between bg-[#000] py-4 sm:py-6  px-4 sm:px-10 lg:px-20  text-[#D9D9D9] ">
         <div className="w-full flex  flex-col justify-center items-center mb-8 ">
           <div className="text-[40px] sm:text-[80px] leading-[96px]  tracking-[1px] text-[#c1cfe3] font-semibold">
             About Us
@@ -157,7 +157,7 @@ const AboutUs = () => {
           </p>
         </div>
 
-        <div className="mt-[40px] sm:mt-[70px] flex flex-col items-center ">
+        <div className="mt-[40px] sm:mt-[70px] flex flex-col items-center mb-20">
           {/* <p className="w-[80%] text-center text-[#ffffffcc] text-[30px] leading-[42px] font-charter"> */}
           <p className="w-full sm:w-[80%] text-center text-[#ffffffcc] text-[18px] leading-[23.4px] sm:text-[30px] sm:leading-[32px] font-charter ">
             Join the FLUTE community today and take charge of your love life,

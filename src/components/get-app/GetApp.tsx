@@ -29,14 +29,14 @@ const GetApp = (props: Props) => {
         <h2 className="text-5xl  font-Secular_One font-bold p-1">
           Get the Flute app
         </h2>
-        <h3 className="text-2xl p-3 pr-[20px]">
+        <h3 className="text-[26px] leading-[34px] p-3 pr-[20px] font-workSans font-[500]">
           We will send you a link,open it on your phone to download the app
         </h3>
         <div className="flex gap-12 pt-2 pl-3">
           <div>
             {/* <input type="radio" name="radio" id="radio" className="h-4 w-4 form-radio accent-[#FF2C20]" /> */}
-            <label htmlFor="email" className=" text-lg">
-              Enter your Email
+            <label htmlFor="email" className=" font-workSans text-[22px] ">
+              Enter Your Email
             </label>
           </div>
           {/* <div>

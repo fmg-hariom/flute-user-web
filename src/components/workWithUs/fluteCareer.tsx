@@ -106,7 +106,7 @@ const FluteCareer: React.FC = () => {
       {data?.map((item) => (
         <div
           key={item.ID}
-          className="text-[30px] text-[#ffffffcc] font-bold mb-4 border rounded-2xl flex justify-between w-[70%] py-4 px-6 mt-12"
+          className="text-[30px] text-[#ffffffcc] font-bold mb-4 border rounded-2xl flex justify-between w-full sm:w-[70%] py-4 px-6 mt-12"
         >
           <div>
             <div className="sm:text-[36px] leading-[43px] font-semibold">
@@ -116,8 +116,8 @@ const FluteCareer: React.FC = () => {
               {item.location}
             </div>
           </div>
-          <div className="flex">
-            <div className="sm:text-[32px] leading-[38px] font-normal mr-8 flex items-start">
+          <div className="flex items-center">
+            <div className="sm:text-[32px] leading-[38px] font-normal mr-8">
               {item.date}
             </div>
             <div className="bg-[#d9d9d98d] border rounded-full w-14 h-14 mt-4 flex items-center justify-center">
@@ -128,6 +128,11 @@ const FluteCareer: React.FC = () => {
           </div>
         </div>
       ))}
+      <div className="mt-10 sm:mt-20 flex justify-center">
+        <button className="bg-black border border-[#D9D9D9] text-white text-[20px] sm:text-[40px] leading-[30px] sm:leading-[50px] font-semibold py-[10px] sm:py-[20px] px-[70px] sm:px-[140px] rounded-full transition-transform duration-300 ease-in-out hover:scale-105">
+          View all Jobs
+        </button>
+      </div>
     </div>
   );
 };

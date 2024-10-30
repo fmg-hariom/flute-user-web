@@ -64,6 +64,8 @@ export const Slides = ({
             {currentIcon}
           </button>
         </div>
+
+        
       ) : (
         <></>
       )}
@@ -120,37 +122,7 @@ export const Slides = ({
                 </div>
               ) : content_type == 2 ? (
                 <>
-                  {/* <Image
-                    src={slide?.image}
-                    width={311}
-                    height={230}
-                    className="w-[311px]  sm:w-full sm:max-w-[384px] object-contain"
-                    alt=""
-                    quality={90}
-                    onClick={() => {
-                      if (slide?.is_clickable) {
-                        router.push(
-                          `/consultant/listeners?category_id=${slide?.category_id}&consultant_type=3&title=Listeners`
-                        );
-                      }
-                    }}
-                  /> */}
-                  {/* <div className="image-class">
-                    <img
-                      src={slide?.image}
-                      width={311}
-                      height={230}
-                      className="w-[311px] sm:w-full sm:max-w-[384px] object-contain"
-                      alt=""
-                      onClick={() => {
-                        if (slide?.is_clickable) {
-                          router.push(
-                            `/consultant/listeners?category_id=${slide?.category_id}&consultant_type=3&title=Listeners`
-                          );
-                        }
-                      }}
-                    />
-                  </div> */}
+               
 
                   <div className="image-class">
                     <img
