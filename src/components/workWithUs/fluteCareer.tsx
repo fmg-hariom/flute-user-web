@@ -56,8 +56,8 @@ const FluteCareer: React.FC = () => {
   };
 
   return (
-    <div className="mb-[40px] sm:mt-[150px] font-urbanist flex flex-col items-center w-full">
-      <div className="text-[30px] sm:text-[70px] leading-[66px] tracking-[1.5px] font-bold mb-4 text-[#6c6c6c] flex">
+    <div className="mb-[40px] mt-6 sm:mt-[150px] font-urbanist flex flex-col items-center w-full">
+      <div className="text-[30px] sm:text-[70px] leading-[66px] tracking-[1.5px] font-bold sm:mb-4 text-[#6c6c6c] flex">
         {letters.map((letter, index) => (
           <span
             key={index}
@@ -80,7 +80,7 @@ const FluteCareer: React.FC = () => {
         ))}
       </div>
 
-      <div className="flex mt-16 gap-x-20">
+      <div className="flex mt-4 sm:mt-16 gap-x-20 sm:mb-8">
         <div
           onClick={() => handlePositionChange("on_site")}
           className={`leading-[52px] tracking-[1px] sm:text-[30px] font-bold cursor-pointer ${
@@ -106,23 +106,23 @@ const FluteCareer: React.FC = () => {
       {data?.map((item) => (
         <div
           key={item.ID}
-          className="text-[30px] text-[#ffffffcc] font-bold mb-4 border rounded-2xl flex justify-between w-full sm:w-[70%] py-4 px-6 mt-12"
+          className="text-[30px] text-[#ffffffcc] font-bold  border rounded-2xl flex justify-between w-full sm:w-[70%] py-4 px-6 mt-10"
         >
           <div>
-            <div className="sm:text-[36px] leading-[43px] font-semibold">
+            <div className=" text-[17px] leading-[21px] sm:text-[36px] sm:leading-[43px] font-semibold">
               {item.title}
             </div>
-            <div className="sm:text-[34px] leading-[40px] font-normal">
+            <div className=" text-[17px] leading-[34px]  sm:text-[34px] sm:leading-[40px] font-normal ">
               {item.location}
             </div>
           </div>
           <div className="flex items-center">
-            <div className="sm:text-[32px] leading-[38px] font-normal mr-8">
+            <div className=" text-[17px] leading-[21px]  sm:text-[32px] sm:leading-[38px] font-normal mr-8 mt-[-40px] whitespace-nowrap">
               {item.date}
             </div>
-            <div className="bg-[#d9d9d98d] border rounded-full w-14 h-14 mt-4 flex items-center justify-center">
+            <div className="bg-[#d9d9d98d] border rounded-full  sm:w-14 sm:h-14  flex items-center justify-center">
               <IoIosArrowForward
-                style={{ fontWeight: "bold", fontSize: "1.3em" }}
+              // style={{ fontWeight: "bold", fontSize: "1.3em" }}
               />
             </div>
           </div>

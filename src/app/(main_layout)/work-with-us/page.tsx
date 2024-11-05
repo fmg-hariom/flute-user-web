@@ -17,10 +17,10 @@ const ContentSection: React.FC<ContentSectionProps> = ({
   return (
     <div className="mb-10 sm:mb-[40px] sm:mt-[150px] font-urbanist flex flex-col sm:flex-row items-center w-full">
       <div className="text-[14px] leading-[22px] sm:leading-[25px] sm:font-[500] sm:text-[30px] sm:w-[50%] w-full sm:mr-[20px] px-4">
-        <div className="flex flex-col items-start mb-6 text-[#ffffffcc] font-bold text-[28px] sm:text-[70px] sm:leading-[91px]">
+        <div className="flex flex-col items-start mb-6 text-[#ffffffcc] font-semibold sm:font-bold text-[32px] leading-[42px] sm:text-[70px] sm:leading-[91px] mt-[18px]">
           <h2>{title}</h2>
         </div>
-        <span className="text-[16px] leading-[24px] sm:text-[30px] sm:leading-[39px] text-[#ffffffcc] sm:font-[500]">
+        <span className="text-[17px] leading-[27px] sm:text-[30px] sm:leading-[39px] text-[#ffffffcc] font-semibold sm:font-[500]">
           {description}
         </span>
       </div>
@@ -36,15 +36,15 @@ const WorkWithUs = () => {
     <div className="w-screen flex flex-col justify-between bg-[#000] py-4 sm:py-6 px-4 sm:px-10 lg:px-20 text-[#D9D9D9]">
       <div className="font-urbanist flex flex-col sm:flex-row items-center sm:my-10 w-full">
         <div className="text-[18px] leading-[26px] sm:font-[400] text-[#ffffffcc] sm:text-[36px] sm:leading-[54px] sm:w-[50%] w-full sm:mr-[20px] font-charter px-4">
-          <h2 className="text-[30px] leading-[36px] sm:text-[100px] sm:leading-[120px] font-bold tracking-[2px]">
-            Create a Career you Love
+          <h2 className="text-[40px] leading-[46px] sm:text-[100px] sm:leading-[120px] font-semibold sm:font-bold tracking-[2px]">
+            Create a Career You Love
           </h2>
-          <p className="text-[18px] leading-[26px] sm:text-[30px] sm:leading-[42px] font-[500] mt-4 sm:mt-[40px]">
+          <p className="text-[18px] leading-[24px] sm:text-[30px] sm:leading-[42px] font-bold sm:font-[500] mt-4 sm:mt-[40px]">
             Join the team Behind Flute & Help shape a more positive World for
             Users Everywhere
           </p>
         </div>
-        <div className="w-[80%] sm:w-[50%] h-[250px] sm:h-[400px] flex justify-center mt-6 sm:mt-0">
+        <div className="w-[95%] sm:w-[50%] h-[250px] sm:h-[400px] flex justify-center mt-6 sm:mt-0">
           <img
             src="work-with-us.png"
             className="object-cover rounded-[20px] sm:rounded-[40px]"
