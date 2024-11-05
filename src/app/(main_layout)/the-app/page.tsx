@@ -140,7 +140,7 @@ const TheApp: React.FC = () => {
       </div>
 
       <div className="mt-[40px] sm:mt-[70px] font-afacad ">
-        <button className="bg-[#ffffff] px-[7px] text-[#000000] font-bold leading-[67px] rounded-xl text-[50px] ">
+        <button className="bg-[#ffffff] px-[7px] text-[#000000] font-bold  leading-[44px] sm:leading-[67px] rounded-xl text-[28px] sm:text-[50px] ">
           How is the Flute Different?
         </button>
         <p className=" text-[#ffffffcc] text-[18px] leading-[23.4px] sm:text-[34px] sm:leading-[42px]  mt-[40px] ">

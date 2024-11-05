@@ -11,7 +11,6 @@ const MapComponent = dynamic(
     ssr: false,
   }
 );
- 
 
 const ContactUs = () => {
   return (
@@ -24,7 +23,7 @@ const ContactUs = () => {
           <div className="w-[100%] rounded pr-20 h-[1px] my-3 bg-[#fffccc]"></div>
 
           <div className="flex flex-col items-center rounded-lg w-full sm:w-[100%] mt-8">
-            <div className="w-full flex relative">
+            <div className="w-full flex  relative">
               {/* Blue Section */}
               <div className="w-[65%] bg-[#1A1C1E]/70 text-white p-4 rounded-l-[40px] backdrop-blur-sm pl-[125px]">
                 <div className=" font-urbanist">
