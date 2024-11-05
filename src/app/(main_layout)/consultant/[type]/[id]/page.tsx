@@ -32,6 +32,17 @@ const Montserrats = Montserrat({
   display: "swap", // Controls how the font is displayed while loading
 });
 
+
+interface ProfileProps {
+  name: string;
+  age: number;
+  bio?: string;
+  rating_count: { [key: string]: number };
+  total_user_count?: number;
+  total:number;
+}
+
+
 export default function Profile(props: any) {
   const {
     consultant_profile: { detail },
@@ -429,7 +440,7 @@ export default function Profile(props: any) {
               <div className="flex flex-wrap items-center">
                 <div className="lg:w-[50%] mb-4 lg:mb-0  w-full xl:border-e-2 xl:border-[#373737]">
                   <div className="bg-[#373737] w-full lg:max-w-[473px] p-5  mt-3  flex flex-wrap items-center rounded-[18px]">
-                    <div className="lg:w-[70%] w-full pe-3">
+                    {/* <div className="lg:w-[70%] w-full pe-3">
                       {review.detail?.rating_count ? (
                         Object.keys(review.detail?.rating_count as any).map(
                           (key) => {
@@ -457,7 +468,44 @@ export default function Profile(props: any) {
                       ) : (
                         <></>
                       )}
+                    </div> */}
+
+                    <div className="lg:w-[70%] w-full pe-3">
+                      {review.detail?.rating_count ? (
+                        Object.keys(review.detail.rating_count).map(
+                          (key: string) => {
+                            const item: number =
+                              review.detail.rating_count[
+                                key as keyof typeof review.detail.rating_count
+                              ];
+                            const totalUsers: number =
+                              review.detail.total_user_count || 0;
+
+                            // Calculate the percentage with a fallback to 0 if totalUsers is 0
+                            const findPercentage = (count: any, total: any) =>
+                              total ? (count / total) * 100 : 0;
+                            const percentage = Math.round(
+                              findPercentage(item, totalUsers)
+                            );
+
+                            return (
+                              <div key={key} className="flex items-center mb-2">
+                                <h2 className="text-[19px] me-1">{key}</h2>
+                                <div className="h-[11px] bg-[#555555] w-full overflow-hidden rounded-[44px] relative">
+                                  <div
+                                    className="absolute left-0 top-0 bottom-0 bg-[#FFA643] rounded-[44px]"
+                                    style={{ width: `${percentage}%` }} // Set width dynamically
+                                  ></div>
+                                </div>
+                              </div>
+                            );
+                          }
+                        )
+                      ) : (
+                        <></>
+                      )}
                     </div>
+
                     <div className="lg:w-[30%] w-full text-center">
                       <h2>
                         <span className="text-[44px] font-bold inline-block align-middle">
