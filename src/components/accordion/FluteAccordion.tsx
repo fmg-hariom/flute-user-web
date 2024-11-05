@@ -49,8 +49,8 @@ const FluteAccordion: React.FC = () => {
               onClick={() => handleToggle(index)}
             >
               <div className="flex items-center justify-start text-[20px] leading-[25px] sm:text-[40px] text-[#191A23] font-[500]">
-                <span className="mr-1 sm:mr-4">0{list.number}</span>
-                <span>{list.title}</span>
+                <span className="mr-2 sm:mr-4">0{list.number}</span>
+                <span className="text-left">{list.title}</span>
               </div>
               <span className="sm:text-[40px] text-[#191A23] font-bold border border-black rounded-full w-5 h-5 sm:w-10 sm:h-10 flex items-center justify-center ml-auto">
                 {openItems[index] ? "-" : "+"}

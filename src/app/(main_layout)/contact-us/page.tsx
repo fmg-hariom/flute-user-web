@@ -22,33 +22,33 @@ const ContactUs = () => {
           </div>
           <div className="w-[100%] rounded pr-20 h-[1px] my-3 bg-[#fffccc]"></div>
 
-          <div className="flex flex-col items-center rounded-lg w-full sm:w-[100%] mt-8">
-            <div className="w-full flex  relative">
+          <div className="flex sm:flex-col   items-center rounded-lg w-full sm:w-[100%] mt-8">
+            <div className="w-full flex flex-col sm:flex-row  relative">
               {/* Blue Section */}
-              <div className="w-[65%] bg-[#1A1C1E]/70 text-white p-4 rounded-l-[40px] backdrop-blur-sm pl-[125px]">
-                <div className=" font-urbanist">
-                  <h2 className="text-[20px] leading-[24px] mb-[20px] sm:text-[48px] sm:leading-[58px] font-bold  sm:pt-[40px]">
+              <div className="sm:w-[65%] bg-[#1A1C1E]/70 text-white p-4 rounded-[20px] sm:rounded-l-[40px] backdrop-blur-sm sm:pl-[125px]">
+                <div className=" font-urbanist flex flex-col items-center sm:place-items-start">
+                  <h2 className="text-[20px] leading-[24px] mb-[20px] sm:text-[48px] sm:leading-[58px] font-bold  sm:pt-[40px] ">
                     Get in
                     <span className="text-[#FFA643]"> Touch</span>
                   </h2>
-                  <p className="text-[16px] leading-[25px] sm:font-[500] text-[#ffffffcc] sm:text-[24px] sm:leading-[33px] w-[50%]">
+                  <p className="text-[16px] leading-[25px] sm:font-[500] text-[#ffffffcc] sm:text-[24px] sm:leading-[33px] sm:w-[50%]">
                     Our executives are standing by for your assistance 24/7
                   </p>
                 </div>
-                <div className="my-[40px] w-[50%]  font-urbanist bg-[#000]  p-4 rounded-[30px] pl-8">
+                <div className="my-[40px] sm:w-[50%]  font-urbanist bg-[#000]  p-4 rounded-[30px] pl-8 ">
                   <h2 className="text-[20px] leading-[24px] mb-[10px] text-white sm:text-[22px] sm:leading-[35px] font-bold ">
                     Phone Call
                   </h2>
 
                   <p className="text-[16px] leading-[25px] text-[#A0A0A0] sm:text-[20px] sm:leading-[29px] font-normal">
-                    Call us 24*7, we will answer you!
+                    Call us 24*7, we will answer you !
                   </p>
 
                   <p className="text-[16px] leading-[25px]  text-[#FFA643] sm:text-[20px] sm:leading-[29px] font-normal">
                     +91 7850098500
                   </p>
                 </div>
-                <div className="my-[40px] w-[50%]  font-urbanist bg-[#000]  p-4 rounded-[30px] pl-8">
+                <div className="my-[40px] sm:w-[50%]  font-urbanist bg-[#000]  p-4 rounded-[30px] pl-8">
                   <h2 className="text-[20px] leading-[24px] mb-[10px] text-white sm:text-[22px] sm:leading-[35px] font-bold ">
                     Email
                   </h2>
@@ -64,7 +64,7 @@ const ContactUs = () => {
               </div>
 
               {/* Yellow Section */}
-              <div className="w-[35%] bg-[#FFA643] text-white p-4 rounded-r-[40px] flex justify-center items-center">
+              <div className=" hidden  sm:w-[35%] bg-[#FFA643] text-white p-4 rounded-r-[40px] sm:flex justify-center items-center ">
                 {/* Placeholder Content */}
               </div>
 
