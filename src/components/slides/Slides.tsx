@@ -64,8 +64,6 @@ export const Slides = ({
             {currentIcon}
           </button>
         </div>
-
-        
       ) : (
         <></>
       )}
@@ -122,12 +120,10 @@ export const Slides = ({
                 </div>
               ) : content_type == 2 ? (
                 <>
-               
-
                   <div className="image-class">
                     <img
                       src={slide?.image}
-                      // width={311}
+                     
                       height={230}
                       className="w-[] sm:w-full sm:max-w-[384px] object-contain"
                       alt=""

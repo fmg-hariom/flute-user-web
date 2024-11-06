@@ -8,7 +8,6 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   console.log("rest ,,,", rest);
 
   return (
@@ -31,6 +30,5 @@ export default function Layout({
     </>
   );
 }
-
 
 // http://localhost:3000/magazine/trust-in-marriage-is-till-death-do-us-part-just-a-myth?type=app

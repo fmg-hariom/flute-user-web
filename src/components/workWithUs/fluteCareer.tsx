@@ -122,7 +122,7 @@ const FluteCareer: React.FC = () => {
             </div>
             <div className="bg-[#d9d9d98d] border rounded-full  sm:w-14 sm:h-14  flex items-center justify-center">
               <IoIosArrowForward
-              // style={{ fontWeight: "bold", fontSize: "1.3em" }}
+                style={{ fontWeight: "bold", fontSize: "1.3em" }}
               />
             </div>
           </div>
