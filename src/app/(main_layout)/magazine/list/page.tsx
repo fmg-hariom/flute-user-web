@@ -43,14 +43,21 @@ export default function FluteMagazineView(props: any) {
 
   const per_page = store?.magazine.per_page;
 
-   
-
   // * States
   const [showCategories, setShowCategories] = useState(false);
   const [search, setSearch] = useState("");
 
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false);
+
+  const [currentPage, setCurrentPage] = useState();
+
+  // Update currentPage whenever current_page changes in store
+  useEffect(() => {
+    if (current_page !== currentPage) {
+      setCurrentPage(current_page as any);
+    }
+  }, [current_page]);
 
   // Detect mobile view on mount and resize
   useEffect(() => {
@@ -107,6 +114,17 @@ export default function FluteMagazineView(props: any) {
     }
   };
 
+  // go to page function
+
+  const goToSubmit = (e: any) => {
+    e.preventDefault();
+    setCurrentPage(e.target.value);
+    const page = parseInt(e.target.goToPage.value, 10);
+    if (page && page > 0 && page <= randerPage.length) {
+      handlePaginate(page);
+    }
+  };
+
   return (
     <div className="py-4 sm:py-4  bg-black text-white">
       <main>
@@ -114,7 +132,7 @@ export default function FluteMagazineView(props: any) {
           <div className="mx-auto px-2 lg:px-8">
             <div className="mx-auto  lg:mx-0 text-center">
               <h2 className="  heading-2  md:!text-[40px]  text-dark  ">
-                Flute Magazine 
+                Flute Magazine
               </h2>
               <span className="x-arrow"></span>
               <p className="mt-14 text-[20px] header-p font-[600]  sm:text-[28px] font-workSans text-[#302c28]">
@@ -158,8 +176,6 @@ export default function FluteMagazineView(props: any) {
                             />
                           </svg>
                         </div>
-
-                        
                       ) : (
                         <svg
                           className="w-4 h-4 text-gray-500 dark:text-gray-400"
@@ -404,140 +420,182 @@ export default function FluteMagazineView(props: any) {
                   );
                 })
               ) : (
-                <></>
+                <div className="w-full flex items-center justify-center h-svh col-span-3">
+                  <div className="loader">
+                    <span className="bar"></span>
+                    <span className="bar"></span>
+                    <span className="bar"></span>
+                  </div>
+                </div>
               )}
             </div>
 
             <div>
               <div className="flex items-center flex-wrap justify-center px-2 sm:py-3 sm:px-6">
-                <div className=" md:flex sm:flex-1 sm:items-center sm:justify-center">
+                <div className="md:flex sm:flex-1 sm:items-center sm:justify-center">
                   <div>
                     <nav
                       aria-label="Pagination"
-                      className="isolate inline-flex  rounded-md shadow-sm"
+                      className="isolate inline-flex rounded-md shadow-sm"
                     >
-                      <div
-                        className="relative m-1 inline-flex items-center rounded pr-2 sm:px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300  focus:z-20 focus:outline-offset-0"
+                      {/* Previous Button */}
+                      <button
+                        className={`relative m-1 inline-flex items-center rounded pr-2 sm:px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 ${
+                          store.magazine.page === 1
+                            ? "cursor-not-allowed opacity-50"
+                            : "cursor-pointer"
+                        }`}
                         onClick={() => handlePaginate("back")}
+                        disabled={store.magazine.page === 1}
                       >
                         <span className="sr-only">Previous</span>
-                        <span>
-                          <svg
-                            className="inline-block align-middle"
-                            width="24"
-                            height="23"
-                            viewBox="0 0 24 23"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              clip-rule="evenodd"
-                              d="M15.2717 5.95041C15.5948 6.28639 15.5843 6.82064 15.2483 7.1437L10.8173 11.3177L15.2483 15.4917C15.5843 15.8148 15.5948 16.3491 15.2717 16.685C14.9487 17.021 14.4144 17.0315 14.0784 16.7084L9.01474 11.9261C8.84926 11.767 8.75574 11.5473 8.75574 11.3177C8.75574 11.0882 8.84926 10.8685 9.01474 10.7094L14.0784 5.92701C14.4144 5.60395 14.9487 5.61443 15.2717 5.95041Z"
-                              fill="#E5E9EC"
-                            />
-                          </svg>
-                          Back
-                        </span>
-                      </div>
+                        <svg
+                          className="inline-block align-middle"
+                          width="24"
+                          height="23"
+                          viewBox="0 0 24 23"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M15.2717 5.95041C15.5948 6.28639 15.5843 6.82064 15.2483 7.1437L10.8173 11.3177L15.2483 15.4917C15.5843 15.8148 15.5948 16.3491 15.2717 16.685C14.9487 17.021 14.4144 17.0315 14.0784 16.7084L9.01474 11.9261C8.84926 11.767 8.75574 11.5473 8.75574 11.3177C8.75574 11.0882 8.84926 10.8685 9.01474 10.7094L14.0784 5.92701C14.4144 5.60395 14.9487 5.61443 15.2717 5.95041Z"
+                            fill="#E5E9EC"
+                          />
+                        </svg>
+                      </button>
 
+                      {/* Page Numbers */}
                       {randerPage
                         .filter((item) => {
-                          // Conditionally apply filtering for mobile view only
+                          const { page } = store.magazine;
+                          const totalPages = randerPage.length;
+
                           if (window.innerWidth <= 640) {
-                            // Mobile screen size (you can adjust this as per your need)
-                            if (store.magazine.page <= 2) {
-                              return item <= 3; // Show first 3 pages when current page is 1 or 2
-                            } else if (
-                              store.magazine.page >=
-                              randerPage.length - 1
-                            ) {
-                              return item >= randerPage.length - 2; // Show last 3 pages when close to the end
-                            } else {
-                              return (
-                                item >= store.magazine.page - 1 &&
-                                item <= store.magazine.page + 1
-                              ); // Show 1 before and 1 after the current page
-                            }
+                            // Smaller screens: Show current range (up to 4 pages)
+                            if (page <= 4) return item <= 4;
+                            if (page >= totalPages - 1)
+                              return item >= totalPages - 3;
+                            return item >= page - 2 && item <= page + 1;
+                          } else {
+                            // Larger screens: Show 7 pages dynamically
+                            const isInRange =
+                              item >= Math.max(page - 3, 1) &&
+                              item <= Math.min(page + 3, totalPages);
+                            console.log("isInRange", isInRange);
+                            const isBoundary =
+                              item === totalPages || item === 1;
+                            return isInRange || isBoundary;
                           }
-                          return true; // No filtering for web version
                         })
-                        .map((item) => (
-                          <a
-                            onClick={() => handlePaginate(item)}
-                            aria-current="page"
-                            key={item}
-                            className={`relative z-10 m-1 inline-flex items-center rounded  px-4 py-1 sm:py-2 text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
-                              store.magazine.page == item
-                                ? "text-dark bg-white"
-                                : "text-white ring-1 ring-inset ring-gray-300 bg-none"
-                            }`}
-                          >
-                            {item}
-                          </a>
+                        .map((item, index, array) => (
+                          <div key={item} className="relative z-10">
+                            <button
+                              onClick={() => handlePaginate(item)}
+                              aria-current={
+                                store.magazine.page === item
+                                  ? "page"
+                                  : undefined
+                              }
+                              className={`relative z-10 m-1 inline-flex items-center rounded px-4 py-4 sm:py-4 text-sm font-semibold focus:z-20 ${
+                                store.magazine.page === item
+                                  ? "text-dark bg-white"
+                                  : "text-white ring-1 ring-inset ring-gray-300 bg-none cursor-pointer"
+                              }`}
+                            >
+                              {item}
+                            </button>
+
+                            {/* Dynamic "..." */}
+                            {index < array.length - 1 &&
+                              item !== array[index + 1] - 1 && (
+                                <span className="m-1 text-sm font-semibold text-gray-500">
+                                  ...
+                                </span>
+                              )}
+                          </div>
                         ))}
 
-                      <div
-                        className="relative m-1 inline-flex rounded items-center rounded-r-md pl-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300  focus:z-20 focus:outline-offset-0"
+                      {/* Next Button */}
+                      <button
+                        className={`relative m-1 inline-flex items-center rounded pl-2 py-2 px-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 ${
+                          store.magazine.page === randerPage.length
+                            ? "cursor-not-allowed opacity-50"
+                            : "cursor-pointer"
+                        }`}
                         onClick={() => handlePaginate("next")}
+                        disabled={store.magazine.page === randerPage.length}
                       >
                         <span className="sr-only">Next</span>
-                        <span>
-                          Next
-                          <svg
-                            className="inline-block align-middle"
-                            width="24"
-                            height="23"
-                            viewBox="0 0 24 23"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              clip-rule="evenodd"
-                              d="M8.76636 16.6853C8.44331 16.3494 8.45378 15.8151 8.78976 15.492L13.2208 11.318L8.78976 7.144C8.45378 6.82094 8.44331 6.28668 8.76636 5.9507C9.08942 5.61472 9.62368 5.60425 9.95966 5.92731L15.0233 10.7097C15.1888 10.8688 15.2823 11.0885 15.2823 11.318C15.2823 11.5476 15.1888 11.7672 15.0233 11.9264L9.95966 16.7087C9.62368 17.0318 9.08942 17.0213 8.76636 16.6853Z"
-                              fill="#E5E9EC"
-                            />
-                          </svg>
-                        </span>
-                      </div>
+                        <svg
+                          className="inline-block align-middle"
+                          width="24"
+                          height="23"
+                          viewBox="0 0 24 23"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M8.76636 16.6853C8.44331 16.3494 8.45378 15.8151 8.78976 15.492L13.2208 11.318L8.78976 7.144C8.45378 6.82094 8.44331 6.28668 8.76636 5.9507C9.08942 5.61472 9.62368 5.60425 9.95966 5.92731L15.0233 10.7097C15.1888 10.8688 15.2823 11.0885 15.2823 11.318C15.2823 11.5476 15.1888 11.7672 15.0233 11.9264L9.95966 16.7087C9.62368 17.0318 9.08942 17.0213 8.76636 16.6853Z"
+                            fill="#E5E9EC"
+                          />
+                        </svg>
+                      </button>
                     </nav>
                   </div>
 
-                  <form className=" hidden sm:flex sm:items-center sm:ms-10">
-                    <label className="block mb-2 text-sm font-medium text-white ">
-                      Result per page
-                    </label>
-                    <select
-                      id="countries"
-                      className="bg-gray-50 ms-2 border result-per-page bg-transparent border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      onChange={(e) =>
-                        store.get.paginate({ size: parseInt(e.target.value) })
-                      }
+                  {/* Go to Page Form */}
+                  <form
+                    className="mt-4 flex items-center sm:ml-10 sm:mt-0"
+                    onSubmit={goToSubmit}
+                  >
+                    <label
+                      htmlFor="goToPage"
+                      className="block mb-2 text-lg font-medium text-white"
                     >
-                      <option selected>12</option>
-                      <option value="24">24</option>
-                      <option value="36">36</option>
-                      <option value="48">48</option>
-                      <option value="60">60</option>
-                    </select>
+                      Go to page :
+                    </label>
+                    <input
+                      id="goToPage"
+                      name="goToPage"
+                      min="1"
+                      max={randerPage.length}
+                      value={currentPage}
+                      onChange={(e: any) =>
+                        setCurrentPage(
+                          (parseInt(e.target.value, 10) as any) || 1
+                        )
+                      }
+                      className="w-12 relative m-1 inline-flex rounded items-center justify-center rounded-r-md py-2 text-white border bg-black focus:z-20 focus:outline-offset-0 text-center"
+                    />
+                    /{randerPage.length}
+                    <button
+                      type="submit"
+                      className="ml-3 px-4 py-2 text-sm font-medium text-white bg-black-600 rounded-md hover:bg-black-700 focus:outline-none focus:ring-2 border"
+                    >
+                      Confirm
+                    </button>
                   </form>
                 </div>
               </div>
 
-              <div className=" w-full flex items-center  justify-center mt-4">
+              {/* Showing Data Info */}
+              <div className="w-full flex items-center justify-center mt-4">
                 <div className="showing-data">
-                  <p className="text-sm text-gray-300 text-center md:text-start">
+                  <p className="text-sm text-gray-300 text-center ">
                     Showing{" "}
                     <span className="font-medium">
                       {(store.magazine.page - 1) * store.magazine.per_page + 1}
                     </span>{" "}
                     to{" "}
                     <span className="font-medium">
-                      {store.magazine.page * store.magazine.per_page >
-                      store.magazine.total_posts
-                        ? store.magazine.total_posts
-                        : store.magazine.page * store.magazine.per_page}
+                      {Math.min(
+                        store.magazine.page * store.magazine.per_page,
+                        store.magazine.total_posts
+                      )}
                     </span>{" "}
                     of{" "}
                     <span className="font-medium">

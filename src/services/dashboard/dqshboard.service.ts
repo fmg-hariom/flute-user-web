@@ -6,6 +6,7 @@ import api from '@/configs/api';
 import PokerApi from '@/api/PokerApi';
 
 export type Dashboard = {
+    list_cards: boolean;
     id: number
     content_type: number
     category_ids: Array<number>

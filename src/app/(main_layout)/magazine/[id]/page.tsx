@@ -191,6 +191,7 @@ export default function Blogs(props: any) {
               <span className="bar"></span>
             </div>
           </div>
+          
         )}
       </main>
 
