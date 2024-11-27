@@ -483,7 +483,7 @@ export default function FluteMagazineView(props: any) {
                             const isInRange =
                               item >= Math.max(page - 3, 1) &&
                               item <= Math.min(page + 3, totalPages);
-                            console.log("isInRange", isInRange);
+
                             const isBoundary =
                               item === totalPages || item === 1;
                             return isInRange || isBoundary;
