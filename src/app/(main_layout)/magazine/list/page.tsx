@@ -35,7 +35,7 @@ export default function FluteMagazineView(props: any) {
   const store = useMagazineStore();
   const totalPages = store?.magazine?.total_pages || 0;
   const total_posts = store?.magazine?.total_posts || 0;
-  console.log("total pages", totalPages);
+
   // Render pagination links
   const randerPage = Array.from({ length: totalPages }, (_, i) => i + 1);
 
@@ -564,11 +564,7 @@ export default function FluteMagazineView(props: any) {
                       min="1"
                       max={randerPage.length}
                       value={currentPage}
-                      onChange={(e: any) =>
-                        setCurrentPage(
-                          (parseInt(e.target.value, 10) as any) || 1
-                        )
-                      }
+                      onChange={(e: any) => setCurrentPage(e.target.value)}
                       className="w-12 relative m-1 inline-flex rounded items-center justify-center rounded-r-md py-2 text-white border bg-black focus:z-20 focus:outline-offset-0 text-center"
                     />
                     /{randerPage.length}

@@ -11,12 +11,12 @@ import { useRouter } from "next/navigation";
 
 type Props = {
   title: string;
-  slides: Array<{ image: string; name: string;[key: string]: any }>;
+  slides: Array<{ image: string; name: string; [key: string]: any }>;
   radiant1: string;
   radiant2: string;
   viewAllId?: any;
   contentType: number;
-  cardSlides?: Array<{ image: string; name: string;[key: string]: any }>;
+  cardSlides?: Array<{ image: string; name: string; [key: string]: any }>;
 };
 
 export const Slides = ({
@@ -26,7 +26,7 @@ export const Slides = ({
   radiant2,
   viewAllId,
   contentType,
-  cardSlides
+  cardSlides,
 }: Props) => {
   const router = useRouter();
 
@@ -69,22 +69,21 @@ export const Slides = ({
       ) : (
         <></>
       )}
-      {
-        cardSlides?.length ?
-          <>
-
-            <Slides
-              contentType={2}
-              title={``}
-              slides={cardSlides}
-              radiant1={radiant1}
-              radiant2={"#DFB881"}
-              viewAllId={viewAllId}
-            />
-            <br />
-          </>
-          : <></>
-      }
+      {cardSlides?.length ? (
+        <>
+          <Slides
+            contentType={2}
+            title={``}
+            slides={cardSlides}
+            radiant1={radiant1}
+            radiant2={"#DFB881"}
+            viewAllId={viewAllId}
+          />
+          <br />
+        </>
+      ) : (
+        <></>
+      )}
       <Carousel
         plugins={contentType === 2 ? [plugin.current] : []}
         onMouseEnter={contentType === 2 ? plugin.current?.stop : undefined}
@@ -98,10 +97,11 @@ export const Slides = ({
           {slides?.map((slide, index: number) => (
             <CarouselItem
               key={index}
-              className={` ${contentType === 2
-                ? "w-full sm:w-auto"
-                : "sm:w-auto sm:basis-1/1"
-                }`}
+              className={` ${
+                contentType === 2
+                  ? "w-full sm:w-auto"
+                  : "sm:w-auto sm:basis-1/1"
+              }`}
             >
               {contentType == 1 ? (
                 <div
@@ -140,7 +140,6 @@ export const Slides = ({
                   <div className="image-class">
                     <img
                       src={slide?.image}
-
                       height={230}
                       className="w-[] sm:w-full sm:max-w-[384px] object-contain"
                       alt=""
@@ -161,7 +160,6 @@ export const Slides = ({
           ))}
         </CarouselContent>
       </Carousel>
-      <br />
       <br />
     </>
   );
