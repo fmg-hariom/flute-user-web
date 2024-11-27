@@ -11,11 +11,12 @@ import { useRouter } from "next/navigation";
 
 type Props = {
   title: string;
-  slides: Array<{ image: string; name: string; [key: string]: any }>;
+  slides: Array<{ image: string; name: string;[key: string]: any }>;
   radiant1: string;
   radiant2: string;
   viewAllId?: any;
-  content_type: number;
+  contentType: number;
+  cardSlides?: Array<{ image: string; name: string;[key: string]: any }>;
 };
 
 export const Slides = ({
@@ -24,12 +25,13 @@ export const Slides = ({
   radiant1,
   radiant2,
   viewAllId,
-  content_type,
+  contentType,
+  cardSlides
 }: Props) => {
   const router = useRouter();
 
   const plugin: any = React.useRef(
-    content_type === 2
+    contentType === 2
       ? Autoplay({ delay: 1500, stopOnInteraction: true })
       : null
   );
@@ -48,7 +50,7 @@ export const Slides = ({
 
   return (
     <>
-      {title && content_type == 1 ? (
+      {title && contentType == 1 ? (
         <div className="flex justify-between py-4 px-4 sm:px-0">
           <h3 className=" text-[24px]  font-semibold sm:text-[38px]  text-[#ffffffcc] font-serif">
             {title}
@@ -67,26 +69,41 @@ export const Slides = ({
       ) : (
         <></>
       )}
+      {
+        cardSlides?.length ?
+          <>
+
+            <Slides
+              contentType={2}
+              title={``}
+              slides={cardSlides}
+              radiant1={radiant1}
+              radiant2={"#DFB881"}
+              viewAllId={viewAllId}
+            />
+            <br />
+          </>
+          : <></>
+      }
       <Carousel
-        plugins={content_type === 2 ? [plugin.current] : []}
-        onMouseEnter={content_type === 2 ? plugin.current?.stop : undefined}
-        onMouseLeave={content_type === 2 ? plugin.current?.play : undefined}
+        plugins={contentType === 2 ? [plugin.current] : []}
+        onMouseEnter={contentType === 2 ? plugin.current?.stop : undefined}
+        onMouseLeave={contentType === 2 ? plugin.current?.play : undefined}
         opts={{
           align: "center",
         }}
-        className="w-full px-4 sm:px-0"
+        className={`w-full px-4 sm:px-0`}
       >
         <CarouselContent>
           {slides?.map((slide, index: number) => (
             <CarouselItem
               key={index}
-              className={` ${
-                content_type === 2
-                  ? "w-full sm:w-auto"
-                  : "sm:w-auto sm:basis-1/1"
-              }`}
+              className={` ${contentType === 2
+                ? "w-full sm:w-auto"
+                : "sm:w-auto sm:basis-1/1"
+                }`}
             >
-              {content_type == 1 ? (
+              {contentType == 1 ? (
                 <div
                   key={index}
                   className={`h-[145px] w-[120px] sm:h-60 sm:w-56 flex items-center justify-center rounded-2xl pt-7 overflow-hidden `}
@@ -118,12 +135,12 @@ export const Slides = ({
                     </p>
                   </div>
                 </div>
-              ) : content_type == 2 ? (
+              ) : contentType == 2 ? (
                 <>
                   <div className="image-class">
                     <img
                       src={slide?.image}
-                     
+
                       height={230}
                       className="w-[] sm:w-full sm:max-w-[384px] object-contain"
                       alt=""
@@ -144,6 +161,8 @@ export const Slides = ({
           ))}
         </CarouselContent>
       </Carousel>
+      <br />
+      <br />
     </>
   );
 };

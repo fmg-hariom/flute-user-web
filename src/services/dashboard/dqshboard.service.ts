@@ -6,7 +6,6 @@ import api from '@/configs/api';
 import PokerApi from '@/api/PokerApi';
 
 export type Dashboard = {
-    list_cards: boolean;
     id: number
     content_type: number
     category_ids: Array<number>
@@ -18,6 +17,23 @@ export type Dashboard = {
     createdAt: string
     updatedAt: string
     list: Array<{
+        // for consultant list
+        id: number
+        first_name: string
+        last_name: string
+        photos: {
+            url: string
+        }[]
+
+        // for promotional cards
+        card_image: string
+        type: number
+        status: string
+        category_name: string
+        category_id: number
+        is_clickable?: boolean
+    }>
+    list_cards: Array<{
         // for consultant list
         id: number
         first_name: string

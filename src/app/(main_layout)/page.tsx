@@ -159,9 +159,8 @@ export default function Home() {
                 >
                   <img src={item.imagePath} className="w-6" />
                   <p
-                    className={`text-sm font-normal text-[#A0A0A0] ${
-                      index == 0 ? "text-[#FFA643]" : ""
-                    }`}
+                    className={`text-sm font-normal text-[#A0A0A0] ${index == 0 ? "text-[#FFA643]" : ""
+                      }`}
                   >
                     {item.title}
                   </p>
@@ -208,8 +207,21 @@ export default function Home() {
               id: l.id,
             }));
 
+            let cardSlides = [] as any;
+
+
+
             if (item.content_type === 2) {
               slides = item.list.map((l) => ({
+                image: l.card_image,
+                name: l.category_name,
+                id: l.id,
+                category_id: l?.category_id,
+                is_clickable: l?.is_clickable,
+              }));
+            }
+            if (item.list_cards?.length) {
+              cardSlides = item.list_cards.map((l) => ({
                 image: l.card_image,
                 name: l.category_name,
                 id: l.id,
@@ -220,17 +232,20 @@ export default function Home() {
 
             return (
               <>
-                <div className="py-4 sm:py-6 px-2 sm:px-16   w-full sm:w-[100%] bg-black text-white">
+                <div className="py-4 sm:py-6 px-2 sm:px-16   w-full sm:w-[100%] bg-black text-white" style={{
+                  background: `radial-gradient(circle, 
+                    ${item.categories?.[0]?.category_bg_color?.[0] || `rgba(9,9,121,1)`} 1%, ${item.categories?.[0]?.category_bg_color?.[1] || `rgba(0,212,255,1)`} 50%)`,
+                }} >
                   <Slides
-                    content_type={item.content_type}
+                    contentType={item.content_type}
                     title={`${item.title}`}
                     slides={slides}
-                    radiant1={`${
-                      item.categories?.[0]?.category_card_bg_color?.[0]
-                        ?.color || "#DDC3A2"
-                    }`}
+                    radiant1={`${item.categories?.[0]?.category_card_bg_color?.[0]
+                      ?.color || "#DDC3A2"
+                      }`}
                     radiant2={"#DFB881"}
                     viewAllId={item.category_ids?.[0]}
+                    cardSlides={cardSlides}
                   />
                 </div>
               </>

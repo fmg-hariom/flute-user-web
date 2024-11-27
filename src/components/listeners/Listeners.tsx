@@ -98,11 +98,11 @@ const Listeners = (props: Props) => {
         </Carousel>
       </div>
       <div className=" py-4 sm:py-8 px-2 sm:px-16 bg-gradient-to-b from-[#072b27] to-[#0A413B]">
-        <Slides content_type={1} title={"Listeners"} slides={listenersSlides} radiant1={"#95AAA5"} radiant2={"#95AAA5"} />
+        <Slides contentType={1} title={"Listeners"} slides={listenersSlides} radiant1={"#95AAA5"} radiant2={"#95AAA5"} />
       </div>
       <h4 className='py-4 px-7 sm:px-16 text-white text-xl sm:text-2xl font-semibold bg-[#094A44]'>View All</h4>
     </div>
-  ) 
+  )
 }
 
 export default Listeners
