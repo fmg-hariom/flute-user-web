@@ -99,8 +99,8 @@ export default function Home() {
 
   return (
     <>
-      <div className="py-4 sm:py-8 px-2 sm:px-16 bg-black text-white">
-        <main>
+      <div className="py-4 sm:py-8 px-2 sm:px-16 bg-black text-white overflow-x-hidden">
+        <main>  
           <div className="hidden sm:grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
             {cardList.map((card) => {
               if (!card?.path) {
@@ -174,7 +174,7 @@ export default function Home() {
             <Banner />
           </div>
 
-          <div className="flex overflow-x-scroll mb-5 sm:mb-0">
+          <div className="flex  mb-5 sm:mb-0">
             {skillStore.skill.list?.length ? (
               <SkillSlide slides={[...(skillStore.skill.list || [])]} />
             ) : (

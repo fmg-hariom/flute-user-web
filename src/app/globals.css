@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Kay+Pho+Du:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
 /* @import url('https://fonts.cdnfonts.com/css/myriad-pro'); */
 
 @tailwind base;
@@ -75,16 +75,20 @@
   }
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-*::-webkit-scrollbar {
+/* Hide the horizontal scrollbar */
+/* *::-webkit-scrollbar {
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge add Firefox */
 * {
   -ms-overflow-style: none;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
+} */
+
+body {
+  overflow-x: hidden;
 }
+
 :root {
   --light-blue-color: #c9e2e5;
   --bg-light-yellow: #e7f59a;

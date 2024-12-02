@@ -127,8 +127,8 @@ export default function FluteMagazineView(props: any) {
 
   return (
     <div className="py-4 sm:py-4  bg-black text-white">
-      <main>
-        <div className="relative isolate overflow-hidden bg-light-yellow py-22 ">
+      <main className="">
+        <div className="relative isolate   bg-light-yellow py-22 ">
           <div className="mx-auto px-2 lg:px-8">
             <div className="mx-auto  lg:mx-0 text-center">
               <h2 className="  heading-2  md:!text-[40px]  text-dark  ">
