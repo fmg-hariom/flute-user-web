@@ -96,7 +96,7 @@ body {
 
 /* Custom scrollbar styles */
 ::-webkit-scrollbar {
-  width: 16px;
+  width: 13px;
   /* height: 16px; */
 }
 
