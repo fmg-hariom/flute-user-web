@@ -357,7 +357,7 @@ export default function FluteMagazineView(props: any) {
                               {item.second_line_title}
                             </h2>
 
-                            <h2 className="text-[16px] mb-8 text-[#959393] line-clamp-2 ">
+                            <h2 className="text-[18px] mb-8 text-[#959393] line-clamp-2 ">
                               {item.sub_title}
                             </h2>
                           </div>
