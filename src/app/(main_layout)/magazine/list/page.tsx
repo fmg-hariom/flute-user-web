@@ -345,13 +345,13 @@ export default function FluteMagazineView(props: any) {
                         <div className="p-4">
                           <div className="h-[125px]">
                             <h2
-                              className={`text-[20px] text-[#959393] font-bold mb-2 line-clamp-2    ${Montserrats.className} `}
+                              className={`text-[20px] text-[#959393] font-bold mb-2 lg:line-clamp-2    ${Montserrats.className} `}
                             >
                               {" "}
                               {item.title}
                             </h2>
                             <h2
-                              className={`text-[20px] text-[#959393] font-bold mb-2 line-clamp-2    ${Montserrats.className} `}
+                              className={`text-[20px] text-[#959393] font-bold mb-2 lg:line-clamp-2    ${Montserrats.className} `}
                             >
                               {" "}
                               {item.second_line_title}
@@ -362,7 +362,7 @@ export default function FluteMagazineView(props: any) {
                             </h2>
                           </div>
 
-                          <div className="flex justify-between px-1 mt-3 ">
+                          <div className="flex justify-between px-1 mt-6 ">
                             <div>
                               <span className="inline-block align-middle me-2">
                                 <svg
