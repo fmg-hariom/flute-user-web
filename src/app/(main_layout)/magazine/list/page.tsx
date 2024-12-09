@@ -362,7 +362,7 @@ export default function FluteMagazineView(props: any) {
                             </h2>
                           </div>
 
-                          <div className="flex justify-between px-1 mt-6 ">
+                          <div className="flex justify-between px-1  mt-10 lg:mt-6 ">
                             <div>
                               <span className="inline-block align-middle me-2">
                                 <svg
