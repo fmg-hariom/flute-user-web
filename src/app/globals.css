@@ -108,7 +108,7 @@ body {
 ::-webkit-scrollbar-thumb {
   background-color: #b8c6c9;
   border-radius: 6px;
-  height: 40px  !important;
+  height: 40px !important;
 }
 
 /* ::-webkit-scrollbar-thumb:hover {

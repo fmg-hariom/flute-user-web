@@ -32,16 +32,14 @@ const Montserrats = Montserrat({
   display: "swap", // Controls how the font is displayed while loading
 });
 
-
 interface ProfileProps {
   name: string;
   age: number;
   bio?: string;
   rating_count: { [key: string]: number };
   total_user_count?: number;
-  total:number;
+  total: number;
 }
-
 
 export default function Profile(props: any) {
   const {
@@ -66,7 +64,7 @@ export default function Profile(props: any) {
         <div className="modal-cards ">
           <div className="container px-[10px] md:px-16  mx-auto">
             <div className="flex flex-wrap mb-4 modal-cards p-1 lg:p-2 ">
-              <div className=" w-full lg:w-[265px] h-auto   md:h-[45rem] lg:h-[24rem]">
+              <div className=" w-full lg:w-[350px] h-auto   md:h-[45rem] lg:h-[24rem]">
                 <img
                   src={detail?.profile_photo?.url || ""}
                   className="rounded-2xl h-full w-full object-cover "
@@ -75,11 +73,11 @@ export default function Profile(props: any) {
               </div>
 
               <div
-                className={` grow p-1 xl:p-4 xl:ps-5 text-[#ffffffcc]  ${Montserrats.className}`}
+                className={` grow p-1 text-[#ffffffcc]  ${Montserrats.className}`}
               >
                 <div className="card-body">
                   <div className="flex flex-wrap  justify-between">
-                    <div className="grow sm:ml-[60px]">
+                    <div className="grow sm:ml-[40px]">
                       <div className="flex items-center grow h-14">
                         <h2 className=" text-[28px] sm:text-[46px] me-3 font-semibold">
                           {detail?.first_name}
@@ -152,7 +150,7 @@ export default function Profile(props: any) {
 
                       <p className=" font-normal text-[30px] leading-[32px] my-6 text-[#ffffffb3]">
                         {" "}
-                        Exp: {detail?.experience} years
+                        Exp: {detail?.experience || 0} years
                       </p>
                     </div>
 

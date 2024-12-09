@@ -432,7 +432,9 @@ export default function ViewAll(props: any) {
                             <div className="flex items-center justify-between">
                               <div>
                                 <h2 className="card-title text-[19px] sm:text-[26px] sm:leading-[44px] tracking-[1px] text-[#ffffffcc] font-serif">
-                                  {item.first_name + " " + item.last_name}
+                                  {item.first_name +
+                                    " " +
+                                    (item.last_name || "")}
                                 </h2>
                               </div>
                               {item.is_live ? (
