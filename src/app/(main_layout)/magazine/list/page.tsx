@@ -323,7 +323,7 @@ export default function FluteMagazineView(props: any) {
               <></>
             )}
 
-            <div className="gap-10 grid md:grid-cols-3">
+            <div className="gap-10 grid md:grid-cols-3 ">
               {store.magazine.list.length ? (
                 store.magazine.list.map((item) => {
                   return (
@@ -343,7 +343,7 @@ export default function FluteMagazineView(props: any) {
                           alt=""
                         />
                         <div className="p-4">
-                          <div className="">
+                          <div className="md:h-[125px]">
                             <h2
                               className={`text-[20px] text-[#959393] font-bold mb-2 lg:line-clamp-2    ${Montserrats.className} `}
                             >
