@@ -26,12 +26,9 @@ const MobileBlogs = (props: any) => {
     setIsModalOpen(false);
   };
 
-  console.log(",,,,,,,", store.magazine?.detail);
-
   return (
     <div className="px-0 bg-black text-white">
       <main>
-        <div>kjn</div>
         {store.magazine?.detail ? (
           <div className="container mx-auto px-2 sm:px-12 max-w-[1850px]">
             <div className="pt-6">

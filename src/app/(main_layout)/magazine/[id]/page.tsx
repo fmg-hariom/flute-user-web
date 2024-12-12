@@ -25,7 +25,6 @@ export default function Blogs(props: any) {
     setIsModalOpen(false);
   };
 
-   
   return (
     <div className="px-0 bg-black text-white">
       <main>
@@ -191,7 +190,6 @@ export default function Blogs(props: any) {
               <span className="bar"></span>
             </div>
           </div>
-          
         )}
       </main>
 
@@ -209,7 +207,7 @@ export default function Blogs(props: any) {
             {/* Display the selected image */}
             <img
               src={selectedImage}
-              className="border-none w-full h-full object-cover" 
+              className="border-none w-full h-full object-cover"
               alt="Selected"
             />
           </div>
