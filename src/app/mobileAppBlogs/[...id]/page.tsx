@@ -31,10 +31,9 @@ const MobileBlogs = (props: any) => {
       <main>
         {store.magazine?.detail ? (
           <div className="container mx-auto px-2 sm:px-12 max-w-[1850px]">
-            <div className="pt-6">
+            <div className="pt-1">
               <span className="inline-block align-middle text-[#bcbaba] text-[20px] rounded-sm p-1 px-2  ">
-                {/* <span className="inline-block align-middle bg-slate-200 rounded-sm p-1 px-2 text-sm  text-dark"> */}
-                {store.magazine.detail?.date}
+                {/* {store.magazine.detail?.date} */}
               </span>
             </div>
             <div>
