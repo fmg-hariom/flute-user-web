@@ -8,15 +8,16 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { useRouter } from "next/navigation";
+import DashPromoCard from "../DashPromoCard/DashPromoCard";
 
 type Props = {
   title: string;
-  slides: Array<{ image: string; name: string; [key: string]: any }>;
+  slides: Array<{ image: string; name: string;[key: string]: any }>;
   radiant1: string;
   radiant2: string;
   viewAllId?: any;
   contentType: number;
-  cardSlides?: Array<{ image: string; name: string; [key: string]: any }>;
+  cardSlides?: Array<{ image: string; name: string;[key: string]: any }>;
 };
 
 export const Slides = ({
@@ -69,97 +70,138 @@ export const Slides = ({
       ) : (
         <></>
       )}
-      {cardSlides?.length ? (
-        <>
-          <Slides
-            contentType={2}
-            title={``}
-            slides={cardSlides}
-            radiant1={radiant1}
-            radiant2={"#DFB881"}
-            viewAllId={viewAllId}
-          />
-          <br />
-        </>
-      ) : (
-        <></>
-      )}
-      <Carousel
-        plugins={contentType === 2 ? [plugin.current] : []}
-        onMouseEnter={contentType === 2 ? plugin.current?.stop : undefined}
-        onMouseLeave={contentType === 2 ? plugin.current?.play : undefined}
-        opts={{
-          align: "center",
-        }}
-        className={`w-full px-4 sm:px-0`}
-      >
-        <CarouselContent>
-          {slides?.map((slide, index: number) => (
-            <CarouselItem
-              key={index}
-              className={` ${
-                contentType === 2
-                  ? "w-full sm:w-auto"
-                  : "sm:w-auto sm:basis-1/1"
-              }`}
-            >
-              {contentType == 1 ? (
-                <div
-                  key={index}
-                  className={`h-[145px] w-[120px] sm:h-60 sm:w-56 flex items-center justify-center rounded-2xl pt-7 overflow-hidden `}
-                  style={{
-                    backgroundImage: `radial-gradient(${radiant1}, ${radiant1})`,
-                  }}
-                  onClick={() =>
-                    router.push(`/consultant/astrologer/${slide.id}`)
-                  }
-                >
-                  <div className="w-[160px] sm:w-[230px]">
-                    <Image
-                      src={slide?.image}
-                      width={300}
-                      height={300}
-                      style={{ width: "100%" }}
-                      alt=""
-                    ></Image>
-                  </div>
-                  <div
-                    className="p-2 w-[160px] sm:w-[225px] text-center absolute bottom-[0.01px] rounded-2xl"
-                    style={{
-                      background:
-                        "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 90%)",
-                    }}
-                  >
-                    <p className="text-white text-[14px] sm:text-[20px]  ">
-                      {slide?.name}
-                    </p>
-                  </div>
-                </div>
-              ) : contentType == 2 ? (
-                <>
-                  <div className="image-class">
+
+      {cardSlides?.length ? cardSlides[0]?.type == 2 ?
+        (<>
+          <DashPromoCard>
+            {
+              cardSlides?.map((item) => {
+                return (
+
+                  <div>
                     <img
-                      src={slide?.image}
-                      height={230}
-                      className="w-[] sm:w-full sm:max-w-[384px] object-contain"
-                      alt=""
-                      onClick={() => {
-                        if (slide?.is_clickable) {
-                          router.push(
-                            `/consultant/listeners?category_id=${slide?.category_id}&consultant_type=3&title=Listeners`
-                          );
-                        }
-                      }}
+                      src={item.image}
+                      alt="img1"
                     />
                   </div>
-                </>
-              ) : (
-                <></>
-              )}
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
+                )
+              })
+            }
+          </DashPromoCard>
+        </>)
+        : cardSlides[0]?.type == 3 ? (
+          <>
+            <Slides
+              contentType={2}
+              title={``}
+              slides={cardSlides}
+              radiant1={radiant1}
+              radiant2={"#DFB881"}
+              viewAllId={viewAllId}
+            />
+            <br />
+          </>
+        ) : (
+          <></>
+        ) : (
+        <></>
+      )}
+      {
+        slides?.length ? slides[0]?.type == 2 ?
+          (<>
+            <DashPromoCard items={slides} />
+            {/* <div>
+                <img
+                  src={slides[0]?.image}
+                  alt="img1"
+                />
+              </div>
+              <div>
+                <img
+                  src={slides[1]?.image}
+                  alt="img1"
+                />
+              </div> */}
+
+          </>) :
+
+          <Carousel
+            plugins={contentType === 2 ? [plugin.current] : []}
+            onMouseEnter={contentType === 2 ? plugin.current?.stop : undefined}
+            onMouseLeave={contentType === 2 ? plugin.current?.play : undefined}
+            opts={{
+              align: "center",
+            }}
+            className={`w-full px-4 sm:px-0`}
+          >
+            <CarouselContent>
+              {slides?.map((slide, index: number) => (
+                <CarouselItem
+                  key={index}
+                  className={` ${contentType === 2
+                    ? "w-full sm:w-auto"
+                    : "sm:w-auto sm:basis-1/1"
+                    }`}
+                >
+                  {contentType == 1 ? (
+                    <div
+                      key={index}
+                      className={`h-[145px] w-[120px] sm:h-60 sm:w-56 flex items-center justify-center rounded-2xl pt-7 overflow-hidden `}
+                      style={{
+                        backgroundImage: `radial-gradient(${radiant1}, ${radiant1})`,
+                      }}
+                      onClick={() =>
+                        router.push(`/consultant/astrologer/${slide.id}`)
+                      }
+                    >
+                      <div className="w-[160px] sm:w-[230px]">
+                        <Image
+                          src={slide?.image}
+                          width={300}
+                          height={300}
+                          style={{ width: "100%" }}
+                          alt=""
+                        ></Image>
+                      </div>
+                      <div
+                        className="p-2 w-[160px] sm:w-[225px] text-center absolute bottom-[0.01px] rounded-2xl"
+                        style={{
+                          background:
+                            "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 90%)",
+                        }}
+                      >
+                        <p className="text-white text-[14px] sm:text-[20px]  ">
+                          {slide?.name}
+                        </p>
+                      </div>
+                    </div>
+                  ) : contentType == 2 ? (
+                    <>
+                      <div className="image-class">
+                        <img
+                          src={slide?.image}
+                          height={230}
+                          className="w-[] sm:w-full sm:max-w-[384px] object-contain"
+                          alt=""
+                          onClick={() => {
+                            if (slide?.is_clickable) {
+                              router.push(
+                                `/consultant/listeners?category_id=${slide?.category_id}&consultant_type=3&title=Listeners`
+                              );
+                            }
+                          }}
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+          : <></>
+      }
       <br />
     </>
   );

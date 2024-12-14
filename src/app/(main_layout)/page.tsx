@@ -28,6 +28,7 @@ import useBuzzStore from "@/services/buzz/buzz.service";
 import React, { useState } from "react";
 import useLiveConsultantProfileStore from "@/services/consultant_profile/live_consultant.service";
 import FluteTestimonial from "@/components/testimonial/FluteTestimonial";
+import DashPromoCard from "@/components/DashPromoCard/DashPromoCard";
 
 // import HomeIcon from '/images/icons/home.svg'
 const HomeIcon = "/images/icons/home.svg";
@@ -100,7 +101,7 @@ export default function Home() {
   return (
     <>
       <div className="py-4 sm:py-8 px-2 sm:px-16 bg-black text-white overflow-x-hidden">
-        <main>  
+        <main>
           <div className="hidden sm:grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
             {cardList.map((card) => {
               if (!card?.path) {
@@ -159,9 +160,8 @@ export default function Home() {
                 >
                   <img src={item.imagePath} className="w-6" />
                   <p
-                    className={`text-sm font-normal text-[#A0A0A0] ${
-                      index == 0 ? "text-[#FFA643]" : ""
-                    }`}
+                    className={`text-sm font-normal text-[#A0A0A0] ${index == 0 ? "text-[#FFA643]" : ""
+                      }`}
                   >
                     {item.title}
                   </p>
@@ -217,6 +217,7 @@ export default function Home() {
                 id: l.id,
                 category_id: l?.category_id,
                 is_clickable: l?.is_clickable,
+                type: l?.type,
               }));
             }
             if (item.list_cards?.length) {
@@ -226,6 +227,7 @@ export default function Home() {
                 id: l.id,
                 category_id: l?.category_id,
                 is_clickable: l?.is_clickable,
+                type: l?.type,
               }));
             }
 
@@ -235,23 +237,20 @@ export default function Home() {
                   className="py-4 sm:py-6 px-2 sm:px-16   w-full sm:w-[100%] bg-black text-white"
                   style={{
                     background: `radial-gradient(circle, 
-                    ${
-                      item.categories?.[0]?.category_bg_color?.[0] ||
+                    ${item.categories?.[0]?.category_bg_color?.[0] ||
                       `rgba(9,9,121,1)`
-                    } 1%, ${
-                      item.categories?.[0]?.category_bg_color?.[1] ||
+                      } 1%, ${item.categories?.[0]?.category_bg_color?.[1] ||
                       `rgba(0,212,255,1)`
-                    } 50%)`,
+                      } 50%)`,
                   }}
                 >
                   <Slides
                     contentType={item.content_type}
                     title={`${item.title}`}
                     slides={slides}
-                    radiant1={`${
-                      item.categories?.[0]?.category_card_bg_color?.[0]
-                        ?.color || "#DDC3A2"
-                    }`}
+                    radiant1={`${item.categories?.[0]?.category_card_bg_color?.[0]
+                      ?.color || "#DDC3A2"
+                      }`}
                     radiant2={"#DFB881"}
                     viewAllId={item.category_ids?.[0]}
                     cardSlides={cardSlides}
@@ -264,6 +263,9 @@ export default function Home() {
       ) : (
         <></>
       )}
+      {/* <div className="flex items-center justify-center bg-black p-5" >
+        <img src="https://user-profile-dating.s3.eu-north-1.amazonaws.com/MetadataService/56793afb-bea2-4abb-a94c-ec04dc1412c9_Component%2017.png" className="dash-promo-card" />
+      </div> */}
 
       {/* <Marriage /> */}
       <div className="py-4 sm:py-2 px-2 sm:px-16 bg-black text-white">
